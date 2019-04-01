@@ -11,8 +11,8 @@
 package source.game;
 
 import source.game.IGame;
+import source.game.Menu;
 import source.tools.Window;
-
 import source.tools.listeners.KeyboardListener;
 
 import javax.swing.*;
@@ -23,12 +23,16 @@ public class Ariane implements IGame{
 
 	/** la fen&#234;tre associ&#233;e &#224; notre jeu */
 	private Window window;
+	/** panneau qui repr&#233;sente la fen&#234;tre */
+	private JPanel ecran;
 
 	/** construit un jeu "Ariane"
 	* Dimensions du jeu = 600x600 (largeur*hauteur)
 	*/
 	public Ariane(){
 		this.window = new Window();
+		this.ecran = new JPanel();
+		this.ecran.setLayout(new BorderLayout());
 	}
 
 	/** construit un jeu "Ariane"
@@ -41,24 +45,25 @@ public class Ariane implements IGame{
 	*/
 	public Ariane(int width, int height){
 		this.window = new Window(width,height,"Ariane Game");
+		this.ecran = new JPanel();
+		this.ecran.setLayout(new BorderLayout());
 	}
 
 	/** préparation des ressources du jeu */
 	@Override
 	public void init(){
 		this.window.addKeyListener(new KeyboardListener()); //clavier
-		try{
-			this.window.setBackground("ressources/rem.png"); //fond écran
-		}catch(IllegalStateException e){
-			//erreur de chargement du fond d'écran, on continue
-			System.err.println(e.getMessage());
-		}
+		this.window.setContentPane(this.ecran);
+
+		Menu menu = new Menu(this.ecran);
+		menu.build();
+
 		this.window.setVisible(true); //affiche fenêtre
 	}
 	
 	/** m&#233;thode appel&#234;e pour lancer le jeu */
 	@Override
-	public void start(){
+	public void start(){	
 		this.init();
 		this.gameLoop();
 		this.dispose();

@@ -9,8 +9,6 @@
 
 package source.tools;
 
-import source.tools.streams.DrawImage;
-
 import javax.swing.JFrame;
 import java.awt.Toolkit;
 import java.awt.Dimension;
@@ -82,10 +80,5 @@ public class Window extends JFrame{
 		this.setLocation((int)(ecran.getWidth()-width)/2,
 						 (int)(ecran.getHeight()-height)/2);
 		this.setResizable(false);
-	}
-
-	public void setBackground(String file){
-		// throws FileNotFoundException
-		this.setContentPane(new DrawImage(file));
 	}
 }

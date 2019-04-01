@@ -16,7 +16,6 @@ import java.awt.*;
 public class KeyboardListener implements KeyListener{
 
 	public KeyboardListener(){
-
 	}
 
 	@Override

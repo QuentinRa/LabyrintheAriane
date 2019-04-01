@@ -49,19 +49,28 @@ $(B_SOURCE)Main.class : $(SOURCE)Main.java \
 #Game
 $(B_GAME)Ariane.class : $(S_GAME)Ariane.java \
 		$(B_GAME)IGame.class \
-		$(B_TOOLS)Window.class
+		$(B_TOOLS)Window.class \
+		$(B_GAME)Menu.class
 	$(CC) $(FLAGS) $(S_GAME)Ariane.java
+
+$(B_GAME)Menu.class : $(S_GAME)Menu.java \
+		$(B_TOOLSS)DrawImage.class \
+		$(B_TOOLS)Window.class \
+		$(B_TOOLSL)MenuButtonsListener.class
+	$(CC) $(FLAGS) $(S_GAME)Menu.java
 
 $(B_GAME)IGame.class : $(S_GAME)IGame.java
 	$(CC) $(FLAGS) $(S_GAME)IGame.java
 
 #Tools
-$(B_TOOLS)Window.class : $(S_TOOLS)Window.java \
-		$(B_TOOLSS)DrawImage.class
+$(B_TOOLS)Window.class : $(S_TOOLS)Window.java
 	$(CC) $(FLAGS) $(S_TOOLS)Window.java
 #Listeners
 $(B_TOOLSL)KeyboardListener.class : $(S_TOOLSL)KeyboardListener.java
 	$(CC) $(FLAGS) $(S_TOOLSL)KeyboardListener.java
+
+$(B_TOOLSL)MenuButtonsListener.class : $(S_TOOLSL)MenuButtonsListener.java
+	$(CC) $(FLAGS) $(S_TOOLSL)MenuButtonsListener.java
 #steams
 $(B_TOOLSS)DrawImage.class : $(S_TOOLSS)DrawImage.java \
 		$(B_TOOLSS)ImageLoader.class

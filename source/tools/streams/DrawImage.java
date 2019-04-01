@@ -11,11 +11,12 @@ package source.tools.streams;
 import source.tools.streams.ImageLoader;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 import java.awt.Toolkit;
 import java.awt.Graphics;
 import java.awt.Image;
 
-public class DrawImage extends JComponent{
+public class DrawImage extends JPanel{
 
 	private ImageLoader image;
 
