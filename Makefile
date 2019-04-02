@@ -48,12 +48,18 @@ $(B_SOURCE)Main.class : $(SOURCE)Main.java \
 #Game
 $(B_GAME)Ariane.class : $(S_GAME)Ariane.java \
 		$(B_GAME)IGame.class \
+		$(B_GAME)Menu.class \
 		$(B_TOOLS)Window.class \
 		$(B_TOOLS)Background.class
 	$(CC) $(FLAGS) $(S_GAME)Ariane.java
 
 $(B_GAME)IGame.class : $(S_GAME)IGame.java
 	$(CC) $(FLAGS) $(S_GAME)IGame.java
+
+$(B_GAME)Menu.class : $(S_GAME)Menu.java \
+		$(B_TOOLS)Background.class \
+		$(B_TOOLS)MenuButtonsListener.class
+	$(CC) $(FLAGS) $(S_GAME)Menu.java
 
 #Tools
 $(B_TOOLS)Window.class : $(S_TOOLS)Window.java
@@ -65,6 +71,11 @@ $(B_TOOLS)Background.class : $(S_TOOLS)Background.java \
 
 $(B_TOOLS)ImageLoader.class : $(S_TOOLS)ImageLoader.java
 	$(CC) $(FLAGS) $(S_TOOLS)ImageLoader.java
+
+$(B_TOOLS)MenuButtonsListener.class : $(S_TOOLS)MenuButtonsListener.java \
+		$(B_TOOLS)Background.class \
+		#$(B_GAME)Menu.class
+	$(CC) $(FLAGS) $(S_TOOLS)MenuButtonsListener.java
 
 # --------------------- BUTS FACTICES ------------------------- #
 

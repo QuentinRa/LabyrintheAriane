@@ -67,6 +67,7 @@ public class Ariane implements IGame{
 	@Override
 	public void gameLoop(){
 		Menu menu = new Menu(this.ecran);
+		menu.run(); //lance le jeu
 	}
 
 	/** libération des ressources du jeu */

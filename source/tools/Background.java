@@ -14,6 +14,8 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 
 public class Background extends JPanel{
 
