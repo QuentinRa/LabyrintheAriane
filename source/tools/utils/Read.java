@@ -1,22 +1,32 @@
-/**
-*
-* 
-*
-* @version 1.0 6 avril 2019
-* @author Quentin Ramsamy--Ageorges
-*
-*/
-
 package source.tools.utils;
 
 import source.game.Game;
 
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 
+/**
+*
+* ...
+*
+* @version 1.0 3 avril 2019
+* @author Quentin Ramsamy--Ageorges
+*
+*/
 public class Read{
 
+	/**
+	*
+	* ...
+	*
+	* @param game
+	*
+	* @throws IOException ...
+	* @throws FileNotFoundException ...
+	*
+	*/
 	public static void update(Game game){
 		try{
 			FileInputStream flux = new FileInputStream(game.getFilePath());
@@ -47,7 +57,7 @@ public class Read{
 			}catch(IOException e){
 				System.out.println("Impossible de fermer la sauvegarde");
 			}
-		}catch(IOException e){
+		}catch(FileNotFoundException e){
 			throw new IllegalStateException("Impossible de charger la sauvegarde");
 		}
 	}

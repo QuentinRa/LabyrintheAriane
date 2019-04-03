@@ -1,13 +1,4 @@
-/**
-*
-* Observateur des boutons du menu
-*
-* @version 1.0 6 avril 2019
-* @author Quentin Ramsamy--Ageorges
-*
-*/
-
-package source.tools;
+package source.tools.events;
 
 import source.tools.Background;
 import source.game.Menu;
@@ -17,16 +8,41 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFileChooser;
 import java.io.File;
 
+/**
+*
+* Observateur des boutons du menu
+*
+* @version 1.0 6 avril 2019
+* @author Quentin Ramsamy--Ageorges
+*
+*/
 public class MenuButtonsListener implements ActionListener{
 
+	/** */
 	private Background ecran;
+	/** */
 	private Menu menu;
 
+	/**
+	*
+	* ...
+	*
+	* @param ecran
+	* @param menu
+	*
+	*/
 	public MenuButtonsListener(Background ecran, Menu menu){
 		this.ecran = ecran; //Ce sur quoi on affiche
 		this.menu = menu; //le menu du jeu
 	}
 
+	/**
+	*
+	* ...
+	*
+	* @param evenement
+	*
+	*/
 	@Override
 	public void actionPerformed(ActionEvent evenement){
 		String commande = evenement.getActionCommand();

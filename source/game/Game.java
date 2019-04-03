@@ -1,15 +1,6 @@
-/**
-*
-* Partie principale du jeu
-*
-* @version 1.0 6 avril 2019
-* @author Quentin Ramsamy--Ageorges
-*
-*/
-
 package source.game;
 
-import source.tools.GameButtonsListener;
+import source.tools.events.GameButtonsListener;
 import source.tools.Background;
 import source.tools.utils.Read;
 
@@ -22,6 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+*
+* Partie principale du jeu
+*
+* @version 1.0 6 avril 2019
+* @author Quentin Ramsamy--Ageorges
+*
+*/
 public class Game{
 
 	/** ecran sur lequel on affiche */

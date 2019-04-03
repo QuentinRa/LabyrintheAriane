@@ -1,17 +1,8 @@
-/**
-*
-* Le menu du jeu
-*
-* @version 1.0 6 avril 2019
-* @author Quentin Ramsamy--Ageorges
-*
-*/
-
 package source.game;
 
 import source.game.Game;
 import source.tools.Background;
-import source.tools.MenuButtonsListener;
+import source.tools.events.MenuButtonsListener;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -21,6 +12,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFileChooser;
 
+/**
+*
+* Le menu du jeu
+*
+* @version 1.0 6 avril 2019
+* @author Quentin Ramsamy--Ageorges
+*
+*/
 public class Menu{
 
 	/** ecran sur lequel on affiche */
@@ -105,6 +104,7 @@ public class Menu{
 	*
 	*/
 	public void play(){
+		//Lance le jeu
 		Game game = new Game(this.ecran, this.filePath);
 		game.run();
 	}

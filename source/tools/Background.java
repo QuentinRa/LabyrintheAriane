@@ -1,11 +1,3 @@
-/**
-*
-* Classe qui dessine une image
-*
-* @version 1.0 6 avril 2019
-* @author Quentin Ramsamy--Ageorges
-*
-*/
 package source.tools;
 
 import source.tools.utils.ImageLoader;
@@ -13,19 +5,36 @@ import source.tools.utils.ImageLoader;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import java.awt.Graphics;
-import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
-import javax.swing.*;
-import java.awt.*;
 
+/**
+*
+* Panneau qui contient un fond d'écran (image)
+*
+* @version 1.0 3 avril 2019
+* @author Quentin Ramsamy--Ageorges
+*
+*/
 public class Background extends JPanel{
 
+	/** Image */
 	private ImageLoader image;
 
+	/**
+	*
+	* Créer un panneau avec un fond d'écran
+	*
+	* @param imagePath le chemin du fond d'écran
+	*
+	* @throws IOException si une &#233;tape du chargement de l'image
+	* à &#233;chou&#233;e
+	*
+	* @see ImageLoader
+	*
+	*/
 	public Background(String imagePath){
 		super();
-		this.setLayout(new BorderLayout());
-		this.image = ImageLoader.getImage(imagePath);
+		this.image = new ImageLoader(imagePath);
 	}
 	
 	@Override

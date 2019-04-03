@@ -1,3 +1,9 @@
+package source.tools;
+
+import javax.swing.JFrame;
+import java.awt.Toolkit;
+import java.awt.Dimension;
+
 /**
 *
 * Classe qui g&#232;re les opération li&#233;s à la fen&#234;tre
@@ -6,12 +12,6 @@
 * @author Quentin Ramsamy--Ageorges
 *
 */
-
-package source.tools;
-
-import javax.swing.JFrame;
-import java.awt.Toolkit;
-import java.awt.Dimension;
 
 public class Window extends JFrame{
 

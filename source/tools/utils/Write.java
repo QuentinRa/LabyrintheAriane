@@ -1,20 +1,28 @@
-/**
-*
-* 
-*
-* @version 1.0 6 avril 2019
-* @author Quentin Ramsamy--Ageorges
-*
-*/
-
 package source.tools.utils;
 
 import java.io.IOException;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 
+/**
+*
+* ...
+*
+* @version 1.0 3 avril 2019
+* @author Quentin Ramsamy--Ageorges
+*
+*/
 public class Write{
 
+	/**
+	*
+	* ...
+	*
+	* @return ...
+	*
+	* @throws IOException ...
+	*
+	*/
 	public static String createGame(){
 		try{
 			FileOutputStream flux = new FileOutputStream("../p.lab");

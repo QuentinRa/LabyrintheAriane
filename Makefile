@@ -25,6 +25,7 @@ BUILD=build/
 S_GAME=$(SOURCE)game/
 S_TOOLS=$(SOURCE)tools/
 S_TOOLSU=$(S_TOOLS)utils/
+S_TOOLSE=$(S_TOOLS)events/
 
 #Variables pour les chemins des fichiers build (B)
 B_SOURCE=$(BUILD)$(SOURCE)
@@ -32,6 +33,7 @@ B_SOURCE=$(BUILD)$(SOURCE)
 B_GAME=$(B_SOURCE)game/
 B_TOOLS=$(B_SOURCE)tools/
 B_TOOLSU=$(B_TOOLS)utils/
+B_TOOLSE=$(B_TOOLS)events/
 
 # but du makefile : produire build/source/Main.class
 but: $(B_SOURCE)Main.class
@@ -57,12 +59,12 @@ $(B_GAME)IGame.class : $(S_GAME)IGame.java
 $(B_GAME)Game.class : $(S_GAME)Game.java \
 		$(B_TOOLSU)Read.class \
 		$(B_TOOLSU)Write.class \
-		$(B_TOOLS)GameButtonsListener.class
+		$(B_TOOLSE)GameButtonsListener.class
 	$(CC) $(FLAGS) $(S_GAME)Game.java
 
 $(B_GAME)Menu.class : $(S_GAME)Menu.java \
 		$(B_TOOLS)Background.class \
-		$(B_TOOLS)MenuButtonsListener.class \
+		$(B_TOOLSE)MenuButtonsListener.class \
 		$(B_GAME)Game.class
 	$(CC) $(FLAGS) $(S_GAME)Menu.java
 
@@ -74,15 +76,15 @@ $(B_TOOLS)Background.class : $(S_TOOLS)Background.java \
 		$(B_TOOLSU)ImageLoader.class
 	$(CC) $(FLAGS) $(S_TOOLS)Background.java
 
-$(B_TOOLS)MenuButtonsListener.class : $(S_TOOLS)MenuButtonsListener.java \
+$(B_TOOLSE)MenuButtonsListener.class : $(S_TOOLSE)MenuButtonsListener.java \
 		$(B_TOOLS)Background.class \
-		#$(B_GAME)Menu.class
-	$(CC) $(FLAGS) $(S_TOOLS)MenuButtonsListener.java
+		#$(B_GAME)Menu.class	<-- circulaire
+	$(CC) $(FLAGS) $(S_TOOLSE)MenuButtonsListener.java
 
-$(B_TOOLS)GameButtonsListener.class : $(S_TOOLS)GameButtonsListener.java \
+$(B_TOOLSE)GameButtonsListener.class : $(S_TOOLSE)GameButtonsListener.java \
 		$(B_TOOLS)Background.class \
-		#$(B_GAME)Game.class
-	$(CC) $(FLAGS) $(S_TOOLS)GameButtonsListener.java
+		#$(B_GAME)Game.class	<-- circulaire
+	$(CC) $(FLAGS) $(S_TOOLSE)GameButtonsListener.java
 
 $(B_TOOLSU)ImageLoader.class : $(S_TOOLSU)ImageLoader.java
 	$(CC) $(FLAGS) $(S_TOOLSU)ImageLoader.java

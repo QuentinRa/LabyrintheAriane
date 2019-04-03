@@ -16,7 +16,6 @@ import java.awt.BorderLayout;
 * @author Quentin Ramsamy--Ageorges
 *
 */
-
 public class Ariane implements IGame{
 
 	/** la fen&#234;tre associ&#233;e &#224; notre jeu */
