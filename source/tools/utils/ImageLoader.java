@@ -59,8 +59,6 @@ public class ImageLoader{
 	*
 	* @param path chemin de l'image &#224; charg&#233;e
 	*
-	* @return ImageLoader qui contient image,width,height
-	*
 	* @throws IOException si une &#233;tape du chargement de l'image
 	* à &#233;chou&#233;e
 	*

@@ -106,7 +106,7 @@ clean:
 javadoc:
 	javadoc -d build/javadoc/ -version -author \
 		source.game \
-		source.tools source.tools.utils \
+		source.tools source.tools.utils source.tools.events \
 		source
 
 doc:
