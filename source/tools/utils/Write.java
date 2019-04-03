@@ -7,7 +7,7 @@
 *
 */
 
-package source.tools;
+package source.tools.utils;
 
 import java.io.IOException;
 import java.io.DataOutputStream;

@@ -9,8 +9,7 @@
 
 package source.game;
 
-import source.tools.Window;
-import source.tools.Write;
+import source.game.Game;
 import source.tools.Background;
 import source.tools.MenuButtonsListener;
 
@@ -41,6 +40,7 @@ public class Menu{
 	public Menu(Background ecran){
 		this.ecran = ecran;
 		this.menuListener = new MenuButtonsListener(this.ecran,this);
+		this.filePath = "";
 	}
 
 	/**
@@ -49,9 +49,13 @@ public class Menu{
 	*
 	*/
 	public void run(){
+		// On cherche a créer deux panneaux et que au milieu de  chaque
+		// panneau (redimensionnement inclus) les boutons se trouvent en
+		// leur centre (vertical et horizontal)
 		this.ecran.setLayout(new GridLayout(2,1));
 		GridBagConstraints bag = new GridBagConstraints();
 
+		// Panneau pour créer une nouvelle grille
 		JPanel pNewGame = new JPanel();
 		pNewGame.setLayout(new GridBagLayout());
 		JButton newGame = new JButton("Nouveau");
@@ -59,6 +63,7 @@ public class Menu{
 		pNewGame.add(newGame,bag);
 		pNewGame.setOpaque(false);
 
+		// Panneau pour charger une grille existante
 		JPanel pCharger = new JPanel();
 		pCharger.setLayout(new GridBagLayout());
 		JButton charger = new JButton("Charger");
@@ -69,31 +74,23 @@ public class Menu{
 		this.ecran.add(pNewGame);
 		this.ecran.add(pCharger);
 
-		this.ecran.revalidate();//met à jour l'écran
-	}
-
-	/**
-	*
-	* Cr&#233;e un nouveau jeu
-	*
-	*/
-	public void newGame(){
-		System.out.println("Création du jeu");
-		this.filePath = Write.createGame();
+		//met à jour l'écran (fait automatiquement la 1ere fois)
+		this.ecran.revalidate();
 	}
 
 	/**
 	*
 	* Charge le gestionnaire de fichier si on veut charger une sauvegarde
 	* 
-	* @see #getFilePath pour r&#233;cup&#233;rer le chemin d'un &#233;ventuel fichier s&#233;lectionn&#233;
+	* @see #getFilePath pour r&#233;cup&#233;rer le chemin d'un &#233;ventuel
+	* fichier s&#233;lectionn&#233;
 	*
 	*/
 	public void load(){
 		//Change pour layout qui prends tout l'écran
 		this.ecran.setLayout(new BorderLayout());
-		//Charge le gestionnaire de fichiers
-		JFileChooser gestionnaireFichiers = new JFileChooser();
+		//Charge le gestionnaire de fichiers, dossier courant
+		JFileChooser gestionnaireFichiers = new JFileChooser(".");
 		this.ecran.add(gestionnaireFichiers, BorderLayout.CENTER);
 		gestionnaireFichiers.addActionListener(this.menuListener);
 		//met à jour l'écran
@@ -120,18 +117,15 @@ public class Menu{
 	*
 	* @see MenuButtonsListener
 	*/
-	public void setFilePath(String path){
-		this.filePath = path;
-	}
+	public void setFilePath(String path){ this.filePath = path; }
 
 	/**
 	*
-	* Renvoi le chemin du fichier s&#233;lectionn&#233; par le gestionnaire de fichiers
+	* Renvoi le chemin du fichier s&#233;lectionn&#233; par le gestionnaire
+	* de fichiers
 	*
 	* @return le chemin du fichier s&#233;lectionn&#233;
 	*
 	*/
-	public String getFilePath(){
-		return this.filePath;
-	}
+	public String getFilePath(){ return this.filePath; }
 }

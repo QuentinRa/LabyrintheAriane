@@ -24,16 +24,14 @@ BUILD=build/
 #Variables pour les chemins des fichiers source (S)
 S_GAME=$(SOURCE)game/
 S_TOOLS=$(SOURCE)tools/
-S_TOOLSL=$(S_TOOLS)listeners/
-S_TOOLSS=$(S_TOOLS)streams/
+S_TOOLSU=$(S_TOOLS)utils/
 
 #Variables pour les chemins des fichiers build (B)
 B_SOURCE=$(BUILD)$(SOURCE)
 
 B_GAME=$(B_SOURCE)game/
 B_TOOLS=$(B_SOURCE)tools/
-B_TOOLSL=$(B_TOOLS)listeners/
-B_TOOLSS=$(B_TOOLS)streams/
+B_TOOLSU=$(B_TOOLS)utils/
 
 # but du makefile : produire build/source/Main.class
 but: $(B_SOURCE)Main.class
@@ -57,14 +55,15 @@ $(B_GAME)IGame.class : $(S_GAME)IGame.java
 	$(CC) $(FLAGS) $(S_GAME)IGame.java
 
 $(B_GAME)Game.class : $(S_GAME)Game.java \
-		$(B_TOOLS)Read.class
+		$(B_TOOLSU)Read.class \
+		$(B_TOOLSU)Write.class \
+		$(B_TOOLS)GameButtonsListener.class
 	$(CC) $(FLAGS) $(S_GAME)Game.java
 
 $(B_GAME)Menu.class : $(S_GAME)Menu.java \
 		$(B_TOOLS)Background.class \
 		$(B_TOOLS)MenuButtonsListener.class \
-		$(B_GAME)Game.class \
-		$(B_TOOLS)Write.class
+		$(B_GAME)Game.class
 	$(CC) $(FLAGS) $(S_GAME)Menu.java
 
 #Tools
@@ -72,22 +71,27 @@ $(B_TOOLS)Window.class : $(S_TOOLS)Window.java
 	$(CC) $(FLAGS) $(S_TOOLS)Window.java
 
 $(B_TOOLS)Background.class : $(S_TOOLS)Background.java \
-		$(B_TOOLS)ImageLoader.class
+		$(B_TOOLSU)ImageLoader.class
 	$(CC) $(FLAGS) $(S_TOOLS)Background.java
-
-$(B_TOOLS)ImageLoader.class : $(S_TOOLS)ImageLoader.java
-	$(CC) $(FLAGS) $(S_TOOLS)ImageLoader.java
 
 $(B_TOOLS)MenuButtonsListener.class : $(S_TOOLS)MenuButtonsListener.java \
 		$(B_TOOLS)Background.class \
 		#$(B_GAME)Menu.class
 	$(CC) $(FLAGS) $(S_TOOLS)MenuButtonsListener.java
 
-$(B_TOOLS)Read.class : $(S_TOOLS)Read.java
-	$(CC) $(FLAGS) $(S_TOOLS)Read.java
+$(B_TOOLS)GameButtonsListener.class : $(S_TOOLS)GameButtonsListener.java \
+		$(B_TOOLS)Background.class \
+		#$(B_GAME)Game.class
+	$(CC) $(FLAGS) $(S_TOOLS)GameButtonsListener.java
 
-$(B_TOOLS)Write.class : $(S_TOOLS)Write.java
-	$(CC) $(FLAGS) $(S_TOOLS)Write.java
+$(B_TOOLSU)ImageLoader.class : $(S_TOOLSU)ImageLoader.java
+	$(CC) $(FLAGS) $(S_TOOLSU)ImageLoader.java
+
+$(B_TOOLSU)Read.class : $(S_TOOLSU)Read.java
+	$(CC) $(FLAGS) $(S_TOOLSU)Read.java
+
+$(B_TOOLSU)Write.class : $(S_TOOLSU)Write.java
+	$(CC) $(FLAGS) $(S_TOOLSU)Write.java
 
 # --------------------- BUTS FACTICES ------------------------- #
 
@@ -98,9 +102,9 @@ clean:
 	`find -name "*.class" -exec rm -rf {} \;`
 
 javadoc:
-	javadoc -d build/javadoc/ \
+	javadoc -d build/javadoc/ -version -author \
 		source.game \
-		source.tools \
+		source.tools source.tools.utils \
 		source
 
 doc:

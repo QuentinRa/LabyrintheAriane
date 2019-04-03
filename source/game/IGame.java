@@ -1,3 +1,5 @@
+package source.game;
+
 /**
 *
 * Format type d'un jeu
@@ -6,8 +8,6 @@
 * @author Quentin Ramsamy--Ageorges
 *
 */
-
-package source.game;
 
 public interface IGame{
 

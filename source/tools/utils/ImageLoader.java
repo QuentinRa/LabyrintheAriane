@@ -7,19 +7,18 @@
 *
 */
 
-package source.tools.streams;
+package source.tools.utils;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.FileInputStream;
 import javax.imageio.ImageIO;
-import java.awt.Image;
 
 public class ImageLoader{
 
 	private int width;
 	private int height;
-	private Image image;
+	private BufferedImage image;
 
 	public ImageLoader(){
 		this.width = 0;
@@ -73,7 +72,7 @@ public class ImageLoader{
 	* @return Image image charg&#233;e ou null si aucune
 	*
 	*/
-	public Image getImage(){ return this.image; }
+	public BufferedImage getImage(){ return this.image; }
 
 	/**
 	*

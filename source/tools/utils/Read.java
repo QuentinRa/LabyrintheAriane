@@ -7,7 +7,7 @@
 *
 */
 
-package source.tools;
+package source.tools.utils;
 
 import source.game.Game;
 
@@ -52,11 +52,3 @@ public class Read{
 		}
 	}
 }
-
-/*
-					byte tmp = file.readByte();
-					for(int i=7; i >= 0; i--){
-						System.out.print(tmp >> i & 00000001);
-					}
-					System.out.println();
-				*/

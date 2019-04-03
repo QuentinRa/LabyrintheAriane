@@ -40,7 +40,7 @@ public class MenuButtonsListener implements ActionListener{
 			this.menu.load();
 		}else if(commande.equals("Nouveau")){
 			//Charge le menu "Nouveau"
-			this.menu.newGame();
+			this.menu.play();
 		} else if(commande.equals("CancelSelection")){
 			//On revient en arrière si l'utilisateur fait "annuler"
 			this.menu.run();

@@ -8,12 +8,13 @@
 */
 package source.tools;
 
-import source.tools.ImageLoader;
+import source.tools.utils.ImageLoader;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.awt.*;
 
@@ -37,7 +38,8 @@ public class Background extends JPanel{
 			secondPinceau.setColor(this.getBackground());
 			secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
 		}
-		secondPinceau.drawImage(this.image.getImage(),
-			0-this.image.getWidth()/2,0,this);
+
+		secondPinceau.drawImage(this.image.getImage(), 0, 0,this.getWidth(),
+			this.getHeight(), this);
 	}
 }
