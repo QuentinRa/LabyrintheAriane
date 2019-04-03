@@ -20,6 +20,8 @@ CLFLAGS =
 SOURCE=source/
 #fichier .class générés
 BUILD=build/
+#documentation
+JAVADOC=$(BUILD)javadoc/
 
 #Variables pour les chemins des fichiers source (S)
 S_GAME=$(SOURCE)game/
@@ -101,10 +103,10 @@ run:
 	cd build/ && $(CL) $(CLFLAGS) source.Main && cd ..
 
 clean:
-	`find -name "*.class" -exec rm -rf {} \;`
+	`find -name "*.class" -exec rm -rf {} \;; rm -rf $(JAVADOC)*;`
 
 javadoc:
-	javadoc -d build/javadoc/ -version -author \
+	javadoc -d $(JAVADOC) -version -author \
 		source.game \
 		source.tools source.tools.utils source.tools.events \
 		source
