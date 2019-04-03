@@ -56,9 +56,15 @@ $(B_GAME)Ariane.class : $(S_GAME)Ariane.java \
 $(B_GAME)IGame.class : $(S_GAME)IGame.java
 	$(CC) $(FLAGS) $(S_GAME)IGame.java
 
+$(B_GAME)Game.class : $(S_GAME)Game.java \
+		$(B_TOOLS)Read.class
+	$(CC) $(FLAGS) $(S_GAME)Game.java
+
 $(B_GAME)Menu.class : $(S_GAME)Menu.java \
 		$(B_TOOLS)Background.class \
-		$(B_TOOLS)MenuButtonsListener.class
+		$(B_TOOLS)MenuButtonsListener.class \
+		$(B_GAME)Game.class \
+		$(B_TOOLS)Write.class
 	$(CC) $(FLAGS) $(S_GAME)Menu.java
 
 #Tools
@@ -76,6 +82,12 @@ $(B_TOOLS)MenuButtonsListener.class : $(S_TOOLS)MenuButtonsListener.java \
 		$(B_TOOLS)Background.class \
 		#$(B_GAME)Menu.class
 	$(CC) $(FLAGS) $(S_TOOLS)MenuButtonsListener.java
+
+$(B_TOOLS)Read.class : $(S_TOOLS)Read.java
+	$(CC) $(FLAGS) $(S_TOOLS)Read.java
+
+$(B_TOOLS)Write.class : $(S_TOOLS)Write.java
+	$(CC) $(FLAGS) $(S_TOOLS)Write.java
 
 # --------------------- BUTS FACTICES ------------------------- #
 

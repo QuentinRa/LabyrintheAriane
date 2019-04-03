@@ -38,9 +38,9 @@ public class MenuButtonsListener implements ActionListener{
 		if(commande.equals("Charger")){
 			//Charge le menu "Charger"
 			this.menu.load();
-		}else if(commande.equals("Créer")){
-			//Charge le menu "Jouer"
-			this.menu.create();
+		}else if(commande.equals("Nouveau")){
+			//Charge le menu "Nouveau"
+			this.menu.newGame();
 		} else if(commande.equals("CancelSelection")){
 			//On revient en arrière si l'utilisateur fait "annuler"
 			this.menu.run();
@@ -49,8 +49,9 @@ public class MenuButtonsListener implements ActionListener{
 			JFileChooser gestionnaire = (JFileChooser) evenement.getSource();
 			//Récupération du fichier sélectionné
 			File file = gestionnaire.getSelectedFile();
-
-			System.out.println(file.getPath());
+			//Donne le path au menu
+			this.menu.setFilePath(file.getPath());
+			this.menu.play();
 		}
 	}
 }
