@@ -21,16 +21,14 @@ public class Write{
 			DataOutputStream file = new DataOutputStream(flux);
 
 			try{
-				file.write(4);
+				file.write(3);
 				file.write(0);
 				file.write(1);
 				file.write(0);
 				file.write(3);
 
-				String str = "00000110";
-
-				file.write(str.toBinaryString());
-				file.write(str.toBinaryString());
+				file.writeByte(Integer.parseInt("00000110",2));
+				file.writeByte(Integer.parseInt("10000000",2));
 
 				file.flush();
 

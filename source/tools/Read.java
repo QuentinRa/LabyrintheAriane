@@ -34,7 +34,7 @@ public class Read{
 				for(int i = 0; i< size; i+=8){
 					byte tmp = file.readByte();
 					for(int j=7; j >= 0; j--){
-						System.out.print(tmp >> j & 00000001);
+						System.out.print((tmp >> j & 00000001) == 1?true:false);
 					}
 					System.out.println();
 				}
