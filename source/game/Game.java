@@ -2,6 +2,7 @@ package source.game;
 
 import source.tools.events.GameButtonsListener;
 import source.tools.Background;
+import source.tools.AreaGame;
 import source.tools.utils.Read;
 
 import java.awt.BorderLayout;
@@ -104,6 +105,10 @@ public class Game{
 		//Ajouts à la fenêtre
 		this.ecran.add(playP, BorderLayout.NORTH);
 		this.ecran.add(panneauSauvegarde, BorderLayout.SOUTH);
+
+		AreaGame area = new AreaGame(5);
+		area.setOpaque(false);
+		this.ecran.add(area, BorderLayout.CENTER);
 		
 		//met à jour l'écran
 		this.ecran.revalidate();

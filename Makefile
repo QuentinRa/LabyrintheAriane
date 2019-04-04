@@ -61,7 +61,8 @@ $(B_GAME)IGame.class : $(S_GAME)IGame.java
 $(B_GAME)Game.class : $(S_GAME)Game.java \
 		$(B_TOOLSU)Read.class \
 		$(B_TOOLSU)Write.class \
-		$(B_TOOLSE)GameButtonsListener.class
+		$(B_TOOLSE)GameButtonsListener.class \
+		$(B_TOOLS)AreaGame.class
 	$(CC) $(CCFLAGS) $(S_GAME)Game.java
 
 $(B_GAME)Menu.class : $(S_GAME)Menu.java \
@@ -78,6 +79,10 @@ $(B_TOOLS)Background.class : $(S_TOOLS)Background.java \
 		$(B_TOOLSU)ImageLoader.class
 	$(CC) $(CCFLAGS) $(S_TOOLS)Background.java
 
+$(B_TOOLS)AreaGame.class : $(S_TOOLS)AreaGame.java
+	$(CC) $(CCFLAGS) $(S_TOOLS)AreaGame.java
+
+#events
 $(B_TOOLSE)MenuButtonsListener.class : $(S_TOOLSE)MenuButtonsListener.java \
 		$(B_TOOLS)Background.class \
 		#$(B_GAME)Menu.class	<-- circulaire
@@ -88,6 +93,7 @@ $(B_TOOLSE)GameButtonsListener.class : $(S_TOOLSE)GameButtonsListener.java \
 		#$(B_GAME)Game.class	<-- circulaire
 	$(CC) $(CCFLAGS) $(S_TOOLSE)GameButtonsListener.java
 
+#utils
 $(B_TOOLSU)ImageLoader.class : $(S_TOOLSU)ImageLoader.java
 	$(CC) $(CCFLAGS) $(S_TOOLSU)ImageLoader.java
 
