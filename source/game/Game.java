@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +23,7 @@ import javax.swing.JTextField;
 * @author Quentin Ramsamy--Ageorges
 *
 */
+
 public class Game{
 
 	/** ecran sur lequel on affiche */
@@ -52,10 +54,12 @@ public class Game{
 	public void run(){
 		if(this.filepath.length() != 0){
 			Read.update(this);
-
-			System.out.println("taille : "+this.size+"*"+this.size);
-			System.out.println(this.xPlayer+","+this.yPlayer);
-			System.out.println(this.xOut+","+this.yOut);
+			
+				System.out.println("taille : "+this.size+"*"+this.size);
+				System.out.println(this.xPlayer+","+this.yPlayer);
+				System.out.println(this.xOut+","+this.yOut);
+			
+			this.start();
 		} else {
 			this.ecran.setLayout(new GridBagLayout());
 			GridBagConstraints bag = new GridBagConstraints();
@@ -82,7 +86,8 @@ public class Game{
 		System.out.println(this.xOut+","+this.yOut);
 
 		// On veut créer au centre la zone, en bas un bouton sauvegarder
-		// en haut bouton jouer
+		// en haut bouton jouer et a gauche le bouton pour remplir la grille
+		// qui est environ au centre
 		this.ecran.setLayout(new BorderLayout());
 
 		//Bouton jouer
@@ -101,13 +106,31 @@ public class Game{
 		JTextField nomSav = new JTextField();
 		nomSav.addActionListener(this.gameListener);
 		panneauSauvegarde.add(nomSav);
+
+		//Panneau avec les boutons
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(4,1));
+		panel.setOpaque(false);
 		
+		//Nos boutons pour remplir la grille
+		JButton white = new JButton(new ImageIcon("ressources/wall.png"));
+		JButton erase = new JButton("effacer");
+		JButton joueur = new JButton(new ImageIcon("ressources/main.png"));
+		JButton sortie = new JButton(new ImageIcon("ressources/chest.png"));
+
+		panel.add(white);
+		panel.add(joueur);
+		panel.add(sortie);
+		panel.add(erase);
+
+		//Panneau central : jeu à personnaliser
+		AreaGame area = new AreaGame(this.size);
+		area.setOpaque(false);
+
 		//Ajouts à la fenêtre
 		this.ecran.add(playP, BorderLayout.NORTH);
 		this.ecran.add(panneauSauvegarde, BorderLayout.SOUTH);
-
-		AreaGame area = new AreaGame(5);
-		area.setOpaque(false);
+		this.ecran.add(panel, BorderLayout.WEST);
 		this.ecran.add(area, BorderLayout.CENTER);
 		
 		//met à jour l'écran

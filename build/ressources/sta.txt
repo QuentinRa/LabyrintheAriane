@@ -1,0 +1,5 @@
+System.out.println(sortie.getIcon()); //récupère l'icone
+//white.setContentAreaFilled(false); //vide le bouton de son fond
+
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;

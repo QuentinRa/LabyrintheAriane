@@ -6,6 +6,7 @@ import source.game.Game;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 /**
 *
@@ -52,7 +53,7 @@ public class GameButtonsListener implements ActionListener{
 		if(this.game.getSize() == 0){
 			try{
 				this.game.setSize(Integer.parseInt(commande));
-				if(this.game.getSize()>0){
+				if(this.game.getSize()>1){ //grille 1x1 : entités confondus
 					//Supression des composants = reset
 					this.ecran.removeAll();
 					this.ecran.repaint();
@@ -73,6 +74,9 @@ public class GameButtonsListener implements ActionListener{
 			this.ecran.repaint();
 
 			this.game.start();
+		} else {
+			//String message = "Fichier sauvegardé à : ressources/sav/"+commande;
+			//JOptionPane.showMessageDialog(this.ecran,message);
 		}
 	}
 }
