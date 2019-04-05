@@ -1,3 +1,5 @@
+# dot -Tpng visual.dot -o visual.png
+
 digraph visual {
 
 	node [ shape = "record" ]

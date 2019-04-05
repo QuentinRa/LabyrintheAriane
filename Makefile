@@ -25,6 +25,7 @@ JAVADOC=$(BUILD)javadoc/
 
 #Variables pour les chemins des fichiers source (S)
 S_GAME=$(SOURCE)game/
+S_GAMEI=$(S_GAME)interfaces/
 S_TOOLS=$(SOURCE)tools/
 S_TOOLSU=$(S_TOOLS)utils/
 S_TOOLSE=$(S_TOOLS)events/
@@ -33,6 +34,7 @@ S_TOOLSE=$(S_TOOLS)events/
 B_SOURCE=$(BUILD)$(SOURCE)
 
 B_GAME=$(B_SOURCE)game/
+B_GAMEI=$(B_GAME)interfaces/
 B_TOOLS=$(B_SOURCE)tools/
 B_TOOLSU=$(B_TOOLS)utils/
 B_TOOLSE=$(B_TOOLS)events/
@@ -43,78 +45,67 @@ but: $(B_SOURCE)Main.class
 # LANCEUR DU JEU
 $(B_SOURCE)Main.class : $(SOURCE)Main.java \
 		$(B_GAME)Ariane.class \
-		$(B_GAME)IGame.class
+		$(B_GAMEI)IGame.class
 	$(CC) $(CCFLAGS) $(SOURCE)Main.java
 
 # --------------- Dépendences implicites ---------------------- #
-#Game
+#Package game
 $(B_GAME)Ariane.class : $(S_GAME)Ariane.java \
-		$(B_GAME)IGame.class \
-		$(B_GAME)Menu.class \
+		$(B_GAMEI)IGame.class \
 		$(B_TOOLS)Window.class \
-		$(B_TOOLS)Background.class
+		$(B_GAMEI)IGameComponent.class \
+		$(B_GAME)Menu.class
 	$(CC) $(CCFLAGS) $(S_GAME)Ariane.java
 
-$(B_GAME)IGame.class : $(S_GAME)IGame.java
-	$(CC) $(CCFLAGS) $(S_GAME)IGame.java
-
-$(B_GAME)Game.class : $(S_GAME)Game.java \
-		$(B_TOOLSU)Read.class \
-		$(B_TOOLSU)Write.class \
-		$(B_TOOLSE)GameButtonsListener.class \
-		$(B_TOOLS)AreaGame.class \
-		$(B_TOOLSE)IconListener.class
-	$(CC) $(CCFLAGS) $(S_GAME)Game.java
-
 $(B_GAME)Menu.class : $(S_GAME)Menu.java \
-		$(B_TOOLS)Background.class \
-		$(B_TOOLSE)MenuButtonsListener.class \
-		$(B_GAME)Game.class
+		$(B_GAMEI)IGameComponent.class \
+		$(B_TOOLSE)MenuButtons.class \
+		$(B_GAME)MainGame.class \
+		$(B_TOOLS)Window.class
 	$(CC) $(CCFLAGS) $(S_GAME)Menu.java
 
-#Tools
-$(B_TOOLS)Window.class : $(S_TOOLS)Window.java
+$(B_GAME)MainGame.class : $(S_GAME)MainGame.java \
+		$(B_GAMEI)IGameComponent.class \
+		$(B_TOOLS)Window.class \
+		$(B_GAME)Grille.class \
+		$(B_TOOLSU)SaveLoader.class
+	$(CC) $(CCFLAGS) $(S_GAME)MainGame.java
+
+$(B_GAME)Grille.class : $(S_GAME)Grille.java
+	$(CC) $(CCFLAGS) $(S_GAME)Grille.java
+
+#Package interfaces
+$(B_GAMEI)IGame.class : $(S_GAMEI)IGame.java
+	$(CC) $(CCFLAGS) $(S_GAMEI)IGame.java
+
+$(B_GAMEI)IGameComponent.class : $(S_GAMEI)IGameComponent.java
+	$(CC) $(CCFLAGS) $(S_GAMEI)IGameComponent.java
+
+#Package tools
+$(B_TOOLS)Window.class : $(S_TOOLS)Window.java \
+		$(B_TOOLSU)Background.class
 	$(CC) $(CCFLAGS) $(S_TOOLS)Window.java
 
-$(B_TOOLS)Background.class : $(S_TOOLS)Background.java \
-		$(B_TOOLSU)ImageLoader.class
-	$(CC) $(CCFLAGS) $(S_TOOLS)Background.java
-
-$(B_TOOLS)AreaGame.class : $(S_TOOLS)AreaGame.java \
-		$(B_TOOLSE)GameCaseListener.class \
-		$(B_TOOLSE)IconListener.class \
-		$(B_TOOLS)Case.class
-	$(CC) $(CCFLAGS) $(S_TOOLS)AreaGame.java
-
-$(B_TOOLS)Case.class : $(S_TOOLS)Case.java
-	$(CC) $(CCFLAGS) $(S_TOOLS)Case.java
-#events
-$(B_TOOLSE)MenuButtonsListener.class : $(S_TOOLSE)MenuButtonsListener.java \
-		$(B_TOOLS)Background.class \
+#Package events
+$(B_TOOLSE)MenuButtons.class : $(S_TOOLSE)MenuButtons.java \
+		$(B_TOOLS)Window.class \
 		#$(B_GAME)Menu.class	<-- circulaire
-	$(CC) $(CCFLAGS) $(S_TOOLSE)MenuButtonsListener.java
+	$(CC) $(CCFLAGS) $(S_TOOLSE)MenuButtons.java
 
-$(B_TOOLSE)GameButtonsListener.class : $(S_TOOLSE)GameButtonsListener.java \
-		$(B_TOOLS)Background.class \
-		#$(B_GAME)Game.class	<-- circulaire
-	$(CC) $(CCFLAGS) $(S_TOOLSE)GameButtonsListener.java
+#Packtage utils
+$(B_TOOLSU)Background.class : $(S_TOOLSU)Background.java \
+		$(B_TOOLSU)ImageLoader.class
+	$(CC) $(CCFLAGS) $(S_TOOLSU)Background.java
 
-$(B_TOOLSE)IconListener.class : $(S_TOOLSE)IconListener.java
-	$(CC) $(CCFLAGS) $(S_TOOLSE)IconListener.java
-
-$(B_TOOLSE)GameCaseListener.class : $(S_TOOLSE)GameCaseListener.java \
-		$(B_TOOLSE)IconListener.class
-	$(CC) $(CCFLAGS) $(S_TOOLSE)GameCaseListener.java
-
-#utils
 $(B_TOOLSU)ImageLoader.class : $(S_TOOLSU)ImageLoader.java
 	$(CC) $(CCFLAGS) $(S_TOOLSU)ImageLoader.java
 
-$(B_TOOLSU)Read.class : $(S_TOOLSU)Read.java
-	$(CC) $(CCFLAGS) $(S_TOOLSU)Read.java
+$(B_TOOLSU)SaveLoader.class : $(S_TOOLSU)SaveLoader.java \
+		$(B_TOOLSU)ReaderBitByBit.class
+	$(CC) $(CCFLAGS) $(S_TOOLSU)SaveLoader.java
 
-$(B_TOOLSU)Write.class : $(S_TOOLSU)Write.java
-	$(CC) $(CCFLAGS) $(S_TOOLSU)Write.java
+$(B_TOOLSU)ReaderBitByBit.class : $(S_TOOLSU)ReaderBitByBit.java
+	$(CC) $(CCFLAGS) $(S_TOOLSU)ReaderBitByBit.java
 
 # --------------------- BUTS FACTICES ------------------------- #
 
@@ -125,8 +116,8 @@ clean:
 	`find -name "*.class" -exec rm -rf {} \;; rm -rf $(JAVADOC)*;`
 
 javadoc:
-	javadoc -d $(JAVADOC) -version -author \
-		source.game \
+	javadoc -d $(JAVADOC) -version -author -html5 \
+		source.game source.game.interfaces \
 		source.tools source.tools.utils source.tools.events \
 		source
 

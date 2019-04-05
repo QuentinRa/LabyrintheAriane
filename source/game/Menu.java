@@ -1,8 +1,9 @@
 package source.game;
 
-import source.game.Game;
-import source.tools.Background;
-import source.tools.events.MenuButtonsListener;
+import source.game.interfaces.IGameComponent;
+import source.game.MainGame;
+import source.tools.Window;
+import source.tools.events.MenuButtons;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -20,14 +21,12 @@ import javax.swing.JFileChooser;
 * @author Quentin Ramsamy--Ageorges
 *
 */
-public class Menu{
-
+public class Menu implements IGameComponent{
+	
 	/** ecran sur lequel on affiche */
-	private Background ecran;
+	private Window ecran;
 	/** observateur du menu */
-	private MenuButtonsListener menuListener;
-	/** chemin d'un &#233;ventuel fichier &#224; charger */
-	private String filePath;
+	private MenuButtons menuListener;
 
 	/**
 	*
@@ -36,10 +35,9 @@ public class Menu{
 	* @param ecran l'&#233;cran sur lequel afficher le menu
 	*
 	*/
-	public Menu(Background ecran){
+	public Menu(Window ecran){
 		this.ecran = ecran;
-		this.menuListener = new MenuButtonsListener(this.ecran,this);
-		this.filePath = "";
+		this.menuListener = new MenuButtons(this.ecran,this);
 	}
 
 	/**
@@ -47,6 +45,7 @@ public class Menu{
 	* Lance le menu
 	*
 	*/
+	@Override
 	public void run(){
 		// On cherche a créer deux panneaux et que au milieu de  chaque
 		// panneau (redimensionnement inclus) les boutons se trouvent en
@@ -79,10 +78,20 @@ public class Menu{
 
 	/**
 	*
+	* Lance le jeu
+	*
+	* @see MainGame
+	*
+	*/
+	public void play(String path){
+		IGameComponent game = new MainGame(this.ecran,path);
+		game.run();
+	}
+
+
+	/**
+	*
 	* Charge le gestionnaire de fichier si on veut charger une sauvegarde
-	* 
-	* @see #getFilePath pour r&#233;cup&#233;rer le chemin d'un &#233;ventuel
-	* fichier s&#233;lectionn&#233;
 	*
 	*/
 	public void load(){
@@ -96,37 +105,4 @@ public class Menu{
 		//met à jour l'écran
 		this.ecran.revalidate();
 	}
-
-	/**
-	*
-	* Lance le jeu
-	*
-	* @see Game
-	*
-	*/
-	public void play(){
-		//Lance le jeu
-		Game game = new Game(this.ecran, this.filePath);
-		game.run();
-	}
-
-	/**
-	*
-	* setter du chemin du fichier s&#233;lectionn&#233; remplit par l'observateur
-	*
-	* @param path le nouveau chemin du fichier s&#233;lectionn&#233;
-	*
-	* @see MenuButtonsListener
-	*/
-	public void setFilePath(String path){ this.filePath = path; }
-
-	/**
-	*
-	* Renvoi le chemin du fichier s&#233;lectionn&#233; par le gestionnaire
-	* de fichiers
-	*
-	* @return le chemin du fichier s&#233;lectionn&#233;
-	*
-	*/
-	public String getFilePath(){ return this.filePath; }
 }

@@ -73,6 +73,7 @@ public class ImageLoader{
 			// lecture de l'image
 			this.image = ImageIO.read(input);
 
+			//maintenant l'image à une taille !
 			this.width = image.getWidth();
 			this.height = image.getHeight();
 

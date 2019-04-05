@@ -1,18 +1,16 @@
 package source.game;
 
-import source.game.IGame;
 import source.game.Menu;
+import source.game.interfaces.IGame;
+import source.game.interfaces.IGameComponent;
 import source.tools.Window;
-import source.tools.Background;
-
-import java.awt.BorderLayout;
 
 /**
 *
-* Le jeu Ariane, on se trouve à un certain endroit dans un espace remplit
-* d'obstacle et on doit arriver à la sortie.
+* Le jeu Ariane, on se trouve à un certain endroit dans un espace (grille) remplie
+* d'obstacles et on doit arriver à la sortie.
 *
-* @version 1.0 13 avril 2019
+* @version 1.0 1 avril 2019
 * @author Quentin Ramsamy--Ageorges
 *
 */
@@ -20,8 +18,8 @@ public class Ariane implements IGame{
 
 	/** la fen&#234;tre associ&#233;e &#224; notre jeu */
 	private Window window;
-	/** panneau qui repr&#233;sente la fen&#234;tre */
-	private Background ecran;
+	/** le menu du jeu */
+	private IGameComponent menu;
 
 	/**
 	*
@@ -34,7 +32,9 @@ public class Ariane implements IGame{
 	*/
 	public Ariane(){
 		this.window = new Window();
-		this.ecran = new Background("ressources/rem.png");
+		this.window.setBackground("ressources/rem.png");
+		this.menu = new Menu(this.window);
+		this.window.setVisible(true); //affiche fenêtre
 	}
 
 	/**
@@ -53,7 +53,8 @@ public class Ariane implements IGame{
 	*/
 	public Ariane(int width, int height){
 		this.window = new Window(width,height,"Ariane Game");
-		this.ecran = new Background("ressources/rem.png");
+		this.window.setBackground("ressources/rem.png");
+		this.menu = new Menu(this.window);
 	}
 
 	/**
@@ -62,7 +63,7 @@ public class Ariane implements IGame{
 	*
 	*/
 	@Override
-	public void start(){	
+	public void start(){
 		this.init();
 		this.gameLoop();
 		this.dispose();
@@ -75,8 +76,6 @@ public class Ariane implements IGame{
 	*/
 	@Override
 	public void init(){
-		//ajoute le panneau à la fenêtre
-		this.window.add(this.ecran, BorderLayout.CENTER);
 		this.window.setVisible(true); //affiche fenêtre
 	}
 
@@ -87,8 +86,7 @@ public class Ariane implements IGame{
 	*/
 	@Override
 	public void gameLoop(){
-		Menu menu = new Menu(this.ecran);
-		menu.run(); //lance le menu
+		this.menu.run(); //lance le menu
 	}
 
 	/**
@@ -98,5 +96,16 @@ public class Ariane implements IGame{
 	*/
 	@Override
 	public void dispose(){
+	}
+
+	/**
+	*
+	* retourne la fen&#234;tre associ&#233;e au jeu
+	*
+	* @return fen&#234;tre associ&#233;e au jeu
+	*
+	*/
+	public Window getWindow(){
+		return this.window;
 	}
 }
