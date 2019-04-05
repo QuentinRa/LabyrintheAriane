@@ -2,6 +2,7 @@ package source.tools.events;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 
 /**
 *
@@ -13,12 +14,15 @@ import java.awt.event.ActionEvent;
 */
 public class GameSelector implements ActionListener{
 
+	private String currentPath;
+
 	/**
 	*
 	* ...
 	*
 	*/
 	public GameSelector(){
+		this.currentPath = "";
 	}
 
 	/**
@@ -30,8 +34,23 @@ public class GameSelector implements ActionListener{
 	*/
 	@Override
 	public void actionPerformed(ActionEvent evenement){
-		//String commande = evenement.getActionCommand();
 
-		System.out.println(evenement.getSource());
+		//L'objectif est de récupérer le chemin de l'icone cliquée
+
+		//Récupère le bouton
+		JButton boutonAppuye = (JButton) evenement.getSource();
+		//Si un bouton n'a pas d'icone alors getIcon renvoi null
+		// (donc toString rate)
+		
+		try{
+			//récupère le chemin
+			this.currentPath = boutonAppuye.getIcon().toString();
+		}catch(NullPointerException e){
+			this.currentPath = "";
+		}
+	}
+
+	public String getSelectedFile(){
+		return this.currentPath;
 	}
 }

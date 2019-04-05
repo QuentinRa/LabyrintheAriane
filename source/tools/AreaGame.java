@@ -1,6 +1,7 @@
 package source.tools;
 
 import source.tools.events.Case;
+import source.tools.events.GameSelector;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -29,10 +30,10 @@ public class AreaGame extends JPanel{
 
 	private Case caseJeu;
 
-	public AreaGame(int size){
+	public AreaGame(int size, GameSelector selector){
 		super();
 		this.size = size;
-		this.caseJeu = new Case();
+		this.caseJeu = new Case(selector);
 	}
 	
 	@Override

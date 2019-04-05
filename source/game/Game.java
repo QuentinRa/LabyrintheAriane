@@ -1,6 +1,7 @@
 package source.game;
 
 import source.tools.events.GameButtonsListener;
+import source.tools.events.GameSelector;
 import source.tools.Background;
 import source.tools.AreaGame;
 import source.tools.utils.Read;
@@ -111,12 +112,17 @@ public class Game{
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(4,1));
 		panel.setOpaque(false);
+		GameSelector selectorListener = new GameSelector();
 		
 		//Nos boutons pour remplir la grille
 		JButton white = new JButton(new ImageIcon("ressources/wall.png"));
 		JButton erase = new JButton("effacer");
-		JButton joueur = new JButton(new ImageIcon("ressources/main.png"));
+		JButton joueur = new JButton(new ImageIcon("ressources/player.png"));
 		JButton sortie = new JButton(new ImageIcon("ressources/chest.png"));
+		white.addActionListener(selectorListener);
+		erase.addActionListener(selectorListener);
+		joueur.addActionListener(selectorListener);
+		sortie.addActionListener(selectorListener);
 
 		panel.add(white);
 		panel.add(joueur);
@@ -124,7 +130,7 @@ public class Game{
 		panel.add(erase);
 
 		//Panneau central : jeu à personnaliser
-		AreaGame area = new AreaGame(this.size);
+		AreaGame area = new AreaGame(this.size,selectorListener);
 		area.setOpaque(false);
 
 		//Ajouts à la fenêtre
