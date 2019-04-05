@@ -65,6 +65,7 @@ public class GameButtonsListener implements ActionListener{
 				}
 			}catch(NumberFormatException e){
 				//On vide l'étiquette @recommencez !
+				this.game.setSize(0); //au cas ou l'entier était bon pour parseInt
 				JTextField champ = (JTextField) evenement.getSource();
 				champ.setText("");
 			}

@@ -1,16 +1,17 @@
 package source.tools;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import java.awt.BorderLayout;
+import source.tools.events.Case;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.event.ChangeListener;
 
 /**
 *
@@ -26,9 +27,12 @@ public class AreaGame extends JPanel{
 	private final int xOffset = 100;
 	private final int yOffset = 100;
 
+	private Case caseJeu;
+
 	public AreaGame(int size){
 		super();
 		this.size = size;
+		this.caseJeu = new Case();
 	}
 	
 	@Override
@@ -59,6 +63,10 @@ public class AreaGame extends JPanel{
 					carre.setIcon(new ImageIcon("ressources/main.png"));
 				if(j == 3 && i == 0)
 					carre.setIcon(new ImageIcon("ressources/chest.png"));
+				carre.addActionListener(this.caseJeu); //ajoute un observateur
+				carre.setFocusable(false); //images ne sont par resurlignés après clic
+				carre.setRolloverEnabled(false);
+				carre.setFocusPainted(false);
 				this.add(carre, bag);
 			}
 		}
