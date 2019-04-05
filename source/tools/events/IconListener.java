@@ -6,30 +6,36 @@ import javax.swing.JButton;
 
 /**
 *
-* Observateur des boutons du menu
+* Observateur qui conserve le chemin des icones du dernier &#233;lement ayant
+* subit un &#233;v&#233;nement.
 *
-* @version 1.0 6 avril 2019
+* @version 1.0 5 avril 2019
 * @author Quentin Ramsamy--Ageorges
 *
 */
-public class GameSelector implements ActionListener{
+public class IconListener implements ActionListener{
 
+	/** le chemin contenu dans la dernière icone des &#233;léments*/
 	private String currentPath;
 
 	/**
 	*
-	* ...
+	* Cr&#233;e l'observateur
 	*
 	*/
-	public GameSelector(){
+	public IconListener(){
 		this.currentPath = "";
 	}
 
 	/**
 	*
-	* ...
+	* Invoque lorsque une action est effectu&#233;e sur un &#233;l&#233;ment
+	* associ&#233;. Rempli automatiquement.
 	*
-	* @param evenement
+	* @param evenement l'object de l'&#233;v&#233;nement sous la forme d'un
+	* ActionEvent
+	*
+	* @see ActionEvent
 	*
 	*/
 	@Override
@@ -46,11 +52,19 @@ public class GameSelector implements ActionListener{
 			//récupère le chemin
 			this.currentPath = boutonAppuye.getIcon().toString();
 		}catch(NullPointerException e){
+			//Si c'était null
 			this.currentPath = "";
 		}
 	}
 
-	public String getSelectedFile(){
+	/**
+	*
+	* Retourne le chemin de l'icone associ&#233;e au dernier bouton cliqu&#233;
+	*
+	* @return la chemin de l'icone r&#233;cup&#233;r&#233;e
+	*
+	*/
+	public String getIconPath(){
 		return this.currentPath;
 	}
 }

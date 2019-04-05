@@ -1,7 +1,8 @@
 package source.tools;
 
-import source.tools.events.Case;
-import source.tools.events.GameSelector;
+import source.tools.Case;
+import source.tools.events.GameCaseListener;
+import source.tools.events.IconListener;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -28,12 +29,12 @@ public class AreaGame extends JPanel{
 	private final int xOffset = 100;
 	private final int yOffset = 100;
 
-	private Case caseJeu;
+	private GameCaseListener caseJeu;
 
-	public AreaGame(int size, GameSelector selector){
+	public AreaGame(int size,IconListener selector){
 		super();
 		this.size = size;
-		this.caseJeu = new Case(selector);
+		this.caseJeu = new GameCaseListener(selector);
 	}
 	
 	@Override
@@ -58,16 +59,9 @@ public class AreaGame extends JPanel{
 			for(int j=0; j<this.size; j++){
 				bag.gridx = j; //colonnes
 				bag.gridy = i; //lignes
-				JButton carre = new JButton();
-				carre.setPreferredSize(new Dimension(48,48));
-				if(j == 0 && i == 0)
-					carre.setIcon(new ImageIcon("ressources/main.png"));
-				if(j == 3 && i == 0)
-					carre.setIcon(new ImageIcon("ressources/chest.png"));
-				carre.addActionListener(this.caseJeu); //ajoute un observateur
-				carre.setFocusable(false); //images ne sont par resurlignés après clic
-				carre.setRolloverEnabled(false);
-				carre.setFocusPainted(false);
+				//JButton carre = new JButton();
+				Case carre = new Case(j,i);
+				carre.addActionListener(this.caseJeu);//changer l'état
 				this.add(carre, bag);
 			}
 		}

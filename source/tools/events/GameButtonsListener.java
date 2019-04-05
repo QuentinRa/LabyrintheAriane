@@ -10,38 +10,44 @@ import javax.swing.JOptionPane;
 
 /**
 *
-* Observateur des boutons du menu
+* Observateur des boutons jeu (jouer, sauvegarder, tailleGrille)
 *
-* @version 1.0 6 avril 2019
+* @version 1.0 4 avril 2019
 * @author Quentin Ramsamy--Ageorges
 *
 */
 public class GameButtonsListener implements ActionListener{
 
-	/** */
+	/** ecran sur lequel les boutons sont affich&#233;s */
 	private Background ecran;
-	/** */
+	/** le jeu */
 	private Game game;
 
 
 	/**
 	*
-	* ...
+	* Cr&#233;e un observateur des boutons du jeu
 	*
-	* @param ecran
-	* @param game
+	* @param ecran ecran sur lequel les boutons sont affich&#233;s
+	* @param game le jeu ({@link Game#getSize}{@link Game#setSize})
+	*
+	* @see Game
 	*
 	*/
 	public GameButtonsListener(Background ecran, Game game){
-		this.ecran = ecran; //Ce sur quoi on affiche
-		this.game = game; //le jeu
+		this.ecran = ecran;
+		this.game = game;
 	}
 
 	/**
 	*
-	* ...
+	* Invoque lorsque une action est effectu&#233;e sur un &#233;l&#233;ment
+	* associ&#233;. Rempli automatiquement.
 	*
-	* @param evenement
+	* @param evenement l'object de l'&#233;v&#233;nement sous la forme d'un
+	* ActionEvent
+	*
+	* @see ActionEvent
 	*
 	*/
 	@Override
@@ -49,7 +55,8 @@ public class GameButtonsListener implements ActionListener{
 		String commande = evenement.getActionCommand();
 
 		//forcément si la taille est à zéro alors le premier
-		//action listener est celui de la taille
+		//action listener est celui de la taille car elle est
+		//nécessaire pour créer et donc utiliser le reste du menu
 		if(this.game.getSize() == 0){
 			try{
 				this.game.setSize(Integer.parseInt(commande));
@@ -66,6 +73,7 @@ public class GameButtonsListener implements ActionListener{
 			}catch(NumberFormatException e){
 				//On vide l'étiquette @recommencez !
 				this.game.setSize(0); //au cas ou l'entier était bon pour parseInt
+				//Vide la champ de texte
 				JTextField champ = (JTextField) evenement.getSource();
 				champ.setText("");
 			}
@@ -73,11 +81,18 @@ public class GameButtonsListener implements ActionListener{
 			//Supression des composants = reset
 			this.ecran.removeAll();
 			this.ecran.repaint();
-
+			//Lance le jeu
 			this.game.start();
 		} else {
-			//String message = "Fichier sauvegardé à : ressources/sav/"+commande;
-			//JOptionPane.showMessageDialog(this.ecran,message);
+			//Vide la champ de texte
+			JTextField champ = (JTextField) evenement.getSource();
+			champ.setText("");
+			//Sinon c'est que l'on a fait sauvegarder
+			String message = "Fichier sauvegardé à : ressources/sav/"+commande;
+			JOptionPane.showMessageDialog(this.ecran,message);
+			//Ici on sauvegarde
+			//SaveGame save = new SaveGame(this.game);
+			//save.write();
 		}
 	}
 }

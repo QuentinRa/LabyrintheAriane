@@ -79,6 +79,5 @@ public class Window extends JFrame{
 		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((int)(ecran.getWidth()-width)/2,
 						 (int)(ecran.getHeight()-height)/2);
-		this.setResizable(false);
 	}
 }

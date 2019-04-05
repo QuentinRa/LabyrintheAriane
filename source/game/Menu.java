@@ -88,8 +88,9 @@ public class Menu{
 	public void load(){
 		//Change pour layout qui prends tout l'écran
 		this.ecran.setLayout(new BorderLayout());
+		String savPath = "./ressources/sav/";
 		//Charge le gestionnaire de fichiers, dossier courant
-		JFileChooser gestionnaireFichiers = new JFileChooser(".");
+		JFileChooser gestionnaireFichiers = new JFileChooser(savPath);
 		this.ecran.add(gestionnaireFichiers, BorderLayout.CENTER);
 		gestionnaireFichiers.addActionListener(this.menuListener);
 		//met à jour l'écran

@@ -12,7 +12,7 @@ import java.io.File;
 *
 * Observateur des boutons du menu
 *
-* @version 1.0 6 avril 2019
+* @version 1.0 3 avril 2019
 * @author Quentin Ramsamy--Ageorges
 *
 */
@@ -38,9 +38,13 @@ public class MenuButtonsListener implements ActionListener{
 
 	/**
 	*
-	* ...
+	* Invoque lorsque une action est effectu&#233;e sur un &#233;l&#233;ment
+	* associ&#233;. Rempli automatiquement.
 	*
-	* @param evenement
+	* @param evenement l'object de l'&#233;v&#233;nement sous la forme d'un
+	* ActionEvent
+	*
+	* @see ActionEvent
 	*
 	*/
 	@Override
