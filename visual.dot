@@ -1,0 +1,32 @@
+digraph visual {
+
+	node [ shape = "record" ]
+
+	Main [ label = "{Main|+ main(String[] args) : String|Lance le jeu}" ];
+
+	Main -> Ariane;
+	Main -> IGame;
+
+	Ariane [ label = "{Ariane|}" ];
+	IGame [ label = "{Igame||Interface du format type d'un jeu}"];
+
+	edge [ arrowhead="empty" ];
+	Ariane -> IGame;
+	edge [ arrowhead="normal" ];
+}
+
+/* 			Style
+\l sauter une ligne
+style=	filled:rempli
+color=	white/red/purple/yellow/...
+shape=	record:rectangle
+label= ""	etiquette sur objet
+edge=	arrowhead = "empty"/"normal"
+
+fontname
+fontsize
+
+[] tableau valeur
+*/
+
+//node [<style>] : tous les trucs suivants dessinés le seront avec <style>
