@@ -1,0 +1,17 @@
+# dot -Tpng t.dot -o t.png
+
+digraph visual {
+
+	subgraph cluster_tab {
+		A -> A,B,C,F,H,I,J [label = "1"];
+		B -> A,C,D,E,F,G,H,I [label = "1"];
+		C -> C,D,F,H,J [label = "1"];
+		D -> A,B,C,D,F,G,H,J [label = "1"];
+		E -> A,B,E,G,I,J [label = "1"];
+		F -> A,C,D,E,G,H,J [label = "1"];
+		G -> A,C,E,G,H,I,J [label = "1"];
+		H -> A,B,C,E,F,H [label = "1"];
+		I -> D,E,G,I [label = "1"];
+		J -> B,C,D,E,F,G,H,I [label = "1"];
+	}
+}
