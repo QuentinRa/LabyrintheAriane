@@ -17,6 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import java.util.Queue;
+import java.util.LinkedList;
+
 /**
 *
 * Partie principale du jeu
@@ -66,34 +69,52 @@ public class MainGame implements IGameComponent{
 
 		Cases[][] cases = this.grille.getCasesArray();
 
-		for(int i=0; i<this.grille.getSize(); i++){
-			for(int j=0; j<this.grille.getSize(); j++){
-				System.out.print(cases[i][j].getValue() == true?"0":"1");
+		int i = this.grille.getXPlayer();
+		int j = this.grille.getYPlayer();
+		int butx = this.grille.getXExit();
+		int buty = this.grille.getYExit();
+		int size = this.grille.getSize();
+
+		Queue<Cases> file = new LinkedList<>();
+		file.add(cases[i][j]);
+		
+		while(file.isEmpty() == false){
+			Cases first = file.element(); //Récupère le 1er élément
+			first.setEmpille(true);
+			System.out.println(i+" "+j);
+			i = first.getXPos();
+			j = first.getYPos();
+
+			if(i == butx && j == buty){
+				//On a trouvé un chemin
+				System.out.println("victory");
+				file.clear();
+			}else{
+				//chemin gauche ok
+				if(j-1>=0 && !cases[i][j-1].getValue() && !cases[i][j-1].isEmpille())
+					file.add(cases[i][j-1]);
+				//chemin droite
+				if(j+1<size && !cases[i][j+1].getValue() && !cases[i][j+1].isEmpille())
+					file.add(cases[i][j+1]);
+				//chemin haut
+				if(i-1>=0 && !cases[i-1][j].getValue() && !cases[i-1][j].isEmpille())
+					file.add(cases[i-1][j]);
+				//chemin bas
+				if(i+1<size && !cases[i+1][j].getValue() && !cases[i+1][j].isEmpille())
+					file.add(cases[i+1][j]);
+
+				file.remove(); //supprime le 1er élément
+			}
+		}
+
+
+		//boolean[][] matrice = new boolean[size][size];
+
+		for(i=0; i < size; i++){
+			for(j=0; j < size; j++){
+				System.out.print(cases[i][j].getValue()==true?0:1);
 			}
 			System.out.println("");
 		}
-/*
-		int i = this.grille.getXPlayer();
-		int j = this.grille.getYPlayer();
-
-		System.out.println(i+" "+j);
-
-		try{
-			if(j-1>=0 && !cases[i][j-1].getValue())
-			System.out.println("g: "+cases[i][j-1].isEmpille());
-			if(j+1<this.grille.getSize() && !cases[i][j+1].getValue())
-				System.out.println("d: "+cases[i][j+1].isEmpille());
-
-			if(i-1>=0 && !cases[i-1][j].getValue())
-			System.out.println("t: "+cases[i-1][j].getValue());
-			if(i+1<this.grille.getSize() && !cases[i+1][j].getValue())
-			System.out.println("b: "+cases[i+1][j].isEmpille());
-
-		}catch(IndexOutOfBoundsException e){
-
-		}catch(NullPointerException e){
-
-		}
-		*/
 	}
 }

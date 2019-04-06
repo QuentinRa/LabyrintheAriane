@@ -54,3 +54,23 @@
 0a03 0309 0820 d9a0 8a2c b003
 20d9 a08a 2cb0 03aa 1022 3510 70
 https://www.mathsisfun.com/binary-decimal-hexadecimal-converter.html
+
+
+System.out.println(i+" "+j);
+
+			if(j-1>=0 && !cases[i][j-1].getValue())
+				System.out.println("g: "+cases[i][j-1].isEmpille());
+			if(j+1<this.grille.getSize() && !cases[i][j+1].getValue())
+				System.out.println("d: "+cases[i][j+1].isEmpille());
+
+			if(i-1>=0 && !cases[i-1][j].getValue())
+				System.out.println("t: "+cases[i-1][j].getValue());
+			if(i+1<this.grille.getSize() && !cases[i+1][j].getValue())
+				System.out.println("b: "+cases[i+1][j].isEmpille());
+
+						for(int i=0; i<this.grille.getSize(); i++){
+			for(int j=0; j<this.grille.getSize(); j++){
+				System.out.print(cases[i][j].getValue() == true?"0":"1");
+			}
+			System.out.println("");
+		}

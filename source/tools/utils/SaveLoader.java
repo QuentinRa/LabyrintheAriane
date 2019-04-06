@@ -56,7 +56,7 @@ public class SaveLoader{
 				Cases[][] cases = new Cases[size][size];
 				for(int i=0; i<size; i++){
 					for(int j=0; j<size; j++){
-						cases[j][i] = new Cases(0);
+						cases[j][i] = new Cases(0,j,i);
 						cases[j][i].setValue(buffer[i][j]);
 					}
 				}
