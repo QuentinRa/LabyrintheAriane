@@ -50,6 +50,14 @@ public class Background extends JPanel{
 		super();
 		this.image = new ImageLoader(imagePath);
 	}
+
+	/**
+	*
+	* m&#233;thode appell&#233;e lors du dessin du composant
+	*
+	* @param pinceau le pinceau utilis&#233; pour dessiner
+	*
+	*/
 	
 	@Override
 	public void paintComponent(Graphics pinceau){
@@ -62,6 +70,7 @@ public class Background extends JPanel{
 			secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
 		}
 
+		if(this.image != null)
 		//Scale l'image pour qu'elle tienne dans le conteneur
 		secondPinceau.drawImage(this.image.getImage(), 0, 0,this.getWidth(),
 			this.getHeight(), this);
@@ -75,6 +84,9 @@ public class Background extends JPanel{
 	*
 	*/
 	public void setBackground(String background){
-		this.image.buildImage(background);
+		if(background.length() != 0)
+			this.image.buildImage(background);
+		else
+			this.image = null;
 	}
 }

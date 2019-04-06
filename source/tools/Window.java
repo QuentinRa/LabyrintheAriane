@@ -4,6 +4,7 @@ import source.tools.utils.Background;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.LayoutManager;
@@ -23,6 +24,11 @@ public class Window extends JFrame{
 	qui sera manipul&#233;, cf r&#233;&#233;criture des add, ce qui fait un vrai 
 	effet de fond */
 	private Background screen;
+	/** chemin du fond d'écran */
+	private String background;
+
+	/** positionner la fen&234;tre au centre horizontal et vertical &#233;cran */
+	public static final int CENTER = 0;
 
 	/**
 	*
@@ -85,15 +91,53 @@ public class Window extends JFrame{
 			throw new IllegalStateException("Dimension Fenêtre invalide!");
 		this.setSize(width,height);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation((int)(ecran.getWidth()-width)/2,
-						 (int)(ecran.getHeight()-height)/2);
+		this.setLocation(Window.CENTER);
 		this.screen = new Background();
+		this.background = "";
 		this.add(this.screen, BorderLayout.CENTER);
 	}
 
 	public void setBackground(String background){
 		this.screen.setBackground(background);
+		this.background = background;
+	}
+
+	public void reloadBackground(boolean value){
+		if(value){
+			this.setBackground(background);
+		}
+	}
+
+	public void setLocation(int constante){
+		if(constante == Window.CENTER){
+			Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
+			this.setLocation((int)(ecran.getWidth()-this.getWidth())/2,
+							(int)(ecran.getHeight()-this.getHeight())/2);
+		}
+	}
+
+	/**
+	*
+	* Renvoi la largeur de l'écran dans lequel est la fenêtre
+	*
+	* @return largeur du moniteur
+	*
+	*/
+	public int getMonitorWidth(){
+		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
+		return (int) ecran.getWidth();
+	}
+
+	/**
+	*
+	* Renvoi la hauteur de l'écran dans lequel est la fenêtre
+	*
+	* @return hauteur du moniteur
+	*
+	*/
+	public int getMonitorHeight(){
+		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
+		return (int) ecran.getHeight();
 	}
 
 	/**

@@ -61,6 +61,10 @@ public class MenuButtons implements ActionListener{
 		}else if(commande.equals("Nouveau")){
 			//Charge le menu "Nouveau"
 			this.menu.play("");
+
+		// Cancel/Approve selection ne sont valables que dans l'interface
+		// du JFileChooser (cancer = annuler, approve = double clic/ouvrir)
+
 		} else if(commande.equals("CancelSelection")){
 			//On revient en arrière si l'utilisateur fait "annuler"
 			this.menu.run();

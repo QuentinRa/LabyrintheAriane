@@ -1,0 +1,32 @@
+//public void setPreferredSize(int width, int height){
+	//	//Si on a un écran
+	//	if(this.screen != null)
+	//		this.screen.setPreferredSize(new Dimension(width,height));
+	//	else
+	//		super.setPreferredSize(new Dimension(width,height));
+	//}
+
+	//@Override
+	//public void setSize(int width, int height){
+	//	//Si on a un écran
+	//	if(this.screen != null){
+	//		super.setSize(width,height);
+	//		this.screen = new Background(background);
+	//		this.add(this.screen, BorderLayout.CENTER);
+	//		this.revalidate();
+	//	} else {
+	//		super.setSize(width,height);
+	//	}
+	//}
+
+/*bag.gridx = 0;
+		bag.gridy = 0;
+		
+		JButton carre = new JButton("i");
+		carre.setPreferredSize(dim);
+		carre.setMinimumSize(dim);
+		//images ne sont par resurlignés après clic
+		carre.setFocusable(false);
+		carre.setRolloverEnabled(false);
+		carre.setFocusPainted(false);
+		this.add(carre);*/

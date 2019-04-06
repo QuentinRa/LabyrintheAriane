@@ -7,8 +7,8 @@ import source.tools.Window;
 
 /**
 *
-* Le jeu Ariane, on se trouve à un certain endroit dans un espace (grille) remplie
-* d'obstacles et on doit arriver à la sortie.
+* Le jeu Ariane, on se trouve à un certain endroit dans un espace (grille)
+* remplie d'obstacles et on doit arriver à la sortie.
 *
 * @version 1.0 1 avril 2019
 * @author Quentin Ramsamy--Ageorges
@@ -42,10 +42,10 @@ public class Ariane implements IGame{
 	* construit un jeu "Ariane"
 	* Dimensions du jeu = width*height
 	*
-	* @param width largeur de la fen&#234;tre (strictement sup&#233;rieure &#224;
-	*  0 ainsi que strictement sup&#233;rieure &#224; 1 si height=1)
-	* @param height hauteur de la fen&#234;tre (strictement sup&#233;rieure &#224;
-	*  0 ainsi que strictement sup&#233;rieure &#224; 1 si width=1)
+	* @param width largeur de la fen&#234;tre (strictement sup&#233;rieure
+	* &#224; 0 ainsi que strictement sup&#233;rieure &#224; 1 si height=1)
+	* @param height hauteur de la fen&#234;tre (strictement sup&#233;rieure
+	* &#224; 0 ainsi que strictement sup&#233;rieure &#224; 1 si width=1)
 	*
 	* @throws IllegalStateException si le chargement du fond d'&#233;cran
 	* &#233;choue

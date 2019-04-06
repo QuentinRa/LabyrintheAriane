@@ -2,6 +2,7 @@ package source.tools.utils;
 
 import source.game.Grille;
 import source.tools.utils.ReaderBitByBit;
+import source.tools.exceptions.InvalidDataException;
 
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -25,8 +26,10 @@ public class SaveLoader{
 	*
 	* @return Grille remplie avec le fichier de sauvegarde
 	*
-	* @throws IOException si la fermeture du fichier &#233;choue, ou si la lecture &#233;choue
+	* @throws IOException si la fermeture du fichier &#233;choue, ou si la lecture
+	* &#233;choue
 	* @throws FileNotFoundException si l'ouverture du fichier à &#233;chou&#233;e
+	* @throws InvalidDataException si les données n'ont pas le bon format
 	*
 	* @see Grille
 	*
@@ -39,25 +42,39 @@ public class SaveLoader{
 			DataInputStream file = new DataInputStream(flux);
 
 			try{
-				//Catcher les exceptions invalidFormat
 				grille.setSize(file.read());
 				grille.setYPlayer(file.read());
 				grille.setXPlayer(file.read());
 				grille.setYOut(file.read());
 				grille.setXOut(file.read());
 				int size = grille.getSize();
-				grille.setCasesArray(ReaderBitByBit.read(file,size,size));
+				boolean[][] buffer = ReaderBitByBit.read(file,size,size);
+				//Inverse le tableau car la lecture est en ligne mais
+				//on doit l'interpréter en colonnes
+				boolean[][] cases = new boolean[size][size];
+				for(int i=0; i<size; i++){
+					for(int j=0; j<size; j++){
+						cases[j][i] = buffer[i][j];
+					}
+				}
+				grille.setCasesArray(cases);
 			}catch(IOException e){
-				System.out.println("Erreur de la lecture de la sauvegarde");
+				String message = "Erreur de la lecture de la sauvegarde";
+				throw new IllegalStateException(message);
+			}catch(InvalidDataException e){
+				String message = "Les données sont au mauvais format/invalides";
+				throw new InvalidDataException(message);
 			}
 		
 			try{
 				file.close();
 			}catch(IOException e){
-				System.out.println("Impossible de fermer la sauvegarde");
+				String message = "Impossible de fermer la sauvegarde";
+				throw new IllegalStateException(message);
 			}
 		}catch(FileNotFoundException e){
-			throw new IllegalStateException("Impossible de charger la sauvegarde");
+			String message = "Impossible de charger la sauvegarde";
+			throw new IllegalStateException(message);
 		}
 
 		return grille;

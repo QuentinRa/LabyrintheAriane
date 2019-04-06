@@ -27,6 +27,8 @@ public class Menu implements IGameComponent{
 	private Window ecran;
 	/** observateur du menu */
 	private MenuButtons menuListener;
+	/** chemin des sauvegardes de base */
+	private String savPath = "./ressources/sav/";
 
 	/**
 	*
@@ -69,6 +71,7 @@ public class Menu implements IGameComponent{
 		pCharger.add(charger,bag);
 		pCharger.setOpaque(false);
 
+		//ajoute
 		this.ecran.add(pNewGame);
 		this.ecran.add(pCharger);
 
@@ -97,12 +100,35 @@ public class Menu implements IGameComponent{
 	public void load(){
 		//Change pour layout qui prends tout l'écran
 		this.ecran.setLayout(new BorderLayout());
-		String savPath = "./ressources/sav/";
 		//Charge le gestionnaire de fichiers, dossier courant
-		JFileChooser gestionnaireFichiers = new JFileChooser(savPath);
+		JFileChooser gestionnaireFichiers = new JFileChooser(this.savPath);
 		this.ecran.add(gestionnaireFichiers, BorderLayout.CENTER);
 		gestionnaireFichiers.addActionListener(this.menuListener);
 		//met à jour l'écran
 		this.ecran.revalidate();
+	}
+
+	/**
+	*
+	* Change le chemin o&#254; chercher les sauvegardes
+	* 
+	* @param path le nouveau chemin
+	*
+	*/
+	public void setSavePath(String path){
+		if(path.length() == 0)
+			path = ".";
+		this.savPath = path;
+	}
+
+	/**
+	*
+	* Renvoi le chemin o&#254; chercher les sauvegardes
+	* 
+	* @return le nouveau chemin o&#254; chercher les sauvegardes
+	*
+	*/
+	public String getSavePath(){
+		return this.savPath;
 	}
 }

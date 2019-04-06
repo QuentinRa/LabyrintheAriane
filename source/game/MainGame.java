@@ -3,6 +3,7 @@ package source.game;
 import source.game.Grille;
 import source.game.interfaces.IGameComponent;
 import source.tools.Window;
+import source.tools.DrawGrille;
 import source.tools.utils.SaveLoader;
 
 import java.awt.BorderLayout;
@@ -31,8 +32,6 @@ public class MainGame implements IGameComponent{
 	private String filePath;
 	/** la grille de jeu */
 	private Grille grille;
-	/** observateur des boutons du menu */
-	//private GameButtonsListener gameListener;
 
 	public MainGame(Window ecran, String filePath){
 		this.ecran = ecran;
@@ -58,8 +57,12 @@ public class MainGame implements IGameComponent{
 			this.grille = new Grille();
 		}
 
-		System.out.println("taille : "+this.grille.getSize()+"*"+this.grille.getSize());
-		System.out.println("j: "+this.grille.getXPlayer()+","+this.grille.getYPlayer());
+		//Affiche à des fins de débogage
+
+		System.out.println("taille : "+this.grille.getSize()+"*"+
+			this.grille.getSize());
+		System.out.println("j: "+this.grille.getXPlayer()+","+
+			this.grille.getYPlayer());
 		System.out.println("o: "+this.grille.getXOut()+","+this.grille.getYOut());
 
 		int size = this.grille.getSize();
@@ -67,10 +70,14 @@ public class MainGame implements IGameComponent{
 
 		for(int i=0; i<size; i++){
 			for(int j=0; j<size; j++){
-				System.out.print(array[i][j] == true?0:1);
+				System.out.print(array[i][j] == true?1:0);
 			}
 			System.out.println();
 		}
 
+		DrawGrille drawGrille = new DrawGrille(this.grille,this.ecran);
+		this.ecran.add(drawGrille);
+		drawGrille.setOpaque(false);
+		this.ecran.revalidate();
 	}
 }
