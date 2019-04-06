@@ -74,12 +74,22 @@ public class ReaderBitByBit{
 		// 0000 0110 >> 1 donne  0000 0001 & 1 = 1 et le 7e bit = 1 ok
 		// 0000 0110 >> 0 donne  0000 0000 & 1 = 0 et le 8e bit = 0 ok
 
+		int i=0,j=0;
 
-		for(int i = 0; i< size; i+=8){
-			byte tmp = flux.readByte();
-			for(int j=7; j >= 0; j--){
-				array[i+7-j] = ((tmp >> j & 00000001) == 1)?true:false;
+		try{
+			for(i = 0; i< size; i+=8){
+				byte tmp = flux.readByte();
+				for(j=7; j >= 0 && (i+7-j) < size; j--){
+					//on considère des valeurs de 0 à 7 donc 8 = octect
+					//la première valeur lue soit celle déplacement de 7
+					//est dans la case 0 puis celle de 6 dans case 1 ...
+					//et i est la position la ou mettre le bit
+					array[i+7-j] = ((tmp >> j & 00000001) == 1)?true:false;
+				}
 			}
+		}catch(IOException e){
+			//Sinon c'était une erreur de lecture
+			throw new IOException(e.getMessage());
 		}
 
 		return array;

@@ -1,6 +1,7 @@
 package source.game;
 
 import source.game.Grille;
+import source.game.Cases;
 import source.game.interfaces.IGameComponent;
 import source.tools.Window;
 import source.tools.DrawGrille;
@@ -52,29 +53,12 @@ public class MainGame implements IGameComponent{
 
 		//si on m'a donné un chemin
 		if(this.filePath.length() != 0){
-			this.grille = SaveLoader.getSave(this.filePath);
+			this.grille = SaveLoader.getSave(this.filePath,this.ecran);
 		} else {
 			this.grille = new Grille();
 		}
 
-		//Affiche à des fins de débogage
-
-		System.out.println("taille : "+this.grille.getSize()+"*"+
-			this.grille.getSize());
-		System.out.println("j: "+this.grille.getXPlayer()+","+
-			this.grille.getYPlayer());
-		System.out.println("o: "+this.grille.getXOut()+","+this.grille.getYOut());
-
-		int size = this.grille.getSize();
-		boolean[][] array = this.grille.getCasesArray();
-
-		for(int i=0; i<size; i++){
-			for(int j=0; j<size; j++){
-				System.out.print(array[i][j] == true?1:0);
-			}
-			System.out.println();
-		}
-
+		// Affiche le vrai jeu
 		DrawGrille drawGrille = new DrawGrille(this.grille,this.ecran);
 		this.ecran.add(drawGrille);
 		drawGrille.setOpaque(false);

@@ -1,6 +1,7 @@
 package source.tools;
 
 import source.game.Grille;
+import source.game.Cases;
 import source.tools.Window;
 import source.tools.exceptions.InvalidDataException;
 
@@ -9,12 +10,6 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-
-import java.awt.Dimension;
-import javax.swing.JButton;
-
-import java.awt.*;
-import javax.swing.*;
 
 /**
 *
@@ -72,23 +67,22 @@ public class DrawGrille extends JPanel{
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints bag = new GridBagConstraints();
 
-		Dimension dim = new Dimension(this.caseSize,this.caseSize);
-
 		width/=this.caseSize;
 		height/=this.caseSize;
+
+		Cases[][] cases = this.grille.getCasesArray();
 		
 		for(int i=0; i<width; i++){
 			for(int j=0; j<height; j++){
 				bag.gridx = j; //colonnes
 				bag.gridy = i; //lignes
-				JButton carre = new JButton(""+i);
-				carre.setPreferredSize(dim);
-				carre.setMinimumSize(dim);
-				//images ne sont par resurlignés après clic
-				carre.setFocusable(false);
-				carre.setRolloverEnabled(false);
-				carre.setFocusPainted(false);
-				this.add(carre, bag);
+				cases[i][j].setIcon(cases[i][j].getValue() == true?Cases.WALL:null);
+				if(cases[i][j].isPlayer())
+					cases[i][j].setIcon(Cases.PLAYER);
+				else if(cases[i][j].isExit())
+					cases[i][j].setIcon(Cases.EXIT);
+
+				this.add(cases[i][j], bag);
 			}
 		}
 

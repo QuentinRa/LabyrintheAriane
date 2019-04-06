@@ -71,12 +71,17 @@ $(B_GAME)MainGame.class : $(S_GAME)MainGame.java \
 		$(B_TOOLS)Window.class \
 		$(B_GAME)Grille.class \
 		$(B_TOOLSU)SaveLoader.class \
-		$(B_TOOLS)DrawGrille.class
+		$(B_TOOLS)DrawGrille.class \
+		$(B_GAME)Cases.class
 	$(CC) $(CCFLAGS) $(S_GAME)MainGame.java
 
 $(B_GAME)Grille.class : $(S_GAME)Grille.java \
-		$(B_TOOLSEX)InvalidDataException.class
+		$(B_TOOLSEX)InvalidDataException.class \
+		$(B_GAME)Cases.class
 	$(CC) $(CCFLAGS) $(S_GAME)Grille.java
+
+$(B_GAME)Cases.class : $(S_GAME)Cases.java
+	$(CC) $(CCFLAGS) $(S_GAME)Cases.java
 
 #Package interfaces
 $(B_GAMEI)IGame.class : $(S_GAMEI)IGame.java
@@ -92,7 +97,8 @@ $(B_TOOLS)Window.class : $(S_TOOLS)Window.java \
 
 $(B_TOOLS)DrawGrille.class : $(S_TOOLS)DrawGrille.java \
 		$(B_GAME)Grille.class \
-		$(B_TOOLSEX)InvalidDataException.class
+		$(B_TOOLSEX)InvalidDataException.class \
+		$(B_GAME)Cases.class
 	$(CC) $(CCFLAGS) $(S_TOOLS)DrawGrille.java
 
 #Package events
@@ -111,11 +117,17 @@ $(B_TOOLSU)ImageLoader.class : $(S_TOOLSU)ImageLoader.java
 
 $(B_TOOLSU)SaveLoader.class : $(S_TOOLSU)SaveLoader.java \
 		$(B_TOOLSU)ReaderBitByBit.class \
-		$(B_TOOLSEX)InvalidDataException.class
+		$(B_TOOLSEX)InvalidDataException.class \
+		$(B_GAME)Cases.class \
+		$(B_TOOLS)Window.class \
+		$(B_TOOLSU)ErrorPopup.class
 	$(CC) $(CCFLAGS) $(S_TOOLSU)SaveLoader.java
 
 $(B_TOOLSU)ReaderBitByBit.class : $(S_TOOLSU)ReaderBitByBit.java
 	$(CC) $(CCFLAGS) $(S_TOOLSU)ReaderBitByBit.java
+
+$(B_TOOLSU)ErrorPopup.class : $(S_TOOLSU)ErrorPopup.java
+	$(CC) $(CCFLAGS) $(S_TOOLSU)ErrorPopup.java
 
 #Packtage exceptions
 $(B_TOOLSEX)InvalidDataException.class : $(S_TOOLSEX)InvalidDataException.java

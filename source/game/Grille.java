@@ -1,5 +1,6 @@
 package source.game;
 
+import source.game.Cases;
 import source.tools.exceptions.InvalidDataException;
 
 import javax.swing.JButton;
@@ -19,24 +20,21 @@ public class Grille{
 	/** Position ligne x du joueur */
 	private int yPlayer;
 	/** Position colonne x de la sortie */
-	private int xOut;
+	private int xExit;
 	/** Position ligne y de la sortie */
-	private int yOut;
+	private int yExit;
 	/** dimension de la grille = size * size */
 	private int size;
-	/** valeurs de nos cases sous la forme de booleans */
-	private boolean[][] cases;
 	/** nos cases */
-	private JButton[][] container;
+	private Cases[][] cases;
 
 	public Grille(){
-		this.xPlayer = 0;
-		this.yPlayer = 0;
-		this.xOut = 0;
-		this.yOut = 0;
+		this.xPlayer = -1;
+		this.yPlayer = -1;
+		this.xExit = -1;
+		this.yExit = -1;
 		this.size = 0;
 		this.cases = null;
-		this.container = null;
 	}
 
 	/**
@@ -107,8 +105,8 @@ public class Grille{
 	* Compteur commence &#224; z&#233;ro
 	*
 	*/
-	public int getXOut(){
-		return this.xOut;
+	public int getXExit(){
+		return this.xExit;
 	}
 
 	/**
@@ -121,12 +119,12 @@ public class Grille{
 	* @throws InvalidDataException si value n'a pas une valeur correcte
 	*
 	*/
-	public void setXOut(int value){
+	public void setXExit(int value){
 		if(value<0 || value >= this.size ){
 			String message = "La valeur x (sortie) n'est pas dans la grille";
 			throw new InvalidDataException(message);
 		}
-		this.xOut = value;
+		this.xExit = value;
 	}
 
 	/**
@@ -137,8 +135,8 @@ public class Grille{
 	* Compteur commence &#224; z&#233;ro
 	*
 	*/
-	public int getYOut(){
-		return this.yOut;
+	public int getYExit(){
+		return this.yExit;
 	}
 	
 	/**
@@ -151,12 +149,12 @@ public class Grille{
 	* @throws InvalidDataException si value n'a pas une valeur correcte
 	*
 	*/
-	public void setYOut(int value){
+	public void setYExit(int value){
 		if(value<0 || value >= this.size ){
 			String message = "La valeur x (sortie) n'est pas dans la grille";
 			throw new InvalidDataException(message);
 		}
-		this.yOut = value;
+		this.yExit = value;
 	}
 	
 	/**
@@ -190,7 +188,7 @@ public class Grille{
 			throw new InvalidDataException(message);
 		}
 		this.size = size;
-		this.cases = new boolean[this.size][this.size];
+		this.cases = new Cases[this.size][this.size];
 	}
 
 	/**
@@ -198,12 +196,12 @@ public class Grille{
 	* Renvoi le tableau des valeurs des cases.
 	*
 	* @return null si {@link #setSize} n'a pas &#233;t&#233;e appel&#233;e,
-	* sinon un tableau de booleans initialisés à false de taille [size][size]
+	* sinon un tableau de Cases initialisés à false de taille [size][size]
 	*
 	* @see #setSize
 	* @see #setCasesArray
 	*/
-	public boolean[][] getCasesArray(){
+	public Cases[][] getCasesArray(){
 		return this.cases;
 	}
 
@@ -214,7 +212,7 @@ public class Grille{
 	* @param cases le nouveau tableau des valeurs des cases
 	*
 	*/
-	public void setCasesArray(boolean[][] cases){
+	public void setCasesArray(Cases[][] cases){
 		this.cases = cases;
 	}
 
@@ -229,7 +227,7 @@ public class Grille{
 	*/
 	public void setCasesArray(int x, int y, boolean value){
 		try{
-			this.cases[x][y] = value;
+			this.cases[x][y].setValue(value);
 		}catch(IndexOutOfBoundsException e){
 			String message = "La position x,y n'est pas valide dans le tableau.";
 			throw new InvalidDataException(message);

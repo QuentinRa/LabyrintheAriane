@@ -33,6 +33,8 @@ public class Main{
 		try{
 			IGame ariane = new Ariane(600,600); //dimensions fenêtre
 			ariane.start(); //démarrage du jeu
+		}catch(RuntimeException e){
+			System.err.println("ebb");
 		}catch(Exception e){
 			//S'il y a une exception, on l'affiche simplement sur error
 			System.err.println(e.getMessage());
