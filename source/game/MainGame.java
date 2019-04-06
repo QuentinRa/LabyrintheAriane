@@ -66,37 +66,34 @@ public class MainGame implements IGameComponent{
 
 		Cases[][] cases = this.grille.getCasesArray();
 
+		for(int i=0; i<this.grille.getSize(); i++){
+			for(int j=0; j<this.grille.getSize(); j++){
+				System.out.print(cases[i][j].getValue() == true?"0":"1");
+			}
+			System.out.println("");
+		}
+/*
 		int i = this.grille.getXPlayer();
 		int j = this.grille.getYPlayer();
 
 		System.out.println(i+" "+j);
 
-		if(j-1>=0 && cases[i][j-1].isEmpile() == false
-				&& cases[i][j-1].getValue() == false){
-			System.out.println("gauche ok");
-			cases[i][j].setEmpile(true);
-			j--;
-		}
-		if(j+1<this.grille.getSize() && cases[i][j+1].isEmpile() == false
-				&& cases[i][j+1].getValue() == false){
-			System.out.println("droite ok");
-			cases[i][j].setEmpile(true);
-			j++;
+		try{
+			if(j-1>=0 && !cases[i][j-1].getValue())
+			System.out.println("g: "+cases[i][j-1].isEmpille());
+			if(j+1<this.grille.getSize() && !cases[i][j+1].getValue())
+				System.out.println("d: "+cases[i][j+1].isEmpille());
+
+			if(i-1>=0 && !cases[i-1][j].getValue())
+			System.out.println("t: "+cases[i-1][j].getValue());
+			if(i+1<this.grille.getSize() && !cases[i+1][j].getValue())
+			System.out.println("b: "+cases[i+1][j].isEmpille());
+
+		}catch(IndexOutOfBoundsException e){
+
+		}catch(NullPointerException e){
 
 		}
-
-		if(i-1>=0 && cases[i-1][i].isEmpile() == false
-			&& cases[i-1][j].getValue() == false){
-			System.out.println("haut ok");
-			cases[i][j].setEmpile(true);
-			i--;
-		}
-
-		if(i+1<this.grille.getSize() && cases[i+1][j].isEmpile() == false
-			&& cases[i+1][j].getValue() == false){
-			cases[i][j].setEmpile(true);
-			i++;
-			System.out.println("bas ok");
-		}
+		*/
 	}
 }

@@ -18,7 +18,6 @@ public class Cases extends JButton{
 	public static final ImageIcon EXIT = new ImageIcon("ressources/exit.png");
 	public static final ImageIcon WALL = new ImageIcon("ressources/wall.png");
 
-	private String icone;
 	private boolean value;
 
 	private boolean player;
@@ -29,7 +28,6 @@ public class Cases extends JButton{
 	public Cases(int size){
 		super();
 		this.value = false;
-		this.icone = "";
 		this.player = false;
 		this.exit = false;
 		this.empille = false;
@@ -74,8 +72,7 @@ public class Cases extends JButton{
 		this.empille = value;
 	}
 
-	public boolean isEmpile(){
+	public boolean isEmpille(){
 		return this.empille;
 	}
-
 }
