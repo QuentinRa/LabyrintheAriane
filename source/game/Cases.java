@@ -24,12 +24,15 @@ public class Cases extends JButton{
 	private boolean player;
 	private boolean exit;
 
+	private boolean empille;
+
 	public Cases(int size){
 		super();
 		this.value = false;
 		this.icone = "";
 		this.player = false;
 		this.exit = false;
+		this.empille = false;
 
 		if(size<=0) size = 48; 
 
@@ -65,6 +68,14 @@ public class Cases extends JButton{
 
 	public void setExit(boolean value){
 		this.exit = value;
+	}
+
+	public void setEmpile(boolean value){
+		this.empille = value;
+	}
+
+	public boolean isEmpile(){
+		return this.empille;
 	}
 
 }

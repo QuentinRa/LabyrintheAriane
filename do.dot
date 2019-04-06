@@ -1,0 +1,17 @@
+#dot -Tpng do.dot -o do.png
+
+digraph loa {
+	subgraph cluster_naame {
+		"0,0" -> "1,0";
+		"1,0" -> "2,0";
+		"2,0" -> "2,1";
+		"2,1" -> "2,2";
+		"2,2" -> "1,2";
+		"1,2" -> "0,2";
+	}
+
+	subgraph cluster_name {
+		"D,D" -> "C,D","D,C";
+		"C,D" -> "D,D","B,D","C,C";
+	}
+}
