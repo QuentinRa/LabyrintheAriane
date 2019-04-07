@@ -8,7 +8,7 @@ import java.awt.Graphics;
 
 /**
 *
-* Panneau qui contient une image de fond
+* Panneau qui contient un fond d'écran (image)
 *
 * @version 1.0 3 avril 2019
 * @author Quentin Ramsamy--Ageorges
@@ -21,9 +21,9 @@ public class Background extends JPanel{
 
 	/**
 	*
-	* Cr&#233;e un panneau pouvant avoir un fond
+	* Créer un panneau
 	*
-	* @throws IllegalStateException si une &#233;tape du chargement de l'image
+	* @throws IOException si une &#233;tape du chargement de l'image
 	* à &#233;chou&#233;e
 	*
 	* @see ImageLoader
@@ -36,11 +36,11 @@ public class Background extends JPanel{
 
 	/**
 	*
-	* Cr&#233;e un panneau avec une image de fond
+	* Créer un panneau avec un fond d'écran
 	*
-	* @param imagePath le chemin de l'image de fond
+	* @param imagePath le chemin du fond d'écran
 	*
-	* @throws IllegalStateException si une &#233;tape du chargement de l'image
+	* @throws IOException si une &#233;tape du chargement de l'image
 	* à &#233;chou&#233;e
 	*
 	* @see ImageLoader
@@ -48,10 +48,7 @@ public class Background extends JPanel{
 	*/
 	public Background(String imagePath){
 		super();
-		if(imagePath!=null)
-			this.image = new ImageLoader(imagePath);
-		else
-			this.image = new ImageLoader();
+		this.image = new ImageLoader(imagePath);
 	}
 
 	/**
@@ -61,6 +58,7 @@ public class Background extends JPanel{
 	* @param pinceau le pinceau utilis&#233; pour dessiner
 	*
 	*/
+	
 	@Override
 	public void paintComponent(Graphics pinceau){
 		// on crée un nouveau pinceau pour pouvoir le modifier plus tard
@@ -76,26 +74,19 @@ public class Background extends JPanel{
 		//Scale l'image pour qu'elle tienne dans le conteneur
 		secondPinceau.drawImage(this.image.getImage(), 0, 0,this.getWidth(),
 			this.getHeight(), this);
-		else
-			secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
 	}
 
 	/**
 	*
 	* Change l'image utilis&#233;e comme fond d'&#233;cran
-	* null pour supprimer le fond.
 	*
 	* @param background l'image &#224; mettre en fond d'&#233;cran
 	*
 	*/
 	public void setBackground(String background){
-		if(background == null){
-			this.image = null;
-			this.repaint();
-		}else if(background.length() != 0){
+		if(background.length() != 0)
 			this.image.buildImage(background);
-		} else {
+		else
 			this.image = null;
-		}
 	}
 }

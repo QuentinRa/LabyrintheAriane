@@ -1,7 +1,7 @@
 package source;
 
-import source.game.Ariane; //Jeu
-import source.game.interfaces.IGame; //Interface jeu type
+import source.game.Ariane;
+import source.game.interfaces.IGame;
 
 /**
 *
@@ -31,18 +31,13 @@ public class Main{
 	*/
 	public static void main(String[] args){
 		try{
-			//crée un jeu dans une fenêtre 600x600
-			IGame ariane = new Ariane(600,600);
+			IGame ariane = new Ariane(600,600); //dimensions fenêtre
 			ariane.start(); //démarrage du jeu
-		}catch(IllegalStateException e){
-			//On est obligé d'afficher les exception datant d'
-			//avant la création de la fenêtre/initialisation du jeu
-			//sur le terminal car pas de fenêtre...
-
-			//j'ai classé ces exceptions dans IllegalStateException
-			//il s'agit donc exceptions "controlés" mais incontrolables
+		}catch(RuntimeException e){
+			System.err.println("ebb");
+		}catch(Exception e){
+			//S'il y a une exception, on l'affiche simplement sur error
 			System.err.println(e.getMessage());
 		}
-
 	}
 }

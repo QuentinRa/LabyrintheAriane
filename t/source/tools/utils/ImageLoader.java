@@ -29,7 +29,7 @@ public class ImageLoader{
 	*
 	* @param path le chemin de l'image
 	*
-	* @throws IllegalStateException si une &#233;tape du chargement de l'image
+	* @throws IOException si une &#233;tape du chargement de l'image
 	* à &#233;chou&#233;e
 	*
 	*/
@@ -59,7 +59,7 @@ public class ImageLoader{
 	*
 	* @param path chemin de l'image &#224; charg&#233;e
 	*
-	* @throws IllegalStateException si une &#233;tape du chargement de l'image
+	* @throws IOException si une &#233;tape du chargement de l'image
 	* à &#233;chou&#233;e
 	*
 	*/

@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 */
 public class Window extends JFrame{
 
-	/** la fen&#234;tre n'existe plus qu'&#224; partir de son JPanel, c'est lui 
+	/** la fen&#234;tre n'existe plus qu'à partir de son JPanel, c'est lui 
 	qui sera manipul&#233;, cf r&#233;&#233;criture des add, ce qui fait un vrai 
 	effet de fond */
 	private Background screen;
@@ -32,49 +32,40 @@ public class Window extends JFrame{
 
 	/**
 	*
-	* Construit une fen&#234;tre, cach&#233;e de base.
+	* Construit une fen&#234;tre, cachée de base.
 	*
 	* @see #setVisible(boolean)
-	*
-	* @throws IllegalStateException si la cr&#233;ation de la fen&#234;tre
-	* &#233;choue
 	*
 	*/
 	public Window(){
 		super();
-		this.buildWindow(-1,-1); //taille auto
+		this.buildWindow(-1,-1);
 	}
 
 	/**
 	*
-	* Construit une fen&#234;tre avec un titre, cach&#233;e de base.
+	* Construit une fen&#234;tre avec un titre, cachée de base.
 	*
 	* @param title le titre de la fen&#234;tre
 	*
 	* @see #setVisible(boolean)
 	*
-	* @throws IllegalStateException si la cr&#233;ation de la fen&#234;tre
-	* &#233;choue
-	*
 	*/
 	public Window(String title){
 		super(title);
-		this.buildWindow(-1,-1);//taille auto
+		this.buildWindow(-1,-1);
 	}
 
 	/**
 	*
 	* Construit une fen&#234;tre avec un titre de dimension (largeur et
-	* hauteur) saisies, cach&#233;e de base.
+	* hauteur) indiquées, cachée de base.
 	*
 	* @param width largeur de la fen&#234;tre
 	* @param height hauteur de la fen&#234;tre
 	* @param title titre de la fen&#234;tre
 	*
 	* @see #setVisible(boolean)
-	*
-	* @throws IllegalStateException si la cr&#233;ation de la fen&#234;tre
-	* &#233;choue
 	*
 	*/
 	public Window(int width, int height,String title){
@@ -84,7 +75,7 @@ public class Window extends JFrame{
 
 	/**
 	*
-	* Cr&#233;e une fen&#234;tre pour les constructeurs, cach&#233;e de base.
+	* Cr&#233;e une fen&#234;tre pour les constructeurs, cachée de base.
 	*
 	* @param width largeur de la fen&#234;tre
 	* @param height hauteur de la fen&#234;tre
@@ -92,15 +83,12 @@ public class Window extends JFrame{
 	*
 	* @see #setVisible(boolean)
 	*
-	* @throws IllegalStateException si la cr&#233;ation de la fen&#234;tre
-	* &#233;choue
-	*
 	*/
 	private void buildWindow(int width,int height){
 		if(width <= 0) width = 600;
 		if(height <= 0) height = 600;
 		if(width == 1 && height == 1)
-			throw new IllegalStateException("Dimension Fen&#234;tre invalide!");
+			throw new IllegalStateException("Dimension Fenêtre invalide!");
 		this.setSize(width,height);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(Window.CENTER);
@@ -109,55 +97,17 @@ public class Window extends JFrame{
 		this.add(this.screen, BorderLayout.CENTER);
 	}
 
-	/**
-	*
-	* change le fond d'&#233;cran de la fen&#234;tre
-	*
-	* @param background le nouveau fond d'&#233;cran
-	* null pour supprimer le fond.
-	*
-	* @throws IllegalStateException si la chargement du fond d'&#233;cran
-	* &#233;choue
-	*
-	* @see #reloadBackground
-	* @see #getBackgroundPath
-	*
-	*/
 	public void setBackground(String background){
 		this.screen.setBackground(background);
 		this.background = background;
 	}
 
-	/**
-	*
-	* Recharge le fond d'&#233;cran
-	*
-	* @param value true pour recharger le fond d'&#233;cran sinon false
-	*
-	* @throws IllegalStateException si la chargement du fond d'&#233;cran
-	* &#233;choue
-	*
-	* @see #setBackground
-	* @see #getBackgroundPath
-	*
-	*/
 	public void reloadBackground(boolean value){
 		if(value){
 			this.setBackground(background);
 		}
 	}
 
-	/**
-	*
-	* Change la position de la fen&#234;tre
-	*
-	* @param constante une constante de la classe parmi :
-	*	CENTER : centré horizontalement et verticalement par rapport &#224;
-	*			l'&#233;cran
-	*
-	* @see setLocation(int,int)
-	*
-	*/
 	public void setLocation(int constante){
 		if(constante == Window.CENTER){
 			Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
@@ -168,7 +118,7 @@ public class Window extends JFrame{
 
 	/**
 	*
-	* Renvoi la largeur de l'&#233;cran dans lequel est la fen&#234;tre
+	* Renvoi la largeur de l'écran dans lequel est la fenêtre
 	*
 	* @return largeur du moniteur
 	*
@@ -180,7 +130,7 @@ public class Window extends JFrame{
 
 	/**
 	*
-	* Renvoi la hauteur de l'&#233;cran dans lequel est la fen&#234;tre
+	* Renvoi la hauteur de l'écran dans lequel est la fenêtre
 	*
 	* @return hauteur du moniteur
 	*
@@ -192,7 +142,7 @@ public class Window extends JFrame{
 
 	/**
 	*
-	* redessine la fen&#234;tre
+	* redessine le composant
 	*
 	*/
 	@Override
@@ -204,26 +154,13 @@ public class Window extends JFrame{
 			super.repaint();
 	}
 
-	/**
-	*
-	* Renvoi le chemin du fond d'&#233;cran
-	*
-	* @return chaine vide si aucun fond d'&#233;cran sinon le chemin du dernier
-	* fond ajout&#233; à la fen&#234;tre
-	*
-	* @see #setBackground
-	* @see #reloadBackground
-	*
-	*/
-	public String getBackgroundPath(){
-		return this.background;
+	public Background getScreen(){
+		return this.screen;
 	}
 
 	/**
 	*
-	* Ajoute un composant &#224; la fen&#234;tre
-	*
-	* @param comp le composant &#224; ajouter
+	* Appends the specified component to the end of this container.
 	*
 	* @see JFrame#add(Component)
 	*
@@ -240,10 +177,7 @@ public class Window extends JFrame{
 
 	/**
 	*
-	* Ajoute un composant &#224; la fen&#234;tre &#224; la position index
-	*
-	* @param comp le composant &#224; ajouter
-	* @param index la position &#224; donner au composant
+	* Adds the specified component to this container at the given position.
 	*
 	* @see JFrame#add(Component,int)
 	*/
@@ -259,10 +193,7 @@ public class Window extends JFrame{
 
 	/**
 	*
-	* Ajoute un composant &#224; la fen&#234;tre &#224; la fin du conteneur.
-	*
-	* @param comp le composant &#224; ajouter
-	* @param constaints contraintes sur la position du composant
+	* Adds the specified component to the end of this container.
 	*
 	* @see JFrame#add(Component, Object)
 	*
@@ -279,7 +210,7 @@ public class Window extends JFrame{
 
 	/**
 	*
-	* Supprime tous les composants du conteneur
+	* Removes all the components from this container. 
 	*
 	*/
 	public void removeAll(){
@@ -292,7 +223,7 @@ public class Window extends JFrame{
 
 	/**
 	*
-	* Revalide les composants
+	* Revalidates the component hierarchy up to the nearest validate root.
 	*
 	*/
 	public void revalidate(){

@@ -18,28 +18,28 @@ import java.io.File;
 */
 public class MenuButtons implements ActionListener{
 
-	/** La fen&#234;tre associ&#233;e au menu */
+	/** */
 	private Window ecran;
-	/** le menu */
+	/** */
 	private Menu menu;
 
 	/**
 	*
 	* Cr&#233;e un observateur des boutons du menu
 	*
-	* @param ecran l'&#233;cran associ&#233; au menu
-	* @param menu le menu
+	* @param ecran
+	* @param menu
 	*
 	*/
 	public MenuButtons(Window ecran, Menu menu){
-		this.ecran = ecran; //ce sur quoi on affiche
+		this.ecran = ecran; //Ce sur quoi on affiche
 		this.menu = menu; //le menu du jeu
 	}
 
 	/**
 	*
-	* Invoqu&#233; lorsque une action est effectu&#233;e sur un &#233;l&#233;ment
-	* associ&#233;. Remplie automatiquement.
+	* Invoque lorsque une action est effectu&#233;e sur un &#233;l&#233;ment
+	* associ&#233;. Rempli automatiquement.
 	*
 	* @param evenement l'object de l'&#233;v&#233;nement sous la forme d'un
 	* ActionEvent
@@ -51,7 +51,7 @@ public class MenuButtons implements ActionListener{
 	public void actionPerformed(ActionEvent evenement){
 		String commande = evenement.getActionCommand();
 
-		//Supression des composants = reset écran
+		//Supression des composants = reset
 		this.ecran.removeAll();
 		this.ecran.repaint();
 
@@ -59,7 +59,7 @@ public class MenuButtons implements ActionListener{
 			//Charge le menu "Charger"
 			this.menu.load();
 		}else if(commande.equals("Nouveau")){
-			//Charge le menu le jeu sans sauvegarde
+			//Charge le menu "Nouveau"
 			this.menu.play("");
 
 		// Cancel/Approve selection ne sont valables que dans l'interface
@@ -74,7 +74,7 @@ public class MenuButtons implements ActionListener{
 			//Récupération du fichier sélectionné
 			File file = gestionnaire.getSelectedFile();
 			//Donne le path au menu
-			this.menu.play(file.getPath());//lance le jeu avec sauvegarde
+			this.menu.play(file.getPath());
 		}
 	}
 }

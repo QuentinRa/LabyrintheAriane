@@ -1,10 +1,9 @@
 package source.game;
 
 import source.game.interfaces.IGameComponent;
-import source.game.GameCore;
+import source.game.MainGame;
 import source.tools.Window;
 import source.tools.events.MenuButtons;
-import source.tools.exceptions.ErrorPopup;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -24,7 +23,7 @@ import javax.swing.JFileChooser;
 */
 public class Menu implements IGameComponent{
 	
-	/** &#233;cran sur lequel on affiche */
+	/** ecran sur lequel on affiche */
 	private Window ecran;
 	/** observateur du menu */
 	private MenuButtons menuListener;
@@ -33,7 +32,7 @@ public class Menu implements IGameComponent{
 
 	/**
 	*
-	* Cr&#233;e et affiche le menu &#224; l'&#233;cran
+	* Créer et affiche le menu &#224; l'&#233;cran
 	*
 	* @param ecran l'&#233;cran sur lequel afficher le menu
 	*
@@ -84,11 +83,11 @@ public class Menu implements IGameComponent{
 	*
 	* Lance le jeu
 	*
-	* @see GameCore
+	* @see MainGame
 	*
 	*/
 	public void play(String path){
-		IGameComponent game = new GameCore(this.ecran,path);
+		IGameComponent game = new MainGame(this.ecran,path);
 		game.run();
 	}
 
@@ -99,20 +98,14 @@ public class Menu implements IGameComponent{
 	*
 	*/
 	public void load(){
-		try{
-			//Change pour layout qui prends tout l'écran
-			this.ecran.setLayout(new BorderLayout());
-			//Charge le gestionnaire de fichiers, dossier courant
-			JFileChooser gestionnaireFichiers = new JFileChooser(this.savPath);
-			this.ecran.add(gestionnaireFichiers, BorderLayout.CENTER);
-			gestionnaireFichiers.addActionListener(this.menuListener);
-			//met à jour l'écran
-			this.ecran.revalidate();
-		}catch(Exception e){
-			//Affiche un panneau avec l'erreur, puis quittera
-			String message = "Ouverture du gestionnaire de fichier à échoué";
-			ErrorPopup popup = new ErrorPopup(this.ecran,message);
-		}
+		//Change pour layout qui prends tout l'écran
+		this.ecran.setLayout(new BorderLayout());
+		//Charge le gestionnaire de fichiers, dossier courant
+		JFileChooser gestionnaireFichiers = new JFileChooser(this.savPath);
+		this.ecran.add(gestionnaireFichiers, BorderLayout.CENTER);
+		gestionnaireFichiers.addActionListener(this.menuListener);
+		//met à jour l'écran
+		this.ecran.revalidate();
 	}
 
 	/**

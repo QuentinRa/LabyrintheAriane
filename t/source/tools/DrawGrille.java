@@ -1,14 +1,13 @@
 package source.tools;
 
-import source.tools.Grille;
-import source.tools.Cases;
+import source.game.Grille;
+import source.game.Cases;
 import source.tools.Window;
-import source.tools.exceptions.ErrorPopup;
+import source.tools.exceptions.InvalidDataException;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import java.awt.Graphics;
-import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
@@ -41,7 +40,6 @@ public class DrawGrille extends JPanel{
 
 	@Override
 	public void paintComponent(Graphics pinceau){
-
 		// on crée un nouveau pinceau pour pouvoir le modifier plus tard
 		Graphics secondPinceau = pinceau.create();
 		// si le composant n'est pas censé être transparent
@@ -51,28 +49,26 @@ public class DrawGrille extends JPanel{
 			secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
 		}
 
-		int widthC = grille.getSize()*this.caseSize+100;
-		int heightC = grille.getSize()*this.caseSize+100;
+		int width = grille.getSize()*this.caseSize;
+		int height = grille.getSize()*this.caseSize;
 	
-		//Si les dimensions de notre jeu sont plus grandes que l'écran
-		if(this.ecran.getMonitorWidth() < widthC ||
-		   this.ecran.getMonitorHeight() < heightC ){
+		//Si les dimensions de notre jeu sont plus grande que l'écran
+		if(this.ecran.getMonitorWidth() < width ||
+		   this.ecran.getMonitorHeight() < height ){
 			String message = "La fenetre ne permet pas un jeu de cette taille";
-			//ErrorPopup popup = new ErrorPopup(this.ecran,message);
-			System.err.println(message);
-			System.exit(0);
+			throw new InvalidDataException(message);
 		}
 		//Si elle sont plus grandes que la fenêtre mais moins que l'écran
-		else if(widthC > this.ecran.getWidth() || heightC>this.ecran.getHeight()){
-			this.ecran.setSize(widthC,heightC); //augmente sa taille
+		else if(width > this.ecran.getWidth() || height>this.ecran.getHeight()){
+			this.ecran.setSize(width,height); //augmente sa taille
 			this.ecran.setLocation(Window.CENTER); //centre par rapport à l'écran
 		}
 
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints bag = new GridBagConstraints();
 
-		int width = grille.getSize();
-		int height = grille.getSize();
+		width/=this.caseSize;
+		height/=this.caseSize;
 
 		Cases[][] cases = this.grille.getCasesArray();
 

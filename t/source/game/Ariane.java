@@ -7,8 +7,8 @@ import source.tools.Window;
 
 /**
 *
-* Le jeu Ariane, on se trouve &#224; un certain endroit dans un espace (grille)
-* remplie d'obstacles et on doit arriver &#224; la sortie.
+* Le jeu Ariane, on se trouve à un certain endroit dans un espace (grille)
+* remplie d'obstacles et on doit arriver à la sortie.
 *
 * @version 1.0 1 avril 2019
 * @author Quentin Ramsamy--Ageorges
@@ -20,8 +20,6 @@ public class Ariane implements IGame{
 	private Window window;
 	/** le menu du jeu */
 	private IGameComponent menu;
-	/** chemin du fond d'écran de base */
-	private static final String background = "ressources/rem.png";
 
 	/**
 	*
@@ -29,13 +27,14 @@ public class Ariane implements IGame{
 	* Dimensions du jeu = 600x600 (largeur*hauteur)
 	*
 	* @throws IllegalStateException si le chargement du fond d'&#233;cran
-	* &#233;choue, ou la cr&#233;ation de la fen&#234;tre
+	* &#233;choue
 	*
 	*/
 	public Ariane(){
-		this.window = new Window(); //fenêtre
-		this.window.setBackground(this.background); //fond
-		this.menu = new Menu(this.window); //menu
+		this.window = new Window();
+		this.window.setBackground("ressources/rem.png");
+		this.menu = new Menu(this.window);
+		this.window.setVisible(true); //affiche fenêtre
 	}
 
 	/**
@@ -49,12 +48,12 @@ public class Ariane implements IGame{
 	* &#224; 0 ainsi que strictement sup&#233;rieure &#224; 1 si width=1)
 	*
 	* @throws IllegalStateException si le chargement du fond d'&#233;cran
-	* &#233;choue ou la cr&#233;ation de la fen&#234;tre
+	* &#233;choue
 	*
 	*/
 	public Ariane(int width, int height){
-		this.window = new Window(width,height,"Ariane");
-		this.window.setBackground(this.background);
+		this.window = new Window(width,height,"Ariane Game");
+		this.window.setBackground("ressources/rem.png");
 		this.menu = new Menu(this.window);
 	}
 
@@ -72,7 +71,7 @@ public class Ariane implements IGame{
 
 	/**
 	*
-	* pr&#233;paration des ressources du jeu
+	* préparation des ressources du jeu
 	*
 	*/
 	@Override
@@ -92,7 +91,7 @@ public class Ariane implements IGame{
 
 	/**
 	*
-	* lib&#233;ration des ressources du jeu
+	* libération des ressources du jeu
 	*
 	*/
 	@Override

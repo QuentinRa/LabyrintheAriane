@@ -2,11 +2,11 @@
 # Makefile compilant à l'endroit désigné par BUILD le projet RPG
 #
 # Auteur : Quentin RAMSAMY--AGEORGES
-# Création : 14/03/2019 (mis-à-jour le 07/04/2019)
+# Création : 14/03/2019 (mise-à-jour le 01/04/2019)
 #
 
-#Note : Les variables commençant par B_ signifient un fichier du build (.class)
-#Les variables commençant par un S_ signifient un fichier source (.java)
+#Note : Les variables commençant par B_ signifient un fichier du build
+#Les variables commençant par un S_ signifient un fichier source
 
 # compilateur
 CC=javac
@@ -16,7 +16,7 @@ CCFLAGS= -encoding UTF-8 -d $(BUILD) -implicit:none
 CLFLAGS = #none
 
 #Chemins principaux
-#fichiers source .java
+#fichiers source
 SOURCE=source/
 #fichier .class générés
 BUILD=build/
@@ -26,7 +26,6 @@ JAVADOC=$(BUILD)javadoc/
 #Variables pour les chemins des fichiers source (S)
 S_GAME=$(SOURCE)game/
 S_GAMEI=$(S_GAME)interfaces/
-
 S_TOOLS=$(SOURCE)tools/
 S_TOOLSU=$(S_TOOLS)utils/
 S_TOOLSEV=$(S_TOOLS)events/
@@ -37,7 +36,6 @@ B_SOURCE=$(BUILD)$(SOURCE)
 
 B_GAME=$(B_SOURCE)game/
 B_GAMEI=$(B_GAME)interfaces/
-
 B_TOOLS=$(B_SOURCE)tools/
 B_TOOLSU=$(B_TOOLS)utils/
 B_TOOLSEV=$(B_TOOLS)events/
@@ -64,19 +62,28 @@ $(B_GAME)Ariane.class : $(S_GAME)Ariane.java \
 $(B_GAME)Menu.class : $(S_GAME)Menu.java \
 		$(B_GAMEI)IGameComponent.class \
 		$(B_TOOLSEV)MenuButtons.class \
-		$(B_TOOLS)Window.class \
-		$(B_GAME)GameCore.class \
-		$(B_TOOLSEX)ErrorPopup.class
+		$(B_GAME)MainGame.class \
+		$(B_TOOLS)Window.class
 	$(CC) $(CCFLAGS) $(S_GAME)Menu.java
 
-$(B_GAME)GameCore.class : $(S_GAME)GameCore.java \
+$(B_GAME)MainGame.class : $(S_GAME)MainGame.java \
 		$(B_GAMEI)IGameComponent.class \
 		$(B_TOOLS)Window.class \
-		$(B_TOOLS)Grille.class \
-		$(B_TOOLS)Cases.class \
-		$(B_TOOLSEV)GameCreate.class \
-		$(B_TOOLS)DrawGrille.class
-	$(CC) $(CCFLAGS) $(S_GAME)GameCore.java
+		$(B_GAME)Grille.class \
+		$(B_TOOLSU)SaveLoader.class \
+		$(B_TOOLS)DrawGrille.class \
+		$(B_GAME)Cases.class \
+		$(B_TOOLS)Graphes.class
+	$(CC) $(CCFLAGS) $(S_GAME)MainGame.java
+
+$(B_GAME)Grille.class : $(S_GAME)Grille.java \
+		$(B_TOOLSEX)InvalidDataException.class \
+		$(B_GAME)Cases.class
+	$(CC) $(CCFLAGS) $(S_GAME)Grille.java
+
+$(B_GAME)Cases.class : $(S_GAME)Cases.java \
+		$(B_TOOLSEX)InvalidDataException.class
+	$(CC) $(CCFLAGS) $(S_GAME)Cases.java
 
 #Package interfaces
 $(B_GAMEI)IGame.class : $(S_GAMEI)IGame.java
@@ -85,46 +92,32 @@ $(B_GAMEI)IGame.class : $(S_GAMEI)IGame.java
 $(B_GAMEI)IGameComponent.class : $(S_GAMEI)IGameComponent.java
 	$(CC) $(CCFLAGS) $(S_GAMEI)IGameComponent.java
 
-
-
 #Package tools
 $(B_TOOLS)Window.class : $(S_TOOLS)Window.java \
 		$(B_TOOLSU)Background.class
 	$(CC) $(CCFLAGS) $(S_TOOLS)Window.java
 
-$(B_TOOLS)Grille.class : $(S_TOOLS)Grille.java \
-		$(B_TOOLSEX)InvalidDataException.class \
-		$(B_TOOLS)Cases.class
-	$(CC) $(CCFLAGS) $(S_TOOLS)Grille.java
-
-$(B_TOOLS)Cases.class : $(S_TOOLS)Cases.java \
-		$(B_TOOLSEX)InvalidDataException.class
-	$(CC) $(CCFLAGS) $(S_TOOLS)Cases.java
-
 $(B_TOOLS)DrawGrille.class : $(S_TOOLS)DrawGrille.java \
-		$(B_TOOLS)Grille.class \
-		$(B_TOOLSEX)ErrorPopup.class \
-		$(B_TOOLS)Cases.class
+		$(B_GAME)Grille.class \
+		$(B_TOOLSEX)InvalidDataException.class \
+		$(B_GAME)Cases.class
 	$(CC) $(CCFLAGS) $(S_TOOLS)DrawGrille.java
 
+$(B_TOOLS)Graphes.class : $(S_TOOLS)Graphes.java \
+		$(B_TOOLSEX)InvalidDataException.class \
+		$(B_GAME)Grille.class \
+		$(B_GAME)Cases.class \
+		$(B_TOOLS)Matrices.class
+	$(CC) $(CCFLAGS) $(S_TOOLS)Graphes.java
+
+$(B_TOOLS)Matrices.class : $(S_TOOLS)Matrices.java
+	$(CC) $(CCFLAGS) $(S_TOOLS)Matrices.java
 
 #Package events
 $(B_TOOLSEV)MenuButtons.class : $(S_TOOLSEV)MenuButtons.java \
 		$(B_TOOLS)Window.class \
 		#$(B_GAME)Menu.class	<-- circulaire
 	$(CC) $(CCFLAGS) $(S_TOOLSEV)MenuButtons.java
-
-$(B_TOOLSEV)GameCreate.class : $(S_TOOLSEV)GameCreate.java \
-		$(B_TOOLS)Grille.class \
-		$(B_TOOLS)Window.class \
-		$(B_TOOLSEX)InvalidDataException.class \
-		$(B_TOOLSEV)MessagePopup.class \
-#$(B_GAME)GameCore.class <-- circulaire
-	$(CC) $(CCFLAGS) $(S_TOOLSEV)GameCreate.java
-
-$(B_TOOLSEV)MessagePopup.class : $(S_TOOLSEV)MessagePopup.java \
-		$(B_TOOLS)Window.class
-	$(CC) $(CCFLAGS) $(S_TOOLSEV)MessagePopup.java
 
 #Packtage utils
 $(B_TOOLSU)Background.class : $(S_TOOLSU)Background.java \
@@ -134,12 +127,21 @@ $(B_TOOLSU)Background.class : $(S_TOOLSU)Background.java \
 $(B_TOOLSU)ImageLoader.class : $(S_TOOLSU)ImageLoader.java
 	$(CC) $(CCFLAGS) $(S_TOOLSU)ImageLoader.java
 
+$(B_TOOLSU)SaveLoader.class : $(S_TOOLSU)SaveLoader.java \
+		$(B_TOOLSU)ReaderBitByBit.class \
+		$(B_TOOLSEX)InvalidDataException.class \
+		$(B_GAME)Cases.class \
+		$(B_TOOLS)Window.class \
+		$(B_TOOLSU)ErrorPopup.class
+	$(CC) $(CCFLAGS) $(S_TOOLSU)SaveLoader.java
 
+$(B_TOOLSU)ReaderBitByBit.class : $(S_TOOLSU)ReaderBitByBit.java
+	$(CC) $(CCFLAGS) $(S_TOOLSU)ReaderBitByBit.java
+
+$(B_TOOLSU)ErrorPopup.class : $(S_TOOLSU)ErrorPopup.java
+	$(CC) $(CCFLAGS) $(S_TOOLSU)ErrorPopup.java
 
 #Packtage exceptions
-$(B_TOOLSEX)ErrorPopup.class : $(S_TOOLSEX)ErrorPopup.java
-	$(CC) $(CCFLAGS) $(S_TOOLSEX)ErrorPopup.java
-
 $(B_TOOLSEX)InvalidDataException.class : $(S_TOOLSEX)InvalidDataException.java
 	$(CC) $(CCFLAGS) $(S_TOOLSEX)InvalidDataException.java
 
@@ -155,7 +157,6 @@ javadoc:
 	javadoc -d $(JAVADOC) -version -author -html5 \
 		source.game source.game.interfaces \
 		source.tools source.tools.utils source.tools.events \
-		source.tools.exceptions \
 		source
 
 doc:

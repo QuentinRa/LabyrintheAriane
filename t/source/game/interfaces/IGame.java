@@ -11,7 +11,7 @@ package source.game.interfaces;
 
 public interface IGame{
 
-	/** pr&#233;paration des ressources du jeu */
+	/** préparation des ressources du jeu */
 	void init();
 	
 	/** Lancer le jeu */
@@ -20,6 +20,6 @@ public interface IGame{
 	/** boucle du jeu */
 	void gameLoop();
 
-	/** lib&#233;ration des ressources du jeu */
+	/** libération des ressources du jeu */
 	void dispose();
 }
