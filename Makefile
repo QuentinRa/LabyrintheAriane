@@ -80,7 +80,8 @@ $(B_GAME)Grille.class : $(S_GAME)Grille.java \
 		$(B_GAME)Cases.class
 	$(CC) $(CCFLAGS) $(S_GAME)Grille.java
 
-$(B_GAME)Cases.class : $(S_GAME)Cases.java
+$(B_GAME)Cases.class : $(S_GAME)Cases.java \
+		$(B_TOOLSEX)InvalidDataException.class
 	$(CC) $(CCFLAGS) $(S_GAME)Cases.java
 
 #Package interfaces

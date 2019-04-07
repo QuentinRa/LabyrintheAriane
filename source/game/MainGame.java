@@ -75,15 +75,17 @@ public class MainGame implements IGameComponent{
 		int buty = this.grille.getYExit();
 		int size = this.grille.getSize();
 
+		int a = 0;
+
 		Queue<Cases> file = new LinkedList<>();
 		file.add(cases[i][j]);
 		
 		while(file.isEmpty() == false){
 			Cases first = file.element(); //Récupère le 1er élément
 			first.setEmpille(true);
-			System.out.println(i+" "+j);
 			i = first.getXPos();
 			j = first.getYPos();
+			System.out.println(i+" "+j);
 
 			if(i == butx && j == buty){
 				//On a trouvé un chemin
@@ -106,7 +108,6 @@ public class MainGame implements IGameComponent{
 				file.remove(); //supprime le 1er élément
 			}
 		}
-
 
 		//boolean[][] matrice = new boolean[size][size];
 

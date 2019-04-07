@@ -3,8 +3,6 @@ package source.game;
 import source.game.Cases;
 import source.tools.exceptions.InvalidDataException;
 
-import javax.swing.JButton;
-
 /**
 *
 * Grille du jeu
@@ -55,16 +53,21 @@ public class Grille{
 	*
 	* @param value nouvelle colonne o&#249; se trouve le joueur.
 	* Compteur commence &#224; z&#233;ro.
+	* Donner -1 pour retirer le joueur de la grille.
 	*
 	* @throws InvalidDataException si value n'a pas une valeur correcte
 	*
 	*/
 	public void setXPlayer(int value){
-		if(value<0 || value >= this.size ){
+		if(value<-1 || value >= this.size ){
 			String message = "La valeur x (joueur) n'est pas dans la grille";
 			throw new InvalidDataException(message);
+		} else if(value == -1){
+			this.yPlayer = -1;
+			this.xPlayer = -1;
+		} else {
+			this.xPlayer = value;
 		}
-		this.xPlayer = value;
 	}
 
 	/**
@@ -85,16 +88,21 @@ public class Grille{
 	*
 	* @param value nouvelle ligne o&#249; se trouve le joueur.
 	* Compteur commence &#224; z&#233;ro.
+	* Donner -1 pour retirer le joueur de la grille.
 	*
 	* @throws InvalidDataException si value n'a pas une valeur correcte
 	*
 	*/
 	public void setYPlayer(int value){
-		if(value<0 || value >= this.size ){
+		if(value<-1 || value >= this.size ){
 			String message = "La valeur y (joueur) n'est pas dans la grille";
 			throw new InvalidDataException(message);
+		} else if(value == -1){
+			this.yPlayer = -1;
+			this.xPlayer = -1;
+		} else {
+			this.yPlayer = value;
 		}
-		this.yPlayer = value;
 	}
 	
 	/**
@@ -115,16 +123,21 @@ public class Grille{
 	*
 	* @return colonne o&#249; se trouve la sortie.
 	* Compteur commence &#224; z&#233;ro
+	* Donner -1 pour retirer la sortie de la grille.
 	*
 	* @throws InvalidDataException si value n'a pas une valeur correcte
 	*
 	*/
 	public void setXExit(int value){
-		if(value<0 || value >= this.size ){
+		if(value<-1 || value >= this.size ){
 			String message = "La valeur x (sortie) n'est pas dans la grille";
 			throw new InvalidDataException(message);
+		} else if(value == -1){
+			this.yExit = -1;
+			this.xExit = -1;
+		} else {
+			this.xExit = value;
 		}
-		this.xExit = value;
 	}
 
 	/**
@@ -145,6 +158,7 @@ public class Grille{
 	*
 	* @return ligne o&#249; se trouve la sortie.
 	* Compteur commence &#224; z&#233;ro
+	* Donner -1 pour retirer la sortie de la grille.
 	*
 	* @throws InvalidDataException si value n'a pas une valeur correcte
 	*
@@ -153,8 +167,12 @@ public class Grille{
 		if(value<0 || value >= this.size ){
 			String message = "La valeur x (sortie) n'est pas dans la grille";
 			throw new InvalidDataException(message);
+		}else if(value == -1){
+			this.yExit = -1;
+			this.xExit = -1;
+		} else {
+			this.yExit = value;
 		}
-		this.yExit = value;
 	}
 	
 	/**
@@ -173,8 +191,7 @@ public class Grille{
 	*
 	* Change la largeur/hauteur de la grille (elle est carr&#233;e).
 	* Dimension = size * size;
-	* Crée automatiquement le tableau de valeurs. {@link #getCasesArray}
-	* Crée automatiquement le tableau de cases.
+	* Crée automatiquement un tableau de cases. {@link #getCasesArray}
 	*
 	* @param size la largeur/hauteur de la grille
 	* Elle est strictement sup&#233;rieure &#224; 1
@@ -224,6 +241,9 @@ public class Grille{
 	* @param y ligne de la valeur à changer
 	* @param value la valeur avec laquelle changer
 	*
+	* @throws InvalidDataException si la position n'est pas valide ou le
+	* tableau n'existe pas.
+	* 
 	*/
 	public void setCasesArray(int x, int y, boolean value){
 		try{
@@ -232,7 +252,32 @@ public class Grille{
 			String message = "La position x,y n'est pas valide dans le tableau.";
 			throw new InvalidDataException(message);
 		}catch(NullPointerException e){
-			String message = "La tableau n'a pas reçu de taille. #setSize";
+			String message = "La tableau n'existe pas.";
+			throw new InvalidDataException(message);
+		}
+	}
+
+	/**
+	*
+	* Renvoi la valeur &#224; la position x,y de cases avec valeur.
+	*
+	* @param x colonne de la valeur &#224; renvoyer
+	* @param y ligne de la valeur &#224; renvoyer
+	*
+	* @return la valeur de la case x,y. true pour pleine, false pour vide.
+	*
+	* @throws InvalidDataException si la position n'est pas valide ou le
+	* tableau n'existe pas.
+	* 
+	*/
+	public boolean setCasesArray(int x, int y){
+		try{
+			return this.cases[x][y].getValue();
+		}catch(IndexOutOfBoundsException e){
+			String message = "La position x,y n'est pas valide dans le tableau.";
+			throw new InvalidDataException(message);
+		}catch(NullPointerException e){
+			String message = "La tableau n'existe pas.";
 			throw new InvalidDataException(message);
 		}
 	}

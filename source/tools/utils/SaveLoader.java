@@ -60,8 +60,8 @@ public class SaveLoader{
 						cases[j][i].setValue(buffer[i][j]);
 					}
 				}
-				cases[grille.getXPlayer()][grille.getYPlayer()].setPlayer(true);
-				cases[grille.getXExit()][grille.getYExit()].setExit(true);
+				//cases[grille.getXPlayer()][grille.getYPlayer()].setPlayer(true);
+				//cases[grille.getXExit()][grille.getYExit()].setExit(true);
 				grille.setCasesArray(cases);
 			}catch(IOException e){
 				String message = "Erreur de la lecture de la sauvegarde";

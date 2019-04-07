@@ -71,15 +71,21 @@ public class DrawGrille extends JPanel{
 		height/=this.caseSize;
 
 		Cases[][] cases = this.grille.getCasesArray();
+
+		int xPlayer = this.grille.getXPlayer();
+		int yPlayer = this.grille.getYPlayer();
+		int xExit = this.grille.getXExit();
+		int yExit = this.grille.getYExit();
 		
 		for(int i=0; i<width; i++){
 			for(int j=0; j<height; j++){
 				bag.gridx = j; //colonnes
 				bag.gridy = i; //lignes
-				cases[i][j].setIcon(cases[i][j].getValue() == true?Cases.WALL:null);
-				if(cases[i][j].isPlayer())
+				boolean value = cases[i][j].getValue();
+				cases[i][j].setIcon(value == true?Cases.WALL:null);
+				if(xPlayer == i && yPlayer == j)
 					cases[i][j].setIcon(Cases.PLAYER);
-				else if(cases[i][j].isExit())
+				else if(xExit == i && yExit == j)
 					cases[i][j].setIcon(Cases.EXIT);
 
 				this.add(cases[i][j], bag);
