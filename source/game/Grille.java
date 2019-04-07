@@ -270,7 +270,7 @@ public class Grille{
 	* tableau n'existe pas.
 	* 
 	*/
-	public boolean setCasesArray(int x, int y){
+	public boolean getCasesArray(int x, int y){
 		try{
 			return this.cases[x][y].getValue();
 		}catch(IndexOutOfBoundsException e){

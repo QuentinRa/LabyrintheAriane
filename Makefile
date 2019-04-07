@@ -106,8 +106,12 @@ $(B_TOOLS)DrawGrille.class : $(S_TOOLS)DrawGrille.java \
 $(B_TOOLS)Graphes.class : $(S_TOOLS)Graphes.java \
 		$(B_TOOLSEX)InvalidDataException.class \
 		$(B_GAME)Grille.class \
-		$(B_GAME)Cases.class
+		$(B_GAME)Cases.class \
+		$(B_TOOLS)Matrices.class
 	$(CC) $(CCFLAGS) $(S_TOOLS)Graphes.java
+
+$(B_TOOLS)Matrices.class : $(S_TOOLS)Matrices.java
+	$(CC) $(CCFLAGS) $(S_TOOLS)Matrices.java
 
 #Package events
 $(B_TOOLSEV)MenuButtons.class : $(S_TOOLSEV)MenuButtons.java \
