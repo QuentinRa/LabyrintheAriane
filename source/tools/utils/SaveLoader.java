@@ -45,10 +45,10 @@ public class SaveLoader{
 
 			try{
 				grille.setSize(file.read());
-				grille.setXPlayer(file.read());
 				grille.setYPlayer(file.read());
-				grille.setXExit(file.read());
+				grille.setXPlayer(file.read());
 				grille.setYExit(file.read());
+				grille.setXExit(file.read());
 				int size = grille.getSize();
 				boolean[][] buffer = ReaderBitByBit.read(file,size,size);
 				//Inverse le tableau car la lecture est en ligne mais

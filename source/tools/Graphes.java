@@ -49,7 +49,7 @@ public class Graphes{
 			i = first.getXPos();
 			j = first.getYPos();
 
-			if(i == xx && j == yy){
+			if(j == xx && i == yy){
 				//On a trouvé un chemin
 				file.clear(); //vide pile
 				return true;
@@ -118,15 +118,16 @@ public class Graphes{
 			}
 		}
 
-		int longueur = 0;
+		int longueur = 1; //le minimum c'est en un coup
+		int[][] matrice = matriceAdjacente;
 
-		while(matriceAdjacente[x+size*y][xx+size*yy] == 0){
+		while(matrice[x+y*size][xx+yy*size] == 0){
 			longueur++;
-			Matrices.mul(matriceAdjacente,matriceAdjacente);
+			matrice = Matrices.mul(matriceAdjacente,matrice);
 		}
 
 
-		System.out.print("      ");
+		/*System.out.print("      ");
 		for(i=0; i<size*size; i++)
 			System.out.print(i+((i<10)?"    ":(i<100?"   ":"  ")));
 		System.out.println("");
@@ -137,7 +138,7 @@ public class Graphes{
 				System.out.print(matriceAdjacente[i][j]+"    ");
 			}
 			System.out.println("");
-		}
+		}*/
 
 		return longueur;
 	}

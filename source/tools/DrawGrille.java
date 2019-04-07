@@ -83,9 +83,9 @@ public class DrawGrille extends JPanel{
 				bag.gridy = i; //lignes
 				boolean value = cases[i][j].getValue();
 				cases[i][j].setIcon(value == true?Cases.WALL:null);
-				if(xPlayer == i && yPlayer == j)
+				if(xPlayer == j && yPlayer == i)
 					cases[i][j].setIcon(Cases.PLAYER);
-				else if(xExit == i && yExit == j)
+				else if(xExit == j && yExit == i)
 					cases[i][j].setIcon(Cases.EXIT);
 
 				this.add(cases[i][j], bag);

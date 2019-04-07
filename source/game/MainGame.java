@@ -57,7 +57,6 @@ public class MainGame implements IGameComponent{
 			this.grille = SaveLoader.getSave(this.filePath,this.ecran);
 		} else {
 			this.grille = new Grille();
-			this.grille.setSize(5);
 		}
 
 		// Affiche le vrai jeu

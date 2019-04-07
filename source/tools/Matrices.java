@@ -1,4 +1,4 @@
-	package source.tools;
+package source.tools;
 
 /**
 *
@@ -30,25 +30,16 @@ public class Matrices{
 
 		for(i=0; i< matrice1.length; i++){
 			for(j=0; j< matrice2[0].length; j++){
-				//matrice[i][j] = i*matrice.length+j;
 				int valeur = 0;
 				for(colonne=0; colonne < matrice2[0].length; colonne++){
+					//on fixe la ligne avec celle de la case a remplir de matrice1
+					//et on fixe la colonne de matrice2 avec celle de la case à remplir
 					valeur += matrice1[i][colonne] * matrice2[colonne][j];
 				}
 				matrice[i][j] = valeur;
 			}
 		}
 
-		//Affichage
-		for(i=0; i < matrice.length ; i++){
-			for(j=0; j<matrice[0].length; j++){
-				System.out.print(matrice[i][j]);
-			}
-			System.out.println("");
-		}
-
-		System.exit(0);
-
-		return null;
+		return matrice;
 	}
 }
