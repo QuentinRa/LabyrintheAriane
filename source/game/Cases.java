@@ -30,11 +30,6 @@ public class Cases extends JButton{
 	/** Si on a empillé la case, cf graphes - dfs */
 	private boolean empille;
 
-	/** true si cette case est le joueur sinon false */
-	private boolean player;
-	/** true si cette case est la sortie */
-	private boolean exit;
-
 	/** la position x de la case */
 	private int x;
 	/** la position x de la case */
@@ -65,58 +60,6 @@ public class Cases extends JButton{
 		this.setPreferredSize(dim);//la taille d'une case (qui lui sera donnée)
 		this.setFocusable(false); //images ne sont par resurlignés après clic
 		this.setRolloverEnabled(false); //pas de hover
-	}
-
-	/**
-	*
-	* Renvoi true si cette case est le joueur
-	*
-	* @return true si cette case est celle du joueur sinon false
-	*
-	* @see #setPlayer
-	*
-	*/
-	public boolean isPlayer(){
-		return this.player;
-	}
-
-	/**
-	*
-	* Renvoi true si cette case est la sortie
-	*
-	* @return true si cette case est celle de la sortie sinon false
-	*
-	* @see #setExit
-	*
-	*/
-	public boolean isExit(){
-		return this.exit;
-	}
-
-	/**
-	*
-	* Change la valeur de la case qui dit si c'est le joueur ou non
-	*
-	* @param value true si cette case va devenir celle du joueur sinon false
-	*
-	* @see #isPlayer
-	*
-	*/
-	public void setPlayer(boolean value){
-		this.player = value;
-	}
-
-	/**
-	*
-	* Change la valeur de la case qui dit si c'est la sortie ou non
-	*
-	* @param value true si cette case va devenir celle la sortie sinon false
-	*
-	* @see #isExit
-	*
-	*/
-	public void setExit(boolean value){
-		this.exit = value;
 	}
 
 	/**
@@ -217,5 +160,19 @@ public class Cases extends JButton{
 			throw new InvalidDataException(message);
 		}
 		this.y = y;
+	}
+
+	@Override
+	public boolean equals(Object element){
+		Cases tmp = (Cases) element;
+		if(this.x == tmp.getXPos())
+			if(this.y == tmp.getYPos())
+				return true;
+		return false;
+	}
+
+	@Override
+	public String toString(){
+		return "x: "+this.x+";\ny: "+this.y;
 	}
 }

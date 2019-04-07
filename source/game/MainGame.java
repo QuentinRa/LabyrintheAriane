@@ -5,6 +5,7 @@ import source.game.Cases;
 import source.game.interfaces.IGameComponent;
 import source.tools.Window;
 import source.tools.DrawGrille;
+import source.tools.Graphes;
 import source.tools.utils.SaveLoader;
 
 import java.awt.BorderLayout;
@@ -16,9 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import java.util.Queue;
-import java.util.LinkedList;
 
 /**
 *
@@ -59,6 +57,7 @@ public class MainGame implements IGameComponent{
 			this.grille = SaveLoader.getSave(this.filePath,this.ecran);
 		} else {
 			this.grille = new Grille();
+			this.grille.setSize(5);
 		}
 
 		// Affiche le vrai jeu
@@ -67,55 +66,28 @@ public class MainGame implements IGameComponent{
 		drawGrille.setOpaque(false);
 		this.ecran.revalidate();
 
-		Cases[][] cases = this.grille.getCasesArray();
+		//Crée un graphe avec la grille
+		Graphes graph = new Graphes(this.grille);
 
-		int i = this.grille.getXPlayer();
-		int j = this.grille.getYPlayer();
-		int butx = this.grille.getXExit();
-		int buty = this.grille.getYExit();
-		int size = this.grille.getSize();
+		int xPlayer = this.grille.getXPlayer();
+		int yPlayer = this.grille.getYPlayer();
+		int xExit = this.grille.getXExit();
+		int yExit = this.grille.getYExit();
 
-		int a = 0;
+		//Trouve un chemin dans le graph entre joueur et sortie
+		boolean b = graph.findPath(xPlayer,yPlayer,xExit,yExit);
 
-		Queue<Cases> file = new LinkedList<>();
-		file.add(cases[i][j]);
-		
-		while(file.isEmpty() == false){
-			Cases first = file.element(); //Récupère le 1er élément
-			first.setEmpille(true);
-			i = first.getXPos();
-			j = first.getYPos();
-			System.out.println(i+" "+j);
-
-			if(i == butx && j == buty){
-				//On a trouvé un chemin
-				System.out.println("victory");
-				file.clear();
-			}else{
-				//chemin gauche ok
-				if(j-1>=0 && !cases[i][j-1].getValue() && !cases[i][j-1].isEmpille())
-					file.add(cases[i][j-1]);
-				//chemin droite
-				if(j+1<size && !cases[i][j+1].getValue() && !cases[i][j+1].isEmpille())
-					file.add(cases[i][j+1]);
-				//chemin haut
-				if(i-1>=0 && !cases[i-1][j].getValue() && !cases[i-1][j].isEmpille())
-					file.add(cases[i-1][j]);
-				//chemin bas
-				if(i+1<size && !cases[i+1][j].getValue() && !cases[i+1][j].isEmpille())
-					file.add(cases[i+1][j]);
-
-				file.remove(); //supprime le 1er élément
-			}
+		//Affiche résultat
+		if(b){
+			System.out.println("Il existe un chemin !");
+		}
+		else{
+			System.out.println("Il n'existe pas de chemin");
+			System.exit(0);
 		}
 
-		//boolean[][] matrice = new boolean[size][size];
-
-		for(i=0; i < size; i++){
-			for(j=0; j < size; j++){
-				System.out.print(cases[i][j].getValue()==true?0:1);
-			}
-			System.out.println("");
-		}
+		//Renvoi le plus court chemin.
+		double plusCourtChemin = graph.getSorthestPath(xPlayer,yPlayer,xExit,yExit);
+		System.out.println("Le plus court chemin fait :"+plusCourtChemin);
 	}
 }

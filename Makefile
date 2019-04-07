@@ -72,7 +72,8 @@ $(B_GAME)MainGame.class : $(S_GAME)MainGame.java \
 		$(B_GAME)Grille.class \
 		$(B_TOOLSU)SaveLoader.class \
 		$(B_TOOLS)DrawGrille.class \
-		$(B_GAME)Cases.class
+		$(B_GAME)Cases.class \
+		$(B_TOOLS)Graphes.class
 	$(CC) $(CCFLAGS) $(S_GAME)MainGame.java
 
 $(B_GAME)Grille.class : $(S_GAME)Grille.java \
@@ -101,6 +102,12 @@ $(B_TOOLS)DrawGrille.class : $(S_TOOLS)DrawGrille.java \
 		$(B_TOOLSEX)InvalidDataException.class \
 		$(B_GAME)Cases.class
 	$(CC) $(CCFLAGS) $(S_TOOLS)DrawGrille.java
+
+$(B_TOOLS)Graphes.class : $(S_TOOLS)Graphes.java \
+		$(B_TOOLSEX)InvalidDataException.class \
+		$(B_GAME)Grille.class \
+		$(B_GAME)Cases.class
+	$(CC) $(CCFLAGS) $(S_TOOLS)Graphes.java
 
 #Package events
 $(B_TOOLSEV)MenuButtons.class : $(S_TOOLSEV)MenuButtons.java \
