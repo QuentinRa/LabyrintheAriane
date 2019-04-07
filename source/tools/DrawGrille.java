@@ -12,6 +12,9 @@ import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 /**
 *
 * Classe qui g&#232;re les opération li&#233;s à la fen&#234;tre
