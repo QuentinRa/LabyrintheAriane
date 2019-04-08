@@ -81,7 +81,8 @@ $(B_GAME)GameCore.class : $(S_GAME)GameCore.java \
 		$(B_TOOLSU)SaveLoader.class \
 		$(B_TOOLSEV)GameSet.class \
 		$(B_TOOLSG)Graphes.class \
-		$(B_TOOLSEV)WinPopup.class
+		$(B_TOOLSEV)WinPopup.class \
+		$(B_TOOLSEV)KeyListener.class
 	$(CC) $(CCFLAGS) $(S_GAME)GameCore.java
 
 #Package interfaces
@@ -146,6 +147,10 @@ $(B_TOOLSEV)CasesListener.class : $(S_TOOLSEV)CasesListener.java \
 
 $(B_TOOLSEV)WinPopup.class : $(S_TOOLSEV)WinPopup.java
 	$(CC) $(CCFLAGS) $(S_TOOLSEV)WinPopup.java
+
+$(B_TOOLSEV)KeyListener.class : $(S_TOOLSEV)KeyListener.java
+#$(B_GAME)GameCore.class <-- circulaire
+	$(CC) $(CCFLAGS) $(S_TOOLSEV)KeyListener.java
 
 #Packtage utils
 $(B_TOOLSU)Background.class : $(S_TOOLSU)Background.java \

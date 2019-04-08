@@ -9,6 +9,7 @@ import source.tools.graph.Graphes;
 import source.tools.events.GameSet;
 import source.tools.events.GameCreate;
 import source.tools.events.WinPopup;
+import source.tools.events.KeyListener;
 import source.tools.utils.SaveLoader;
 
 import java.awt.BorderLayout;
@@ -194,6 +195,7 @@ public class GameCore implements IGameComponent{
 			drawGrille.setOpaque(false);
 			this.ecran.add(drawGrille,BorderLayout.CENTER);
 			this.ecran.revalidate();
+			this.ecran.addKeyListener(new KeyListener(this));
 		} else {
 			//sinon on est en automatique
 			//deterministe
