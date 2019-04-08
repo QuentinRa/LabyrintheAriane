@@ -2,6 +2,10 @@ package source.tools;
 
 import source.tools.Cases;
 import source.tools.exceptions.InvalidDataException;
+import source.tools.graph.Graphes;
+
+import java.util.Random;
+import javax.swing.ImageIcon;
 
 /**
 *
@@ -25,6 +29,8 @@ public class Grille{
 	private int size;
 	/** nos cases */
 	private Cases[][] cases;
+	/** icone selectionnee */
+	private ImageIcon icone;
 
 	public Grille(){
 		this.xPlayer = -1;
@@ -33,6 +39,7 @@ public class Grille{
 		this.yExit = -1;
 		this.size = 0;
 		this.cases = null;
+		this.icone = null;
 	}
 
 	/**
@@ -164,8 +171,8 @@ public class Grille{
 	*
 	*/
 	public void setYExit(int value){
-		if(value<0 || value >= this.size ){
-			String message = "La valeur x (sortie) n'est pas dans la grille";
+		if(value<-1 || value >= this.size ){
+			String message = "La valeur y (sortie) n'est pas dans la grille";
 			throw new InvalidDataException(message);
 		}else if(value == -1){
 			this.yExit = -1;
@@ -287,7 +294,109 @@ public class Grille{
 		}
 	}
 
+	/**
+	*
+	* Renvoi la cases &#224; la position x,y
+	*
+	* @param x colonne de la valeur &#224; renvoyer
+	* @param y ligne de la valeur &#224; renvoyer
+	*
+	* @return la case x,y.
+	*
+	* @throws InvalidDataException si la position n'est pas valide ou le
+	* tableau n'existe pas.
+	* 
+	*/
+	public Cases getCase(int x, int y){
+		try{
+			return this.cases[x][y];
+		}catch(IndexOutOfBoundsException e){
+			String message = "La position x,y n'est pas valide dans le tableau.";
+			throw new InvalidDataException(message);
+		}catch(NullPointerException e){
+			String message = "La tableau n'existe pas.";
+			throw new InvalidDataException(message);
+		}
+	}
+
 	public boolean check(){
-		return false;
+		//regarde si le joueur est dans la grille, sur une case 
+		//différente de la sortie
+		if(this.xPlayer == -1 || this.yPlayer == -1 ||
+			this.yExit == -1 || this.xExit == -1 ||
+			(this.xPlayer == this.xExit && this.yPlayer == this.yExit)){
+			System.out.println("position joueur");
+			return false;
+		}
+
+		for(int i=0; i<size; i++){
+			for(int j=0; j<size; j++){
+				System.out.print(cases[i][j].getValue()==true?"1":"0");
+			}
+			System.out.println();
+		}
+		System.out.println();
+
+		//regarde s'il existe un chemin en connaissant la map
+		Graphes chemin = new Graphes(this);
+		boolean retour = chemin.findPathWithMap(this.xPlayer,this.yPlayer,
+				this.xExit,this.yExit);
+		System.out.println("chemin?"+retour);
+
+		return retour;
+	}
+
+
+	public void generate(boolean value){
+		if(value){
+			Random rand = new Random();
+			this.xPlayer = rand.nextInt(this.size);
+			this.yPlayer = rand.nextInt(this.size);
+
+			do{
+				this.xExit = rand.nextInt(this.size);
+				this.yExit = rand.nextInt(this.size);
+			}while(xPlayer==xExit && yPlayer == yExit);
+			Graphes chemin = new Graphes(this);
+			int min = rand.nextInt(size*size*10);
+			//tant que l'on a pas fait au moins min, on boucle
+			int indice =0;
+			//size-2>=0 car size est controlé pour être >1
+			//et -2 pour joueur+sortie, + existe un chemin entre
+			//joueur et la sortie
+			while(indice<min || !chemin.findPathWithMap(this.xPlayer,this.yPlayer,
+				this.xExit,this.yExit)){
+				int x=-1,y=-1;
+				do{
+					x = rand.nextInt(size);
+					y = rand.nextInt(size);
+				}while((x==xPlayer && y==yPlayer) || (x==xExit && y==yExit));
+			//	System.out.print("on rempli"+y+" "+x+"\\\\\\\\\\");
+			//	System.out.println(yPlayer+" "+xPlayer+" "+yExit+" "+xExit);
+				cases[y][x].setValue(rand.nextBoolean());
+				indice++;
+			}
+		}
+		
+	}
+
+
+	public ImageIcon getImageIcon(){
+		return this.icone;
+	}
+	public void setImageIcon(String icone){
+		if(icone != null){
+			this.icone = new ImageIcon(icone);
+		} else {
+			this.icone = null;
+		}
+	}
+
+	public void removeAllListeners(){
+		for(int i=0; i<size; i++){
+			for(int j=0; j<size; j++){
+				cases[i][j].removeActionListener(null);
+			}
+		}
 	}
 }

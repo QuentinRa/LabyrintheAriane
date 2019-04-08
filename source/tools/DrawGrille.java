@@ -3,6 +3,7 @@ package source.tools;
 import source.tools.Grille;
 import source.tools.Cases;
 import source.tools.Window;
+import source.tools.events.CasesListener;
 import source.tools.exceptions.ErrorPopup;
 
 import javax.swing.JComponent;
@@ -27,6 +28,7 @@ public class DrawGrille extends JPanel{
 
 	private Grille grille;
 	private Window ecran;
+	private CasesListener casesListener;
 
 	//taille d'une case
 	private static final int caseSize = 48;
@@ -36,10 +38,14 @@ public class DrawGrille extends JPanel{
 	* 
 	*
 	*/
-	public DrawGrille(Grille grille, Window ecran){
+	public DrawGrille(Grille grille, Window ecran, boolean withListener){
 		super();
 		this.grille = grille;
 		this.ecran = ecran;
+		if(withListener)
+			this.casesListener = new CasesListener(this.grille);
+		else
+			this.casesListener = null;
 	}
 
 	@Override
@@ -94,7 +100,8 @@ public class DrawGrille extends JPanel{
 					cases[i][j].setIcon(Cases.PLAYER);
 				else if(xExit == j && yExit == i)
 					cases[i][j].setIcon(Cases.EXIT);
-
+				if(this.casesListener!=null)
+					cases[i][j].addActionListener(this.casesListener);
 				this.add(cases[i][j], bag);
 			}
 		}

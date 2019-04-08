@@ -5,7 +5,12 @@ import source.game.Menu;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+import javax.swing.JButton;
 import java.io.File;
 
 /**
@@ -60,7 +65,28 @@ public class MenuButtons implements ActionListener{
 			this.menu.load();
 		}else if(commande.equals("Nouveau")){
 			//Charge le menu le jeu sans sauvegarde
-			this.menu.play("");
+			this.ecran.removeAll();
+			this.ecran.repaint();
+			this.ecran.setLayout(new GridBagLayout());
+			GridBagConstraints bag = new GridBagConstraints();
+			
+			//affiche boutons aléatoire et déterministe
+			JPanel choix = new JPanel();
+			JButton random = new JButton("Aléatoire");
+			JButton vide = new JButton("Vide");
+			choix.setLayout(new GridLayout(2,1));
+			choix.add(random);
+			choix.add(vide);
+			random.addActionListener(this); //observateur
+			vide.addActionListener(this);
+			this.ecran.add(choix,bag);
+			this.ecran.revalidate();
+
+		}else if(commande.equals("Aléatoire") || commande.equals("Vide")){
+			//Charge le menu le jeu sans sauvegarde
+			boolean value = false;
+			if(commande.equals("Aléatoire")) value = true;
+			this.menu.play("",value);
 
 		// Cancel/Approve selection ne sont valables que dans l'interface
 		// du JFileChooser (cancer = annuler, approve = double clic/ouvrir)
@@ -74,7 +100,7 @@ public class MenuButtons implements ActionListener{
 			//Récupération du fichier sélectionné
 			File file = gestionnaire.getSelectedFile();
 			//Donne le path au menu
-			this.menu.play(file.getPath());//lance le jeu avec sauvegarde
+			this.menu.play(file.getPath(),false);//lance le jeu avec sauvegarde
 		}
 	}
 }

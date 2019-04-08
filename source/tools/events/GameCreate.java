@@ -10,7 +10,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+import javax.swing.JPanel;
+import javax.swing.JButton;
 
 /**
 *
@@ -76,7 +81,48 @@ public class GameCreate implements ActionListener{
 				champ.setText("");
 				champ.setBackground(Color.RED);
 			}
-		} else {
+		//Sinon il y a jouer, deterministe, manuel, automatique, random
+		} else if(commande.equals("Jouer")){
+			if(this.grille.check()){
+				this.game.setGame();
+			} else {
+				MessagePopup popup;
+				String message = "La grille n'est pas correcte";
+				popup = new MessagePopup(this.game.getWindow(),message);
+			}
+		//ou la sauvegarde
+		} else if(commande.equals("Deterministe")||commande.equals("Aléatoire")){
+			if(commande.equals("Deterministe"))
+				this.game.setType(true);
+			//clean
+			this.game.getWindow().removeAll();
+			this.game.getWindow().repaint();
+			this.game.getWindow().setLayout(new GridBagLayout());
+			GridBagConstraints bag = new GridBagConstraints();
+			
+			//affiche boutons aléatoire et déterministe
+			JPanel choix = new JPanel();
+			JButton manuel = new JButton("Manuel");
+			JButton automatique = new JButton("Automatique");
+			choix.setLayout(new GridLayout(2,1));
+			choix.add(manuel);
+			choix.add(automatique);
+			manuel.addActionListener(this); //observateur
+			automatique.addActionListener(this);
+			this.game.getWindow().add(choix,bag);
+			this.game.getWindow().revalidate();
+
+		} else if(commande.equals("Manuel") || commande.equals("Automatique")){
+			//Active automatique
+			if(commande.equals("Automatique"))
+				this.game.setMode(true);
+			//Lance le jeu
+			this.game.getWindow().removeAll();
+			this.game.getWindow().repaint();
+			this.game.gameStart();
+			
+		}//ou la sauvegarde
+		else {
 			this.game.setFilePath(commande);
 			//On vide l'étiquette @recommencez !
 			JTextField champ = (JTextField) evenement.getSource();

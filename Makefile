@@ -31,6 +31,7 @@ S_TOOLS=$(SOURCE)tools/
 S_TOOLSU=$(S_TOOLS)utils/
 S_TOOLSEV=$(S_TOOLS)events/
 S_TOOLSEX=$(S_TOOLS)exceptions/
+S_TOOLSG=$(S_TOOLS)graph/
 
 #Variables pour les chemins des fichiers build (B)
 B_SOURCE=$(BUILD)$(SOURCE)
@@ -42,6 +43,7 @@ B_TOOLS=$(B_SOURCE)tools/
 B_TOOLSU=$(B_TOOLS)utils/
 B_TOOLSEV=$(B_TOOLS)events/
 B_TOOLSEX=$(B_TOOLS)exceptions/
+B_TOOLSG=$(B_TOOLS)graph/
 
 # but du makefile : produire build/source/Main.class
 but: $(B_SOURCE)Main.class
@@ -75,7 +77,11 @@ $(B_GAME)GameCore.class : $(S_GAME)GameCore.java \
 		$(B_TOOLS)Grille.class \
 		$(B_TOOLS)Cases.class \
 		$(B_TOOLSEV)GameCreate.class \
-		$(B_TOOLS)DrawGrille.class
+		$(B_TOOLS)DrawGrille.class \
+		$(B_TOOLSU)SaveLoader.class \
+		$(B_TOOLSEV)GameSet.class \
+		$(B_TOOLSG)Graphes.class \
+		$(B_TOOLSEV)WinPopup.class
 	$(CC) $(CCFLAGS) $(S_GAME)GameCore.java
 
 #Package interfaces
@@ -94,7 +100,8 @@ $(B_TOOLS)Window.class : $(S_TOOLS)Window.java \
 
 $(B_TOOLS)Grille.class : $(S_TOOLS)Grille.java \
 		$(B_TOOLSEX)InvalidDataException.class \
-		$(B_TOOLS)Cases.class
+		$(B_TOOLS)Cases.class \
+		$(B_TOOLSG)Graphes.class
 	$(CC) $(CCFLAGS) $(S_TOOLS)Grille.java
 
 $(B_TOOLS)Cases.class : $(S_TOOLS)Cases.java \
@@ -104,7 +111,8 @@ $(B_TOOLS)Cases.class : $(S_TOOLS)Cases.java \
 $(B_TOOLS)DrawGrille.class : $(S_TOOLS)DrawGrille.java \
 		$(B_TOOLS)Grille.class \
 		$(B_TOOLSEX)ErrorPopup.class \
-		$(B_TOOLS)Cases.class
+		$(B_TOOLS)Cases.class \
+		$(B_TOOLSEV)CasesListener.class
 	$(CC) $(CCFLAGS) $(S_TOOLS)DrawGrille.java
 
 
@@ -126,6 +134,19 @@ $(B_TOOLSEV)MessagePopup.class : $(S_TOOLSEV)MessagePopup.java \
 		$(B_TOOLS)Window.class
 	$(CC) $(CCFLAGS) $(S_TOOLSEV)MessagePopup.java
 
+$(B_TOOLSEV)GameSet.class : $(S_TOOLSEV)GameSet.java \
+		$(B_TOOLS)Grille.class \
+		$(B_TOOLS)Cases.class
+	$(CC) $(CCFLAGS) $(S_TOOLSEV)GameSet.java
+
+$(B_TOOLSEV)CasesListener.class : $(S_TOOLSEV)CasesListener.java \
+		$(B_TOOLS)Grille.class \
+		$(B_TOOLS)Cases.class
+	$(CC) $(CCFLAGS) $(S_TOOLSEV)CasesListener.java
+
+$(B_TOOLSEV)WinPopup.class : $(S_TOOLSEV)WinPopup.java
+	$(CC) $(CCFLAGS) $(S_TOOLSEV)WinPopup.java
+
 #Packtage utils
 $(B_TOOLSU)Background.class : $(S_TOOLSU)Background.java \
 		$(B_TOOLSU)ImageLoader.class
@@ -133,6 +154,18 @@ $(B_TOOLSU)Background.class : $(S_TOOLSU)Background.java \
 
 $(B_TOOLSU)ImageLoader.class : $(S_TOOLSU)ImageLoader.java
 	$(CC) $(CCFLAGS) $(S_TOOLSU)ImageLoader.java
+
+$(B_TOOLSU)SaveLoader.class : $(S_TOOLSU)SaveLoader.java \
+		$(B_TOOLSU)ReaderBitByBit.class \
+		$(B_TOOLSEX)InvalidDataException.class \
+		$(B_TOOLS)Grille.class \
+		$(B_TOOLS)Cases.class \
+		$(B_TOOLS)Window.class \
+		$(B_TOOLSEX)ErrorPopup.class
+	$(CC) $(CCFLAGS) $(S_TOOLSU)SaveLoader.java
+
+$(B_TOOLSU)ReaderBitByBit.class : $(S_TOOLSU)ReaderBitByBit.java
+	$(CC) $(CCFLAGS) $(S_TOOLSU)ReaderBitByBit.java
 
 
 
@@ -142,6 +175,17 @@ $(B_TOOLSEX)ErrorPopup.class : $(S_TOOLSEX)ErrorPopup.java
 
 $(B_TOOLSEX)InvalidDataException.class : $(S_TOOLSEX)InvalidDataException.java
 	$(CC) $(CCFLAGS) $(S_TOOLSEX)InvalidDataException.java
+
+#Packtage graphes
+$(B_TOOLSG)Graphes.class : $(S_TOOLSG)Graphes.java \
+		$(B_TOOLSEX)InvalidDataException.class \
+		$(B_TOOLS)Cases.class \
+		$(B_TOOLSG)Matrices.class
+#$(B_TOOLS)Grille.class		<-- circulaire
+	$(CC) $(CCFLAGS) $(S_TOOLSG)Graphes.java
+
+$(B_TOOLSG)Matrices.class : $(S_TOOLSG)Matrices.java
+	$(CC) $(CCFLAGS) $(S_TOOLSG)Matrices.java
 
 # --------------------- BUTS FACTICES ------------------------- #
 

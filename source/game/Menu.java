@@ -87,8 +87,8 @@ public class Menu implements IGameComponent{
 	* @see GameCore
 	*
 	*/
-	public void play(String path){
-		IGameComponent game = new GameCore(this.ecran,path);
+	public void play(String path, boolean remplissage){
+		IGameComponent game = new GameCore(this.ecran,path,remplissage);
 		game.run();
 	}
 
