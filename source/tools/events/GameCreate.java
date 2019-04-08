@@ -5,6 +5,7 @@ import source.tools.Grille;
 import source.tools.Window;
 import source.tools.exceptions.InvalidDataException;
 import source.tools.events.MessagePopup;
+import source.tools.utils.WriteLoader;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,8 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
+import java.util.regex.Pattern;
 
 /**
 *
@@ -129,7 +132,14 @@ public class GameCreate implements ActionListener{
 			champ.setText("");
 			String message = "";
 			if(this.grille.check()){
-				message = "Sauvegardé : ressources/sav/"+commande;
+				message = "Sauvegardé : ressources/sav/"+commande+".lab";
+				this.game.setFilePath("ressources/sav/"+commande+".lab");
+				WriteLoader.writeSave(this.grille,this.game.getFilePath(),
+					this.game.getWindow());
+				//Supression des composants = reset
+				this.game.getWindow().removeAll();
+				this.game.getWindow().repaint();
+				this.game.run(); //relance le jeu avec sauvegarde
 			} else {
 				message = "Grille incorrecte. Non Sauvegardé";
 			}

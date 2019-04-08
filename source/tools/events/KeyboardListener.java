@@ -3,16 +3,19 @@ package source.tools.events;
 import source.game.GameCore;
 
 import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
 public class KeyboardListener implements KeyListener{
 
-	public KeyboardListener(){
+	private GameCore game;
 
+	public KeyboardListener(GameCore game){
+		this.game = game;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e){
-		System.out.println("suivant");
+		this.game.nextMove();
 	}
 	
 	@Override

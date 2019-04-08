@@ -9,7 +9,7 @@ import source.tools.graph.Graphes;
 import source.tools.events.GameSet;
 import source.tools.events.GameCreate;
 import source.tools.events.WinPopup;
-import source.tools.events.KeyListener;
+import source.tools.events.KeyboardListener;
 import source.tools.utils.SaveLoader;
 
 import java.awt.BorderLayout;
@@ -194,8 +194,11 @@ public class GameCore implements IGameComponent{
 			DrawGrille drawGrille = new DrawGrille(this.grille,this.ecran,false);
 			drawGrille.setOpaque(false);
 			this.ecran.add(drawGrille,BorderLayout.CENTER);
+			KeyboardListener keyboardListener = new KeyboardListener(this);
+			this.ecran.setFocusable(true);
+			this.ecran.requestFocusInWindow();
+			this.ecran.addKeyListener(keyboardListener);
 			this.ecran.revalidate();
-			this.ecran.addKeyListener(new KeyListener(this));
 		} else {
 			//sinon on est en automatique
 			//deterministe
@@ -209,6 +212,12 @@ public class GameCore implements IGameComponent{
 				"complétée en "+etapes+" étapes.");
 
 		}
+	}
+
+	public void nextMove(){
+		System.out.println("Le joueur se déplace");
+		//this.grille.setXPlayer(this.grille.getXPlayer()+1);
+		//this.gameStart();
 	}
 
 	public Window getWindow(){

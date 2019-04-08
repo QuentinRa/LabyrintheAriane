@@ -82,7 +82,7 @@ $(B_GAME)GameCore.class : $(S_GAME)GameCore.java \
 		$(B_TOOLSEV)GameSet.class \
 		$(B_TOOLSG)Graphes.class \
 		$(B_TOOLSEV)WinPopup.class \
-		$(B_TOOLSEV)KeyListener.class
+		$(B_TOOLSEV)KeyboardListener.class
 	$(CC) $(CCFLAGS) $(S_GAME)GameCore.java
 
 #Package interfaces
@@ -128,6 +128,7 @@ $(B_TOOLSEV)GameCreate.class : $(S_TOOLSEV)GameCreate.java \
 		$(B_TOOLS)Window.class \
 		$(B_TOOLSEX)InvalidDataException.class \
 		$(B_TOOLSEV)MessagePopup.class \
+		$(B_TOOLSU)WriteLoader.class
 #$(B_GAME)GameCore.class <-- circulaire
 	$(CC) $(CCFLAGS) $(S_TOOLSEV)GameCreate.java
 
@@ -148,9 +149,9 @@ $(B_TOOLSEV)CasesListener.class : $(S_TOOLSEV)CasesListener.java \
 $(B_TOOLSEV)WinPopup.class : $(S_TOOLSEV)WinPopup.java
 	$(CC) $(CCFLAGS) $(S_TOOLSEV)WinPopup.java
 
-$(B_TOOLSEV)KeyListener.class : $(S_TOOLSEV)KeyListener.java
+$(B_TOOLSEV)KeyboardListener.class : $(S_TOOLSEV)KeyboardListener.java
 #$(B_GAME)GameCore.class <-- circulaire
-	$(CC) $(CCFLAGS) $(S_TOOLSEV)KeyListener.java
+	$(CC) $(CCFLAGS) $(S_TOOLSEV)KeyboardListener.java
 
 #Packtage utils
 $(B_TOOLSU)Background.class : $(S_TOOLSU)Background.java \
@@ -172,6 +173,12 @@ $(B_TOOLSU)SaveLoader.class : $(S_TOOLSU)SaveLoader.java \
 $(B_TOOLSU)ReaderBitByBit.class : $(S_TOOLSU)ReaderBitByBit.java
 	$(CC) $(CCFLAGS) $(S_TOOLSU)ReaderBitByBit.java
 
+$(B_TOOLSU)WriteLoader.class : $(S_TOOLSU)WriteLoader.java \
+		$(B_TOOLS)Grille.class \
+		$(B_TOOLS)Window.class \
+		$(B_TOOLSEX)ErrorPopup.class \
+		$(B_TOOLS)Cases.class
+	$(CC) $(CCFLAGS) $(S_TOOLSU)WriteLoader.java
 
 
 #Packtage exceptions

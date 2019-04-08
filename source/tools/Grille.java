@@ -329,19 +329,19 @@ public class Grille{
 			return false;
 		}
 
-		for(int i=0; i<size; i++){
+		/*for(int i=0; i<size; i++){
 			for(int j=0; j<size; j++){
 				System.out.print(cases[i][j].getValue()==true?"1":"0");
 			}
 			System.out.println();
 		}
-		System.out.println();
+		System.out.println();*/
 
 		//regarde s'il existe un chemin en connaissant la map
 		Graphes chemin = new Graphes(this);
 		boolean retour = chemin.findPathWithMap(this.xPlayer,this.yPlayer,
 				this.xExit,this.yExit);
-		System.out.println("chemin?"+retour);
+		//System.out.println("chemin?"+retour);
 
 		return retour;
 	}

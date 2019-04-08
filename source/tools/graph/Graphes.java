@@ -79,52 +79,9 @@ public class Graphes{
 	}
 
 	public boolean findPathWithoutMap(int x,int y, int xx, int yy){
+		System.out.println("en chemin");
 
-		Cases[][] cases = this.grille.getCasesArray();
-
-		Queue<Cases> file = new LinkedList<>();
-		file.add(cases[x][y]);
-
-		int i=0,j=0;
-		int size = this.grille.getSize();
-
-		//Dépille tout
-		for(i=0; i<size; i++){
-			for(j=0; j <size; j++){
-				cases[i][j].setEmpille(false);
-			}
-		}
-
-		Cases first = file.element(); //Récupère le 1er élément
-		first.setEmpille(true);
-		i = first.getXPos();
-		j = first.getYPos();
-
-		if(j == xx && i == yy){
-			//On a trouvé un chemin
-			file.clear(); //vide pile
-			return true;
-		}else{
-			//chemin gauche
-			if(this.cheminGauche(cases,i,j)){
-				file.add(cases[i][j-1]);
-			}
-			//chemin droite
-			if(this.cheminDroite(cases,i,j,size)){
-				file.add(cases[i][j+1]);
-			}
-			//chemin haut
-			if(this.cheminHaut(cases,i,j)){
-				file.add(cases[i-1][j]);
-			}
-			//chemin bas
-			if(this.cheminBas(cases,i,j,size)){
-				file.add(cases[i+1][j]);
-			}
-			file.remove(); //supprime le 1er élément
-		}
-
-		return !(file.isEmpty() == true);
+		return false;
 	}
 
 	public double getSorthestPathWithMap(int x,int y, int xx, int yy){
