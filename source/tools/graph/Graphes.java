@@ -21,17 +21,25 @@ import java.util.Random;
 public class Graphes{
 
 	private Grille grille;
-	private Queue<Cases> noMap;
+	private LinkedList<Cases> noMap;
+	private boolean fileInitialised;
+	private Cases[][] cases;
+	private int size;
+	private int count;
+
+	private Random rand;
 
 	public Graphes(Grille grille){
 		this.grille = grille;
 		this.noMap = new LinkedList<>();
+		this.fileInitialised = false;
+		this.cases = this.grille.getCasesArray();
+		this.size = this.grille.getSize();
+		this.count = 0;
+		this.rand = new Random();
 	}
 
 	public boolean findPathWithMap(int x,int y, int xx, int yy){
-
-		Cases[][] cases = this.grille.getCasesArray();
-
 		Queue<Cases> file = new LinkedList<>();
 		file.add(cases[x][y]);
 
@@ -81,10 +89,92 @@ public class Graphes{
 	}
 
 	public int findPathWithoutMap(){
+		this.count++;
 
+		if(!this.fileInitialised){
+			int x = this.grille.getXPlayer();
+			int y= this.grille.getYPlayer();
+			noMap.add(this.grille.getCase(x,y));
+			this.fileInitialised = true;
 
-		
-		return -1;
+		for(int i=0; i<size; i++){
+				for(int j=0; j <size; j++){
+					cases[i][j].setEmpille(false);
+					cases[i][j].setParcourue(false);
+				}
+			}
+		}
+
+		int x = this.grille.getXPlayer();
+		int y = this.grille.getYPlayer();
+		boolean moved = false;
+		boolean retour = false;
+
+		if(cases[x][y].isParcourue()){
+			//on a fait du surPlace donc la dernière case visitée est
+			//blocante : on l'empille
+			//System.out.println("entre");
+			Cases dernier = noMap.getLast();
+			dernier.setEmpille(true);
+			noMap.removeLast();
+			Cases nouveauDernier = noMap.getLast();
+			nouveauDernier.setParcourue(false);
+		}
+
+		System.out.println(noMap.size());
+		cases[x][y].setParcourue(true);
+
+			if(x-1<size && x-1>=0 && !this.cases[x-1][y].isParcourue()
+				&& !cases[x-1][y].isEmpille()){
+				retour = this.grille.movePlayer(-1,0);
+				noMap.add(this.grille.getCase(x-1,y));
+			} else if(x+1<size && x+1>=0 && !this.cases[x+1][y].isParcourue()
+						&& !cases[x+1][y].isEmpille()){
+				retour = this.grille.movePlayer(1,0);
+				noMap.add(this.grille.getCase(x+1,y));
+			} else if(y-1<size && y-1>=0 && !this.cases[x][y-1].isParcourue() 
+						&& !cases[x][y-1].isEmpille()){
+				retour = this.grille.movePlayer(0,-1);
+				noMap.add(this.grille.getCase(x,y-1));
+			} else if(y+1<size && y+1>=0 && !this.cases[x][y+1].isParcourue()
+					&&	!cases[x][y+1].isEmpille()){
+				retour = this.grille.movePlayer(0,1);
+				noMap.add(this.grille.getCase(x,y+1));
+			}
+
+			if(retour){
+				noMap.clear();
+				return this.count;
+			}
+			if(noMap.size() == 1){
+				return -1;
+			}
+
+		return 0;
+	}
+
+	public int randomPathWithoutMap(){
+		this.count++;
+
+		boolean axis = rand.nextBoolean();	//true = y false = x
+		boolean retour = false;
+		int value = rand.nextBoolean()==true?1:-1;
+
+		if(axis){
+			retour = this.grille.movePlayer(value,0);
+		} else {
+			retour = this.grille.movePlayer(0,value);
+		}
+
+		if(retour){ return count; }
+
+		return 0;
+	}
+
+	public void reset(){
+		this.count = 0;
+		this.noMap.clear();
+		this.fileInitialised = false;
 	}
 
 	public double getSorthestPathWithMap(int x,int y, int xx, int yy){

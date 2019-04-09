@@ -29,6 +29,8 @@ public class Cases extends JButton{
 	private boolean value;
 	/** Si on a empillé la case, cf graphes - dfs */
 	private boolean empille;
+	/** si on a parcouru la case **/
+	private boolean parcourue;
 
 	/** la position x de la case */
 	private int x;
@@ -160,5 +162,12 @@ public class Cases extends JButton{
 			throw new InvalidDataException(message);
 		}
 		this.y = y;
+	}
+
+	public void setParcourue(boolean value){
+		this.parcourue = value;
+	}
+	public boolean isParcourue(){
+		return this.parcourue;
 	}
 }

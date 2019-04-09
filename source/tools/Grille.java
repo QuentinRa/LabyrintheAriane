@@ -325,23 +325,27 @@ public class Grille{
 		if(this.xPlayer == -1 || this.yPlayer == -1 ||
 			this.yExit == -1 || this.xExit == -1 ||
 			(this.xPlayer == this.xExit && this.yPlayer == this.yExit)){
-			System.out.println("position joueur");
 			return false;
 		}
 
-		/*for(int i=0; i<size; i++){
-			for(int j=0; j<size; j++){
-				System.out.print(cases[i][j].getValue()==true?"1":"0");
+		for(int i = 0; i<size; i++){
+			for(int j = 0; j<size; j++){
+				System.out.print(cases[i][j].getValue()?"1":"0");
 			}
-			System.out.println();
+			System.out.println("");
 		}
-		System.out.println();*/
 
 		//regarde s'il existe un chemin en connaissant la map
 		Graphes chemin = new Graphes(this);
-		boolean retour = chemin.findPathWithMap(this.xPlayer,this.yPlayer,
-				this.xExit,this.yExit);
-		//System.out.println("chemin?"+retour);
+		int valeur = 0;
+		int x = this.xPlayer;
+		int y = this.yPlayer;
+		while((valeur = chemin.findPathWithoutMap()) == 0){}
+		chemin.reset();
+		this.xPlayer = x;
+		this.yPlayer = y;
+		boolean retour = (valeur == -1?false:true);
+		System.out.println("chemin?"+retour);
 
 		return retour;
 	}
@@ -356,7 +360,7 @@ public class Grille{
 			do{
 				this.xExit = rand.nextInt(this.size);
 				this.yExit = rand.nextInt(this.size);
-			}while(xPlayer==xExit && yPlayer == yExit);
+			}while(xPlayer == xExit && yPlayer == yExit);
 			Graphes chemin = new Graphes(this);
 			int min = rand.nextInt(size*size*10);
 			//tant que l'on a pas fait au moins min, on boucle
@@ -364,8 +368,7 @@ public class Grille{
 			//size-2>=0 car size est controlé pour être >1
 			//et -2 pour joueur+sortie, + existe un chemin entre
 			//joueur et la sortie
-			while(indice<min || !chemin.findPathWithMap(this.xPlayer,this.yPlayer,
-				this.xExit,this.yExit)){
+			while(indice<min || !this.check()){
 				int x=-1,y=-1;
 				do{
 					x = rand.nextInt(size);
@@ -377,7 +380,33 @@ public class Grille{
 				indice++;
 			}
 		}
-		
+	}
+
+	public boolean movePlayer(int xpos, int ypos){
+		//dans la grille ?
+		int x = this.xPlayer+xpos;
+		int y = this.yPlayer+ypos;
+		if(x==xExit && y==yExit){
+			//bouge pas mais préviens que c'est la sortie
+			return true;
+		}else
+		if(x>=0 && y>=0 && x<size && y<size){
+			//si elle est vide
+			if(cases[y][x].getValue() == false){
+				//vide l'ancienne position
+				cases[this.yPlayer][this.xPlayer].setIcon(null);
+				cases[this.yPlayer][this.xPlayer].revalidate();
+				cases[this.yPlayer][this.xPlayer].repaint();
+				//remplir la nouvelle
+				cases[y][x].setIcon(Cases.PLAYER);
+				cases[y][x].revalidate();
+				cases[y][x].repaint();
+				this.xPlayer = x;
+				this.yPlayer = y;
+			}
+		}
+		//sinon bouge pas
+		return false;
 	}
 
 

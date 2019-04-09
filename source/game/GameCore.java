@@ -64,7 +64,6 @@ public class GameCore implements IGameComponent{
 		this.mode = false;
 		this.type = false;
 		this.remplissage = remplissage;
-		this.graphe = new Graphes(this.grille);
 	}
 
 	/**
@@ -185,6 +184,8 @@ public class GameCore implements IGameComponent{
 		//	+(this.mode?"automatique":"manuel")+" "+
 		//	(this.type?"deterministe":"aléatoire"));
 
+		this.graphe = new Graphes(this.grille);
+
 		int xPlayer = this.grille.getXPlayer();
 		int yPlayer = this.grille.getYPlayer();
 		int xExit = this.grille.getXExit();
@@ -208,6 +209,18 @@ public class GameCore implements IGameComponent{
 			if(type){
 				etapes = graphe
 							.getSorthestPathWithMap(xPlayer,yPlayer,xExit,yExit);
+			} else {
+				double i = 0d;
+				double somme = 0d;
+				while(i<100){
+					double tmp = 0d;
+					while(tmp == 0)
+						tmp = (double) graphe.randomPathWithoutMap();
+					somme+=tmp;
+					graphe.reset();
+					i++;
+				}
+				etapes = somme/i;
 			}
 
 			WinPopup victoire = new WinPopup(this.ecran,"La grille a été "+
@@ -220,14 +233,19 @@ public class GameCore implements IGameComponent{
 		System.out.println("Le joueur se déplace");
 		int retour = -1;
 		if(this.type){
-			retour = this.graph.findPathWithOutMap();
+			retour = this.graphe.findPathWithoutMap();
+		} else {
+			retour = this.graphe.randomPathWithoutMap();
 		}
-		if(retour == 0)
-		WinPopup victoire = new WinPopup(this.ecran,"La grille a été "+
-				"complétée en "+etapes+" étapes.");
-		else if(retour == 1)
-			WinPopup victoire = new WinPopup(this.ecran,"Il n'existe pas de "+
-				"chemin allant à la sortie...");
+		if(retour != 0){
+			WinPopup victoire;
+			if(retour != -1)
+				victoire = new WinPopup(this.ecran,"La grille a été "+
+					"complétée en "+retour+" étapes.");
+			else
+				victoire = new WinPopup(this.ecran,"Il n'existe pas de "+
+					"chemin allant à la sortie...");
+		}
 	}
 
 	public Window getWindow(){
