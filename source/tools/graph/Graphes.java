@@ -21,9 +21,11 @@ import java.util.Random;
 public class Graphes{
 
 	private Grille grille;
+	private Queue<Cases> noMap;
 
 	public Graphes(Grille grille){
 		this.grille = grille;
+		this.noMap = new LinkedList<>();
 	}
 
 	public boolean findPathWithMap(int x,int y, int xx, int yy){
@@ -78,10 +80,11 @@ public class Graphes{
 		return false;
 	}
 
-	public boolean findPathWithoutMap(int x,int y, int xx, int yy){
-		System.out.println("en chemin");
+	public int findPathWithoutMap(){
 
-		return false;
+
+		
+		return -1;
 	}
 
 	public double getSorthestPathWithMap(int x,int y, int xx, int yy){

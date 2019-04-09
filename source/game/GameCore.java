@@ -39,6 +39,8 @@ public class GameCore implements IGameComponent{
 	private String filePath;
 	/** la grille de jeu */
 	private Grille grille;
+	/** graphe associé au jeu */
+	private Graphes graphe;
 
 	/** remplir la grille */
 	private boolean remplissage;
@@ -62,6 +64,7 @@ public class GameCore implements IGameComponent{
 		this.mode = false;
 		this.type = false;
 		this.remplissage = remplissage;
+		this.graphe = new Graphes(this.grille);
 	}
 
 	/**
@@ -182,7 +185,6 @@ public class GameCore implements IGameComponent{
 		//	+(this.mode?"automatique":"manuel")+" "+
 		//	(this.type?"deterministe":"aléatoire"));
 
-		Graphes graphe = new Graphes(this.grille);
 		int xPlayer = this.grille.getXPlayer();
 		int yPlayer = this.grille.getYPlayer();
 		int xExit = this.grille.getXExit();
@@ -216,8 +218,16 @@ public class GameCore implements IGameComponent{
 
 	public void nextMove(){
 		System.out.println("Le joueur se déplace");
-		//this.grille.setXPlayer(this.grille.getXPlayer()+1);
-		//this.gameStart();
+		int retour = -1;
+		if(this.type){
+			retour = this.graph.findPathWithOutMap();
+		}
+		if(retour == 0)
+		WinPopup victoire = new WinPopup(this.ecran,"La grille a été "+
+				"complétée en "+etapes+" étapes.");
+		else if(retour == 1)
+			WinPopup victoire = new WinPopup(this.ecran,"Il n'existe pas de "+
+				"chemin allant à la sortie...");
 	}
 
 	public Window getWindow(){
