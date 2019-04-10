@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.BorderLayout;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -69,7 +70,11 @@ public class DrawGrille extends JPanel{
 			this.ecran.setLocation(Window.CENTER); //centre par rapport à l'écran
 		}
 
-		this.setLayout(new GridBagLayout());
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 255, 0, 0));//#transparent :)
+		//#setOpaque fait tout disparaitre #bidouillage #echec
+
+		panel.setLayout(new GridBagLayout());
 		GridBagConstraints bag = new GridBagConstraints();
 
 		int width = grille.getSize();
@@ -94,10 +99,12 @@ public class DrawGrille extends JPanel{
 					cases[i][j].setIcon(Cases.EXIT);
 				if(this.casesListener!=null)
 					cases[i][j].addActionListener(this.casesListener);
-				this.add(cases[i][j], bag);
+				panel.add(cases[i][j], bag);
 			}
 		}
 
+		this.setLayout(new BorderLayout());
+		this.add(panel,BorderLayout.CENTER);
 		this.revalidate();
 	}
 }

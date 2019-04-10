@@ -57,6 +57,7 @@ public class CasesListener implements ActionListener{
 
 		if(icone != null){
 			String path = icone.getDescription();
+			System.out.println(icone);
 			if(path.equals(Cases.PLAYER.getDescription())){
 				//Si le player est dans la grille, on le déplace
 				if(xPlayer != -1 && yPlayer != -1){
