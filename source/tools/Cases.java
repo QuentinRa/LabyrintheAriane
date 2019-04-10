@@ -24,6 +24,8 @@ public class Cases extends JButton{
 	public static final ImageIcon EXIT = new ImageIcon("ressources/exit.png");
 	/** icone d'un mur */
 	public static final ImageIcon WALL = new ImageIcon("ressources/wall.png");
+	/** taille d'une case */
+	public static int caseSize = 48;
 
 	/** La valeur d'une case : 0 = vide, 1 = remplie */
 	private boolean value;

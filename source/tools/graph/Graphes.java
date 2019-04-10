@@ -121,7 +121,6 @@ public class Graphes{
 			nouveauDernier.setParcourue(false);
 		}
 
-		System.out.println(noMap.size());
 		cases[x][y].setParcourue(true);
 
 			if(x-1<size && x-1>=0 && !this.cases[x-1][y].isParcourue()

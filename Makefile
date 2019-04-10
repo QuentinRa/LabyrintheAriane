@@ -82,7 +82,8 @@ $(B_GAME)GameCore.class : $(S_GAME)GameCore.java \
 		$(B_TOOLSEV)GameSet.class \
 		$(B_TOOLSG)Graphes.class \
 		$(B_TOOLSEV)WinPopup.class \
-		$(B_TOOLSEV)KeyboardListener.class
+		$(B_TOOLSEV)KeyboardListener.class \
+		$(B_TOOLSEX)ErrorPopup.class
 	$(CC) $(CCFLAGS) $(S_GAME)GameCore.java
 
 #Package interfaces
@@ -91,7 +92,6 @@ $(B_GAMEI)IGame.class : $(S_GAMEI)IGame.java
 
 $(B_GAMEI)IGameComponent.class : $(S_GAMEI)IGameComponent.java
 	$(CC) $(CCFLAGS) $(S_GAMEI)IGameComponent.java
-
 
 
 #Package tools

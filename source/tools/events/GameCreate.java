@@ -82,7 +82,7 @@ public class GameCreate implements ActionListener{
 				//On vide l'étiquette @recommencez !
 				JTextField champ = (JTextField) evenement.getSource();
 				champ.setText("");
-				champ.setBackground(Color.RED);
+				MessagePopup popup = new MessagePopup(this.game.getWindow(),e.getMessage());
 			}
 		//Sinon il y a jouer, deterministe, manuel, automatique, random
 		} else if(commande.equals("Jouer")){
@@ -93,6 +93,8 @@ public class GameCreate implements ActionListener{
 				String message = "La grille n'est pas correcte";
 				popup = new MessagePopup(this.game.getWindow(),message);
 			}
+		}else if(commande.equals("Re-générer")){
+			this.game.newGame();
 		//ou la sauvegarde
 		} else if(commande.equals("Deterministe")||commande.equals("Aléatoire")){
 			if(commande.equals("Deterministe"))

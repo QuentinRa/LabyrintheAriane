@@ -10,6 +10,7 @@ import source.tools.events.GameSet;
 import source.tools.events.GameCreate;
 import source.tools.events.WinPopup;
 import source.tools.events.KeyboardListener;
+import source.tools.exceptions.ErrorPopup;
 import source.tools.utils.SaveLoader;
 
 import java.awt.BorderLayout;
@@ -100,6 +101,12 @@ public class GameCore implements IGameComponent{
 	}
 
 	public void newGame(){
+		//Si les dimensions de notre jeu sont plus grandes que l'écran
+		if(this.ecran.getMonitorWidth() < this.grille.getSize()*48+100 ||
+		   this.ecran.getMonitorHeight() < this.grille.getSize()*48+100 ){
+		   	String message = "L'écran ne permet pas un jeu de cette taille";
+			ErrorPopup popup = new ErrorPopup(this.ecran,message);
+		}
 		this.grille.generate(remplissage);
 		this.ecran.setLayout(new BorderLayout());
 
@@ -108,9 +115,19 @@ public class GameCore implements IGameComponent{
 
 		//Bouton jouer
 		JPanel play = new JPanel();
+		if(remplissage) play.setLayout(new BorderLayout());
+
 		JButton boutonPlay = new JButton("Jouer");
 		boutonPlay.addActionListener(gameCreateListener);
-		play.add(boutonPlay);
+		
+		if(remplissage){
+			JButton boutonGenerate = new JButton("Re-générer");
+			boutonGenerate.addActionListener(gameCreateListener);
+			play.add(boutonGenerate, BorderLayout.EAST);
+			play.add(boutonPlay, BorderLayout.CENTER);
+		} else {
+			play.add(boutonPlay);
+		}
 		play.setOpaque(false);
 		
 		//Panneau avec options sauvegarde
@@ -207,8 +224,11 @@ public class GameCore implements IGameComponent{
 			//deterministe
 			double etapes = 0d;
 			if(type){
-				etapes = graphe
-							.getSorthestPathWithMap(xPlayer,yPlayer,xExit,yExit);
+				//etapes = graphe
+				//			.getSorthestPathWithMap(xPlayer,yPlayer,xExit,yExit);
+				while(etapes == 0){
+					etapes = this.graphe.findPathWithoutMap();
+				}
 			} else {
 				double i = 0d;
 				double somme = 0d;
@@ -230,7 +250,6 @@ public class GameCore implements IGameComponent{
 	}
 
 	public void nextMove(){
-		System.out.println("Le joueur se déplace");
 		int retour = -1;
 		if(this.type){
 			retour = this.graphe.findPathWithoutMap();

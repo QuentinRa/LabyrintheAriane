@@ -208,7 +208,11 @@ public class Grille{
 	*/
 	public void setSize(int size){
 		if(size <= 1){
-			String message = "size strictement supérieure à 1!";
+			String message = "taille doit être strictement supérieure à 1!";
+			throw new InvalidDataException(message);
+		}
+		if(size > 100){
+			String message = "taille max 100*100";
 			throw new InvalidDataException(message);
 		}
 		this.size = size;
@@ -328,13 +332,6 @@ public class Grille{
 			return false;
 		}
 
-		for(int i = 0; i<size; i++){
-			for(int j = 0; j<size; j++){
-				System.out.print(cases[i][j].getValue()?"1":"0");
-			}
-			System.out.println("");
-		}
-
 		//regarde s'il existe un chemin en connaissant la map
 		Graphes chemin = new Graphes(this);
 		int valeur = 0;
@@ -345,7 +342,7 @@ public class Grille{
 		this.xPlayer = x;
 		this.yPlayer = y;
 		boolean retour = (valeur == -1?false:true);
-		System.out.println("chemin?"+retour);
+		//System.out.println("chemin?"+retour);
 
 		return retour;
 	}
