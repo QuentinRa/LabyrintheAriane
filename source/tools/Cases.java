@@ -27,6 +27,15 @@ public class Cases extends JButton{
 	/** taille d'une case */
 	public static int caseSize = 48;
 
+	/**  */
+	public static final ImageIcon DROITE = new ImageIcon("ressources/arrow_4.png");
+	/** */
+	public static final ImageIcon GAUCHE = new ImageIcon("ressources/arrow_2.png");
+	/** */
+	public static final ImageIcon HAUT = new ImageIcon("ressources/arrow_3.png");
+	/** */
+	public static final ImageIcon BAS = new ImageIcon("ressources/arrow_1.png");
+
 	/** La valeur d'une case : 0 = vide, 1 = remplie */
 	private boolean value;
 	/** Si on a empillé la case, cf graphes - dfs */

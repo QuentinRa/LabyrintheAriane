@@ -42,6 +42,8 @@ public class GameCore implements IGameComponent{
 	private Grille grille;
 	/** graphe associé au jeu */
 	private Graphes graphe;
+	/** */
+	private JLabel direction;
 
 	/** remplir la grille */
 	private boolean remplissage;
@@ -65,6 +67,9 @@ public class GameCore implements IGameComponent{
 		this.mode = false;
 		this.type = false;
 		this.remplissage = remplissage;
+		this.direction = new JLabel("Direction : ");
+		this.direction.setHorizontalAlignment(JLabel.CENTER);
+		this.direction.setOpaque(true);
 	}
 
 	/**
@@ -213,6 +218,7 @@ public class GameCore implements IGameComponent{
 			this.grille.removeAllListeners();
 			DrawGrille drawGrille = new DrawGrille(this.grille,this.ecran,false);
 			drawGrille.setOpaque(false);
+			this.ecran.add(this.direction,BorderLayout.NORTH);
 			this.ecran.add(drawGrille,BorderLayout.CENTER);
 			KeyboardListener keyboardListener = new KeyboardListener(this);
 			this.ecran.setFocusable(true);
@@ -252,9 +258,9 @@ public class GameCore implements IGameComponent{
 	public void nextMove(){
 		int retour = -1;
 		if(this.type){
-			retour = this.graphe.findPathWithoutMap();
+			retour = this.graphe.findPathWithoutMap(this.direction);
 		} else {
-			retour = this.graphe.randomPathWithoutMap();
+			retour = this.graphe.randomPathWithoutMap(this.direction);
 		}
 		if(retour != 0){
 			WinPopup victoire;

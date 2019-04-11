@@ -7,8 +7,9 @@ import source.tools.graph.Matrices;
 
 import java.util.Queue;
 import java.util.LinkedList;
-
 import java.util.Random;
+
+import javax.swing.JLabel;
 
 /**
 *
@@ -89,6 +90,10 @@ public class Graphes{
 	}
 
 	public int findPathWithoutMap(){
+		return this.findPathWithoutMap(null);
+	}
+
+	public int findPathWithoutMap(JLabel label){
 		this.count++;
 
 		if(!this.fileInitialised){
@@ -127,18 +132,22 @@ public class Graphes{
 				&& !cases[x-1][y].isEmpille()){
 				retour = this.grille.movePlayer(-1,0);
 				noMap.add(this.grille.getCase(x-1,y));
+				if(label != null) label.setText("Direction : gauche");
 			} else if(x+1<size && x+1>=0 && !this.cases[x+1][y].isParcourue()
 						&& !cases[x+1][y].isEmpille()){
 				retour = this.grille.movePlayer(1,0);
 				noMap.add(this.grille.getCase(x+1,y));
+				if(label != null) label.setText("Direction : droite");
 			} else if(y-1<size && y-1>=0 && !this.cases[x][y-1].isParcourue() 
 						&& !cases[x][y-1].isEmpille()){
 				retour = this.grille.movePlayer(0,-1);
 				noMap.add(this.grille.getCase(x,y-1));
+				if(label != null) label.setText("Direction : haut");
 			} else if(y+1<size && y+1>=0 && !this.cases[x][y+1].isParcourue()
 					&&	!cases[x][y+1].isEmpille()){
 				retour = this.grille.movePlayer(0,1);
 				noMap.add(this.grille.getCase(x,y+1));
+				if(label != null) label.setText("Direction : bas");
 			}
 
 			if(retour){
@@ -153,6 +162,10 @@ public class Graphes{
 	}
 
 	public int randomPathWithoutMap(){
+		return this.randomPathWithoutMap(null);
+	}
+
+	public int randomPathWithoutMap(JLabel label){
 		this.count++;
 
 		boolean axis = rand.nextBoolean();	//true = y false = x
@@ -161,8 +174,16 @@ public class Graphes{
 
 		if(axis){
 			retour = this.grille.movePlayer(value,0);
+			if(value == -1 && label != null)
+				label.setText("Direction : gauche");
+			else
+				label.setText("Direction : droite");
 		} else {
 			retour = this.grille.movePlayer(0,value);
+			if(value == -1 && label != null)
+				label.setText("Direction : haut");
+			else
+				label.setText("Direction : bas");
 		}
 
 		if(retour){ return count; }
