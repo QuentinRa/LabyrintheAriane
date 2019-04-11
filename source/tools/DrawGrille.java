@@ -6,16 +6,17 @@ import source.tools.Window;
 import source.tools.events.CasesListener;
 import source.tools.exceptions.ErrorPopup;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.BorderLayout;
 
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JLayeredPane;
+//https://www.logicbig.com/tutorials/java-swing/layered-pane-example.html
+//https://docs.oracle.com/javase/tutorial/uiswing/components/layeredpane.html
 
 /**
 *
