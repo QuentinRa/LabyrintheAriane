@@ -156,7 +156,7 @@ public class Search {
 
 		boolean sortie = false; //sortie trouvée = true
 		int size = grille.getSize();
-		String direction = "";
+		String direction = "demi-tour";
 
 		if(x-1>=0 && !this.cases[x-1][y].isParcourue() && cases[x-1][y].isNotEmpile()){
 			//on regarde pas x-1 < size car x<size
