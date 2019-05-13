@@ -240,13 +240,13 @@ clean:
 	`cd ..;find -name "*.class" -exec rm -rf {} \;; cd src/;`
 
 javadoc:
-	javadoc -d $(JAVADOC) -version -author -html5 \
-		src.engine src.engine.algorithms src.engine.exceptions \
-		src.engine.graph src.engine.utils src.engine.window \
-		src.game src.game.evenements src.game.utils
+	javadoc -d ../javadoc -version -author -html5 \
+		engine.algorithms engine.exceptions \
+		engine.graph engine.utils engine.window \
+		game.evenements game.utils
 
 doc:
-	`firefox -private -new-tab "build/javadoc/index.html"`
+	`firefox -private -new-tab "../javadoc/index.html"`
 
 #but factices - but est déja factice ...
 .PHONY : but \

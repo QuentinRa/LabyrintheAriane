@@ -42,7 +42,7 @@ public class CreateGameListener implements ActionListener {
 	/**
 	 *
 	 * Permet la saisie de la taille de la grille, et les int&#233;ractions avec les boutons
-	 *  jouer et r&233;g&#233;nerer
+	 *  jouer et r&#233;g&#233;nerer
 	 *
 	 * @param screen fen&#234;tre associée au jeu
 	 * @param grille La grille de jeu
