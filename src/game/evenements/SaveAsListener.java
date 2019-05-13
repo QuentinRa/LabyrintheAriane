@@ -39,7 +39,7 @@ public class SaveAsListener implements ActionListener {
 	 * Le chemin o&#249; sauvegarder
 	 *
 	 */
-	private static String globalPath = "ressources/sav/";
+	private static String globalPath = "../ressources/sav/";
 
 	/**
 	 *

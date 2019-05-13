@@ -1,7 +1,6 @@
 package game.utils;
 
 import engine.graph.Grille;
-
 import engine.graph.Case;
 
 import java.io.IOException;

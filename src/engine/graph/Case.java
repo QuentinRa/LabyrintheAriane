@@ -23,19 +23,19 @@ public class Case extends JButton {
 	 * ic&#244;ne du joueur
 	 *
 	 */
-	public static final ImageIcon PLAYER = new ImageIcon("ressources/player.png");
+	public static final ImageIcon PLAYER = new ImageIcon("../ressources/player.png");
 	/**
 	 *
 	 * ic&#244;ne de la sortie
 	 *
 	 */
-	public static final ImageIcon EXIT = new ImageIcon("ressources/exit.png");
+	public static final ImageIcon EXIT = new ImageIcon("../ressources/exit.png");
 	/**
 	 *
 	 *  ic&#244;ne d'un mur
 	 *
 	 */
-	public static final ImageIcon WALL = new ImageIcon("ressources/wall.png");
+	public static final ImageIcon WALL = new ImageIcon("../ressources/wall.png");
 
 	/**
 	 *

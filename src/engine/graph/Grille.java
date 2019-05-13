@@ -1,7 +1,7 @@
 package engine.graph;
 
 import engine.exceptions.InvalidDataException;
-//import engine.graph.Case;
+import engine.graph.Case;
 
 import java.awt.event.ActionListener;
 import java.util.Random;

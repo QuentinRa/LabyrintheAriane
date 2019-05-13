@@ -1,11 +1,7 @@
 package engine.graph;
 
-//import engine.graph.Grille;
-//import engine.graph.Case;
-//import engine.window.Window;
-
-//import engine.graph.Case;
-//import engine.graph.Grille;
+import engine.graph.Grille;
+import engine.graph.Case;
 
 import java.awt.Graphics;
 import java.awt.GridBagLayout;

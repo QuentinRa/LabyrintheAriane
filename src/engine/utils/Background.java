@@ -1,6 +1,6 @@
 package engine.utils;
 
-//import engine.utils.ImageLoader;
+import engine.utils.ImageLoader;
 
 import javax.swing.JPanel;
 import java.awt.Graphics;

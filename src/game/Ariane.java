@@ -48,7 +48,7 @@ public class Ariane extends Game {
 	@Override
 	protected void init() {
 		this.window.setLocation(Window.ALIGN_CENTER);
-		this.window.setBackground("ressources/rem.png");
+		this.window.setBackground("../ressources/rem.png");
 		//Affiche la fenêtre
 		this.window.setVisible(true);
 	}
@@ -57,7 +57,7 @@ public class Ariane extends Game {
 	protected void gameLoop() {
 		//Lance le jeu (menu)
 		Menu menu = new Menu(this.window);
-		menu.setSavePath("./ressources/sav/");
+		menu.setSavePath("../ressources/sav/");
 		menu.run();
 	}
 
