@@ -398,6 +398,8 @@ public class Grille {
 	 *
 	 * G&#233;n&#232;re une map remplie al&#233;atoirement
 	 *
+	 * @return la grille g&#233;n&#233;r&#233;e al&#233;atoirement
+	 *
 	 */
 	public Case[][] generate(){
 		//Création d'une map s'il n'en existe pas.
@@ -437,6 +439,8 @@ public class Grille {
 	/**
 	 *
 	 * Vérifie que la grille est correcte
+	 *
+	 * @return boolean qui indique si la grille est correcte (player, sortie ok)
 	 *
 	 */
 	public boolean check(){

@@ -21,6 +21,7 @@ public class WinPopup extends JOptionPane{
 	 *
 	 * @param screen l'&#233;cran sur lequel afficher le popup
 	 * @param message le message &#224; afficher
+	 * @param icon icone &#224; associer &#224; la fen&#234;tre
 	 *
 	 */
 

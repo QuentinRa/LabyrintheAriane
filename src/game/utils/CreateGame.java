@@ -91,7 +91,7 @@ public class CreateGame {
 				this.screen.setSize(size, size); //augmente sa taille
 				this.screen.setLocation(Window.ALIGN_CENTER); //centre par rapport à l'écran
 			} else {
-				String message = "La taille de l'écran ne permet pas le jeu sur une grille de cette taille";
+				String message = "La taille de cet écran ne permet pas le jeu sur une grille de cette taille";
 				ErrorPopup errorPopup = new ErrorPopup(this.screen,message);
 			}
 		}
@@ -188,6 +188,8 @@ public class CreateGame {
 	/**
 	 *
 	 * Change l'icon de s&#233;lection
+	 *
+	 * @param icon l'icone &#224; assigner
 	 *
 	 */
 	public void setSelectedIcon(ImageIcon icon){
