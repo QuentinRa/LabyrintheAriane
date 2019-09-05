@@ -1,3 +1,5 @@
+<h1>La javadoc est disponible à l'adresse : <a href="https://ariane-javadoc.000webhostapp.com/">Javadoc</a></h1>
+
 <h3>Introduction du jeu</h3>
 			<p>
 				L’algorithme d’Ariane, est un cas particulier d’algorithme de guidage,
@@ -20,7 +22,7 @@
 			<h3>Présentation générale</h3>
 			<p>
 				Le programme vous offre le choix entre choisir de créer un labyrinthe (en partant d'une grille
-				remplie aléatoirement ou vide) ou de charger un labyrinthe existant. (voir <a href="#">SaveLoader</a> pour le format)
+				remplie aléatoirement ou vide) ou de charger un labyrinthe existant. (voir <a href="https://ariane-javadoc.000webhostapp.com/game/utils/SaveLoader.html">SaveLoader</a> pour le format)
 			</p>
 			<p>
 				Vous pouvez ensuite choisir comment Thésée va parcourir le labyrinthe :
