@@ -35,16 +35,12 @@
 				dans le <a href="#rapport">rapport de projet</a>.</p>
 		</div>
 		<div class="box-r">
-			<img src="http://[::1]/ramsamy_personnal_website/assets/img/projets/ariane/parcours.png"
-				 alt="projet-Ariane: Parcours de labyrinthe" title="projet-Ariane: Parcours de labyrinthe"
-				 class="realisation-img-small" onclick="showModal(this)">
+			
 		</div>
 	</div>
 	<div class="box-row">
 		<div class="box-l">
-			<img src="http://[::1]/ramsamy_personnal_website/assets/img/projets/ariane/complet.png"
-				 alt="projet-Ariane: Coffre trouvé" title="projet-Ariane: Coffre trouvé"
-				 class="realisation-img-small" onclick="showModal(this)">
+			
 		</div>
 		<div class="box-r">
 			<h3>Présentation technique</h3>
