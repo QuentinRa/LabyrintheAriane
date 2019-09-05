@@ -32,15 +32,9 @@
 				ou en mode automatique (le résultat du parcours est affiché directement).
 			</p>
 			<p>Vous pouvez trouver la totalité des fonctionnalités ainsi que leurs descriptions plus détaillés
-				dans le <a href="#rapport">rapport de projet</a>.</p>
-		</div>
-		<div class="box-r">
-			
-		</div>
-	</div>
-	<div class="box-row">
-		<div class="box-l">
-			
+				dans le 
+				<b>rapport de projet</b>.
+			</p>
 		</div>
 		<div class="box-r">
 			<h3>Présentation technique</h3>
@@ -62,3 +56,4 @@
 				de projet complet.
 			</p>
 		</div>
+
