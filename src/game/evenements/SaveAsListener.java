@@ -84,7 +84,9 @@ public class SaveAsListener implements ActionListener {
 			try {
 				WriteLoader.writeSave(this.gameCore.getGrille(), this.gameCore.getSavePath());
 			} catch (IOException e) {
-				ErrorPopup error = new ErrorPopup(this.screen, e.getMessage());
+				ErrorPopup error = new ErrorPopup(this.screen, e.getMessage()
+					+ System.lineSeparator() +
+					"vérifier l'existance du dossier ressources/sav.");
 			}
 		}
 

@@ -58,21 +58,21 @@ public class MenuButtonsListener implements ActionListener {
 		String commande = event.getActionCommand();
 
 		switch (commande){
-			case "Charger" :
+			case "Charger un labyrinthe" :
 				//Suppression des composants = reset écran
 				this.screen.removeAll();
 				this.screen.repaint();
 				this.menu.charger();
 				break;
 
-			case "Nouveau" :
+			case "Nouveau labyrinthe" :
 				//Suppression des composants = reset écran
 				this.screen.removeAll();
 				this.screen.repaint();
 				this.menu.nouveau();
 				break;
 
-			case "Aléatoire" :
+			case "Pré-remplir la grille" :
 				//Suppression des composants = reset écran
 				this.screen.removeAll();
 				this.screen.repaint();
@@ -80,12 +80,20 @@ public class MenuButtonsListener implements ActionListener {
 				this.menu.gameStart(null,true);
 				break;
 
-			case "Vide" :
+			case "Grille vide" :
 				//Suppression des composants = reset écran
 				this.screen.removeAll();
 				this.screen.repaint();
 				//Lancement du jeu, sans sauvegarde, normal
 				this.menu.gameStart(null,false);
+				break;
+
+			case "Jouer" :
+				//Suppression des composants = reset écran
+				this.screen.removeAll();
+				this.screen.repaint();
+				//Lancement du jeu, sans sauvegarde, normal
+				this.menu.choix();
 				break;
 		}
 	}

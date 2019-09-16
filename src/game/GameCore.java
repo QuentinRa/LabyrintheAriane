@@ -7,6 +7,7 @@ import engine.graph.Grille;
 import engine.window.Window;
 import engine.exceptions.ErrorPopup;
 import engine.exceptions.WinPopup;
+import engine.exceptions.MessagePopup;
 import engine.utils.CenteredPanel;
 import game.evenements.CreateGameListener;
 import game.utils.CreateGame;
@@ -16,13 +17,16 @@ import game.evenements.KeyboardListener;
 import game.utils.GameComponent;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
+import java.awt.Font;
 import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 
 /**
@@ -186,8 +190,34 @@ public class GameCore implements GameComponent {
 	 */
 	public void setType(){
 		//Boutons de choix du mode
-		JButton deterministe = new JButton("Déterministe");
-		JButton random = new JButton("Aléatoire");
+		JPanel deterP = new JPanel();
+		deterP.setLayout(new GridLayout(2,1));
+		JButton deterministe = new JButton("Parcours déterministe");
+		JTextArea deterInfo = new JTextArea("Thésée cartographie le labyrinthe"
+			+" pour sortir rapidement");
+		deterInfo.setBackground(new Color(255, 255, 255, 225));
+		deterInfo.setForeground(new Color(66, 66, 66, 175));
+		deterInfo.setFont(new Font(deterInfo.getFont().getName(), Font.PLAIN, 15));
+		deterInfo.setLineWrap(true);
+		deterInfo.setEditable(false);
+		deterInfo.setWrapStyleWord(true);
+		deterP.add(deterministe);
+		deterP.add(deterInfo);
+		
+		JPanel randomP = new JPanel();
+		randomP.setLayout(new GridLayout(2,1));
+		JButton random = new JButton("Parcours aléatoire");
+		JTextArea randomInfo = new JTextArea("Thésée se balade en choissisant"
+			+" une direction au hasard.");
+		randomInfo.setBackground(new Color(255, 255, 255, 225));
+		randomInfo.setForeground(new Color(66, 66, 66, 175));
+		randomInfo.setFont(new Font(randomInfo.getFont().getName(), Font.PLAIN, 15));
+		randomInfo.setLineWrap(true);
+		randomInfo.setEditable(false);
+		randomInfo.setWrapStyleWord(true);
+		randomP.add(random);
+		randomP.add(randomInfo);
+		
 		//Observateurs
 		deterministe.addActionListener(this.gameCoreButtonsListener);
 		random.addActionListener(this.gameCoreButtonsListener);
@@ -195,8 +225,8 @@ public class GameCore implements GameComponent {
 		//Panneaux avec éléments centrées
 		CenteredPanel panneauSup = new CenteredPanel();
 		CenteredPanel panneauInf = new CenteredPanel();
-		panneauSup.add(deterministe);
-		panneauInf.add(random);
+		panneauSup.add(deterP);
+		panneauInf.add(randomP);
 
 		//Ajoute et on re-valide (=on re-dessine l'écran)
 		this.screen.setLayout(new GridLayout(2,1));
@@ -220,8 +250,37 @@ public class GameCore implements GameComponent {
 	 */
 	public void setMode(){
 		//Boutons de choix du mode
-		JButton manuel = new JButton("Manuel");
-		JButton automatique = new JButton("Automatique");
+		JPanel manuelP = new JPanel();
+		manuelP.setLayout(new GridLayout(2,1));
+		JButton manuel = new JButton("Parcours en mode manuel");
+		JTextArea manuelInfo = new JTextArea("Vous visionnez chaque étape du parcours.");
+		manuelInfo.setBackground(new Color(255, 255, 255, 225));
+		manuelInfo.setForeground(new Color(66, 66, 66, 175));
+		manuelInfo.setFont(new Font(manuelInfo.getFont().getName(), Font.PLAIN, 15));
+		manuelInfo.setLineWrap(true);
+		manuelInfo.setEditable(false);
+		manuelInfo.setWrapStyleWord(true);
+		manuelP.add(manuel);
+		manuelP.add(manuelInfo);
+
+		//Boutons de choix du mode
+		JPanel automatiqueP = new JPanel();
+		automatiqueP.setLayout(new GridLayout(2,1));
+		JButton automatique = new JButton("Parcours en mode automatique");
+		JTextArea automatiqueInfo;
+		if(this.randomType)
+			automatiqueInfo = new JTextArea("Vous visionnez un moyenne sur 100 parcours.");
+		else
+			automatiqueInfo = new JTextArea("Vous visionnez seulement le résultat.");
+		automatiqueInfo.setBackground(new Color(255, 255, 255, 225));
+		automatiqueInfo.setForeground(new Color(66, 66, 66, 175));
+		automatiqueInfo.setFont(new Font(automatiqueInfo.getFont().getName(), Font.PLAIN, 15));
+		automatiqueInfo.setLineWrap(true);
+		automatiqueInfo.setEditable(false);
+		automatiqueInfo.setWrapStyleWord(true);
+		automatiqueP.add(automatique);
+		automatiqueP.add(automatiqueInfo);
+		
 		//Observateurs
 		manuel.addActionListener(this.gameCoreButtonsListener);
 		automatique.addActionListener(this.gameCoreButtonsListener);
@@ -229,8 +288,8 @@ public class GameCore implements GameComponent {
 		//Panneaux avec éléments centrées
 		CenteredPanel panneauSup = new CenteredPanel();
 		CenteredPanel panneauInf = new CenteredPanel();
-		panneauSup.add(manuel);
-		panneauInf.add(automatique);
+		panneauSup.add(manuelP);
+		panneauInf.add(automatiqueP);
 
 		//Ajoute et on re-valide (=on re-dessine l'écran)
 		this.screen.setLayout(new GridLayout(2,1));
@@ -282,6 +341,9 @@ public class GameCore implements GameComponent {
 			//Observateur pour faire avancer le parcours
 			this.screen.addKeyListener(new KeyboardListener(this));
 			this.screen.revalidate();
+
+			String messagePopup = "Appuyez sur une touche pour vous déplacer.";
+			MessagePopup popup = new MessagePopup(this.screen,messagePopup);
 		} else {
 			double count = 0d;
 

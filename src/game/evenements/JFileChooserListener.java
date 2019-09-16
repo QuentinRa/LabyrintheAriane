@@ -62,7 +62,7 @@ public class JFileChooserListener implements ActionListener {
 			this.screen.removeAll();
 			this.screen.repaint();
 			//On revient en arrière si l'utilisateur fait "annuler"
-			this.menu.run();
+			this.menu.choix();
 		// Validation : on charge le fichier.
 		} else if(commande.equals("ApproveSelection")){
 			this.screen.removeAll();

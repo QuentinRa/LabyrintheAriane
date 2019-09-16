@@ -8,9 +8,14 @@ import game.evenements.MenuButtonsListener;
 import game.utils.GameComponent;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JFileChooser;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.*;
+import javax.swing.*;
 
 /**
  *
@@ -57,8 +62,48 @@ public class Menu implements GameComponent {
 	@Override
 	public void run(){
 		//Boutons du menu
-		JButton newGame = new JButton("Nouveau");
-		JButton charger = new JButton("Charger");
+		JPanel panneauSupInfos = new JPanel();
+		panneauSupInfos.setLayout(new GridLayout(2,1));
+		panneauSupInfos.setOpaque(false);
+		JLabel title = new JLabel("Labyrinthe d'ariane");
+		title.setFont(new Font(title.getFont().getName(), Font.BOLD, 28));
+		title.setForeground(Color.BLACK);
+		title.setBackground(new Color(255, 255, 255, 200) );
+		title.setOpaque(true);
+		title.setHorizontalAlignment(JLabel.CENTER);
+		JTextArea explication = new JTextArea("Le but de ce programme est de"
+			+" vous présenter un algorithme de guidage"
+			+" d'un objet mobile jusqu'à une destination dans un labyrinthe.");
+		explication.setBackground(new Color(255, 255, 255, 225));
+		explication.setForeground(new Color(66, 66, 66, 175));
+		explication.setFont(new Font(explication.getFont().getName(), Font.PLAIN, 15));
+		explication.setLineWrap(true);
+		explication.setWrapStyleWord(true);
+		explication.setEditable(false);
+		panneauSupInfos.add(title);
+		panneauSupInfos.add(explication);
+		JButton jouer = new JButton("Jouer");
+		
+		//Observateurs
+		jouer.addActionListener(this.menuButtonsListener);
+
+		//Panneaux avec éléments centrées
+		CenteredPanel panneauSup = new CenteredPanel();
+		CenteredPanel panneauInf = new CenteredPanel();
+		panneauSup.add(panneauSupInfos);
+		panneauInf.add(jouer);
+
+		//Ajoute et on re-valide (=on re-dessine l'écran)
+		this.screen.setLayout(new GridLayout(2,1));
+		this.screen.add(panneauSup);
+		this.screen.add(panneauInf);
+		this.screen.revalidate();
+	}
+
+	public void choix(){
+		//Boutons du menu
+		JButton newGame = new JButton("Nouveau labyrinthe");
+		JButton charger = new JButton("Charger un labyrinthe");
 		//Observateurs
 		newGame.addActionListener(this.menuButtonsListener);
 		charger.addActionListener(this.menuButtonsListener);
@@ -75,6 +120,7 @@ public class Menu implements GameComponent {
 		this.screen.add(panneauInf);
 		this.screen.revalidate();
 	}
+
 
 	/**
 	 *
@@ -105,8 +151,8 @@ public class Menu implements GameComponent {
 	 */
 	public void nouveau(){
 		//Boutons du menu
-		JButton random = new JButton("Aléatoire");
-		JButton vide = new JButton("Vide");
+		JButton random = new JButton("Pré-remplir la grille");
+		JButton vide = new JButton("Grille vide");
 		//Observateurs
 		random.addActionListener(this.menuButtonsListener);
 		vide.addActionListener(this.menuButtonsListener);

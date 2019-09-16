@@ -3,6 +3,7 @@ package game.evenements;
 import game.utils.CreateGame;
 
 import javax.swing.*;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,6 +24,12 @@ public class CreateGameFillButtonsListener implements ActionListener {
 	 *
 	 */
 	private CreateGame createGame;
+	/**
+	*
+	* Se souvient du dernier bouton cliqué
+	*
+	*/
+	private JButton last;
 
 	/**
 	 *
@@ -33,6 +40,7 @@ public class CreateGameFillButtonsListener implements ActionListener {
 	 */
 	public CreateGameFillButtonsListener(CreateGame createGame){
 		this.createGame = createGame;
+		this.last = null;
 	}
 
 	/**
@@ -55,6 +63,16 @@ public class CreateGameFillButtonsListener implements ActionListener {
 		} else {
 			//Si c'est effacer
 			this.createGame.setSelectedIcon(null);
+		}
+		
+		if(fillButton.getBackground().equals(Color.RED)){
+			//reset bg
+			fillButton.setBackground(new JButton().getBackground());
+		} else {
+			fillButton.setBackground(new Color(255,0,0,125));
+			/* on reset bg ancien */
+			if(last != null) this.last.setBackground(new JButton().getBackground());
+			this.last = fillButton;
 		}
 	}
 }

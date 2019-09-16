@@ -59,7 +59,7 @@ public class GameCoreButtonsListener implements ActionListener {
 		// Vérification des boutons
 
 		switch (commande){
-			case "Déterministe" :
+			case "Parcours déterministe" :
 				//Suppression des composants = reset écran
 				this.screen.removeAll();
 				this.screen.repaint();
@@ -67,7 +67,7 @@ public class GameCoreButtonsListener implements ActionListener {
 				this.gameCore.setMode(); //lance menu de choix du mode
 				break;
 
-			case "Aléatoire" :
+			case "Parcours aléatoire" :
 				//Suppression des composants = reset écran
 				this.screen.removeAll();
 				this.screen.repaint();
@@ -75,7 +75,7 @@ public class GameCoreButtonsListener implements ActionListener {
 				this.gameCore.setMode(); //lance menu de choix du mode
 				break;
 
-			case "Manuel" :
+			case "Parcours en mode manuel" :
 				//Suppression des composants = reset écran
 				this.screen.removeAll();
 				this.screen.repaint();
@@ -83,7 +83,7 @@ public class GameCoreButtonsListener implements ActionListener {
 				this.gameCore.gameStart(); //lance le jeu
 				break;
 
-			case "Automatique" :
+			case "Parcours en mode automatique" :
 				//Suppression des composants = reset écran
 				this.screen.removeAll();
 				this.screen.repaint();

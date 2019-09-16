@@ -118,7 +118,7 @@ public class CreateGame {
 		JButton player = new JButton(Case.PLAYER);
 		JButton exit = new JButton(Case.EXIT);
 		//Save
-		JLabel saveAs = new JLabel("Sauvegarder sous : ");
+		JLabel saveAs = new JLabel("Sauvegarder le labyrinthe sous : ");
 		JTextField saveName = new JTextField();
 		//Observateurs
 		play.addActionListener(this.createGameListener);
