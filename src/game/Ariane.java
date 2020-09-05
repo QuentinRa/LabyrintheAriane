@@ -48,7 +48,7 @@ public class Ariane extends Game {
 	@Override
 	protected void init() {
 		this.window.setLocation(Window.ALIGN_CENTER);
-		this.window.setBackground("../ressources/rem.png");
+		this.window.setBackground("../ressources/bg.jpg");
 		//Affiche la fenêtre
 		this.window.setVisible(true);
 	}
